@@ -20,3 +20,15 @@ def verarbeitung(Anzahl_Hühnerspaltung):
 def HühnerAUSGABEDERSPALTUNG(vieleListen):
     print("🐔".join(str(x) for x in vieleListen))
 
+
+def lineare_gleichungen_lösen(k1,k2,d1,d2): 
+    if k1 == k2:
+        print("Keine Lösung hühneräuglein")
+    else:
+        x = (d2 - d1) / (k1 - k2)
+        y = k1 * x + d1
+        print(f"Die Lösung ist: {x}, {y}")
+    
+
+
+

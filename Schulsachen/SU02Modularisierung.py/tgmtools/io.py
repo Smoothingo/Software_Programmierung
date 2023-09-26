@@ -6,6 +6,18 @@ def i_input(prompt: str = "Eingabe:", type = str):
         except ValueError:
             print("Typecast nicht möglich")
 
+
+testlist = ["Hallo", "Welt", "!"]
+
+def intelligent_print(testlist):     
+    for i in range(len(testlist)):
+        print(f"{i}: {testlist[i]}")
+
 if __name__ == "__main__":
-    ausgabe = i_input(prompt = "Gib einen Integer eun", type = int)
-    print(ausgabe)
+    intelligent_print(testlist)
+
+
+
+
+
+
