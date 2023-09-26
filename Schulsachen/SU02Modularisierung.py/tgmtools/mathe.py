@@ -20,6 +20,3 @@ def verarbeitung(Anzahl_Hühnerspaltung):
 def HühnerAUSGABEDERSPALTUNG(vieleListen):
     print("🐔".join(str(x) for x in vieleListen))
 
-Anzahl_Hühnerspaltung = WIEVIELEHÜHNERSOLLENGESPALTETWERDEN()
-vieleListen = verarbeitung(Anzahl_Hühnerspaltung)
-HühnerAUSGABEDERSPALTUNG(vieleListen)
