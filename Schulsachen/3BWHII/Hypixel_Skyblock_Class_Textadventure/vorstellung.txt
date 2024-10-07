@@ -1,0 +1,145 @@
+1. Spieler (Player)
+
+    Diese Klasse repräsentiert den Spieler und speichert dessen Status, wie z.B. Gesundheit, Geld und Inventar.
+
+Attribute:
+
+    name: Name des Spielers.
+    health: Lebenspunkte des Spielers.
+    gold: Menge an Gold, das der Spieler besitzt.
+    inventory: Liste von Gegenständen, die der Spieler besitzt (z.B. Waffen, Ressourcen, Tools).
+    location: Der aktuelle Ort des Spielers (Insel).
+    stats: Kampf- und Sammelattribute des Spielers (z.B. Stärke, Geschicklichkeit, Mining-Skill, Farming-Skill).
+
+Methoden:
+
+    move_to(location): Bewegt den Spieler zu einer anderen Insel.
+    attack(enemy): Startet einen Kampf mit einem NPC/Feind.
+    mine(): Baut Ressourcen auf einer Mining-Insel ab.
+    farm(): Erntet Ressourcen auf einer Farming-Insel.
+
+2. Insel (Island)
+
+    Diese Klasse beschreibt die verschiedenen Inseln, die der Spieler besuchen kann (z.B. Personal Island, Hub, Combat Island, Farming Island, Mining Island).
+
+Attribute:
+
+    name: Name der Insel.
+    description: Eine kurze Beschreibung der Insel und was dort zu tun ist.
+    npcs: Liste der NPCs, die sich auf der Insel befinden.
+    resources: Liste von Ressourcen, die der Spieler sammeln kann (z.B. Erze, Pflanzen).
+    monsters: Liste von Monstern (falls es eine Combat-Insel ist).
+
+Methoden:
+
+    enter(): Startet die Beschreibung und Aktionen auf der Insel.
+    list_npcs(): Zeigt die NPCs an, mit denen der Spieler interagieren kann.
+    list_resources(): Zeigt die Ressourcen an, die auf der Insel gesammelt werden können.
+
+3. NPC (Villager)
+
+    NPCs interagieren mit dem Spieler, geben ihm Aufgaben, Belohnungen oder handeln mit ihm.
+
+Attribute:
+
+    name: Name des NPCs.
+    role: Rolle des NPCs (z.B. Shopkeeper, Quest-Giver, Guide).
+    dialogue: Die Texte, die der NPC spricht.
+    items_to_trade: Liste von Gegenständen, die der NPC kaufen oder verkaufen kann.
+    quest: Eine optionale Quest, die der NPC dem Spieler geben kann.
+
+Methoden:
+
+    talk(): Gibt den Dialog des NPCs wieder und erlaubt Interaktionen.
+    give_quest(): Startet eine Quest, falls der NPC eine Aufgabe hat.
+    trade(player): Handelt mit dem Spieler (Gegenstände tauschen oder kaufen/verkaufen).
+
+4. Gegenstand (Item)
+
+    Die Gegenstände, die der Spieler finden, kaufen oder handeln kann. Diese werden in einem Inventar gespeichert.
+
+Attribute:
+
+    name: Name des Gegenstandes.
+    type: Typ des Gegenstandes (z.B. Waffe, Rüstung, Werkzeug, Ressource).
+    value: Wert des Gegenstandes (zum Verkaufen oder Tauschen).
+    effect: Möglicher Effekt (z.B. +10 Schaden für Waffen, Heilung für Tränke).
+
+Methoden:
+
+    use(player): Verwendet den Gegenstand (z.B. Heiltrank trinken, Schwert benutzen).
+
+5. Monster (Monster)
+
+    Monster, die der Spieler bekämpfen kann, besonders auf der Combat-Insel. Diese haben Kampfattribute.
+
+Attribute:
+
+    name: Name des Monsters (z.B. Zombie, Enderman).
+    health: Lebenspunkte des Monsters.
+    damage: Schaden, den das Monster verursacht.
+    loot: Der Gegenstand, den das Monster fallen lässt, wenn es besiegt wird.
+
+Methoden:
+
+    attack(player): Greift den Spieler an.
+    drop_loot(): Gibt dem Spieler den Loot, wenn das Monster besiegt wird.
+
+6. Quest (Quest)
+
+    Quests werden von NPCs gegeben und ermöglichen es dem Spieler, Belohnungen zu erhalten, wenn er Aufgaben erledigt.
+
+Attribute:
+
+    description: Beschreibung der Aufgabe (z.B. "Sammle 10 Kohle").
+    reward: Belohnung für das Erfüllen der Quest (Gold, Gegenstände, Erfahrung).
+    is_completed: Status, ob die Quest abgeschlossen wurde.
+
+Methoden:
+
+    check_completion(): Überprüft, ob der Spieler die Anforderungen der Quest erfüllt hat.
+    reward_player(player): Belohnt den Spieler bei erfolgreichem Abschluss.
+
+Detaillierte Insel-Beschreibungen
+Personal Island
+
+    Die Startinsel des Spielers. Hier bekommt der Spieler eine Willkommensnachricht.
+
+    NPCs:
+        Keine NPCs, nur eine Einführung.
+
+Hub Island
+
+    Zentraler Punkt, der den Spieler zu den anderen Inseln leitet. Hier gibt es Shops, Quests und Interaktionen.
+
+    NPCs:
+        Shopkeeper: Verkauft dem Spieler grundlegende Ausrüstung (Schwerter, Spitzhacken, Rüstungen).
+        Quest-Giver: Gibt dem Spieler einfache Aufgaben, wie das Sammeln von Ressourcen oder das Besiegen von Monstern.
+
+Combat Island
+
+    Eine Insel mit gefährlichen Monstern, die der Spieler besiegen muss, um Ressourcen und Gold zu sammeln.
+
+    NPCs:
+        Monster: Zombies, Skelette, etc.
+        Combat Trainer: Gibt Tipps zum Kampf und könnte dem Spieler besondere Waffen verkaufen.
+
+Farming Island
+
+    Eine friedliche Insel, auf der der Spieler Pflanzen anbauen und ernten kann. Erträge können für Gold verkauft werden.
+
+    NPCs:
+        Farmer: Gibt dem Spieler Saatgut und erklärt, wie das Farming funktioniert. Gibt Quests wie "Sammle 20 Weizen".
+
+    Ressourcen:
+        Weizen, Karotten, Kartoffeln.
+
+Mining Island
+
+    Eine Ressourcensammel-Insel, wo der Spieler Erze abbauen kann. Erze können verkauft oder für bessere Ausrüstung verwendet werden.
+
+    NPCs:
+        Miner: Gibt dem Spieler eine Spitzhacke und erklärt, wie man abbaut.
+
+    Ressourcen:
+        Kohle, Eisen, Diamanten.

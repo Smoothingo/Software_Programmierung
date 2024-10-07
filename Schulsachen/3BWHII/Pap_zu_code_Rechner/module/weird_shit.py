@@ -1,10 +1,18 @@
+
 def fakultät(n):
+    i = 1 
+    prod = 1
+    print
     if n == 0:
-        return 1
-    produkt = 1
-    for i in range(1, n + 1):
-        produkt *= i
-    return produkt
+        return prod
+    elif n <= 0:
+        print("keine negativen zahlen")
+    while i <= n:
+        prod = prod * i
+        i+= 1
+        return prod
+        
+  
 
 def gauss_summe(n):
     summe = 0

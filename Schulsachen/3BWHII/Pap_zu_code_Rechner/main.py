@@ -18,9 +18,9 @@ def grund_stuff(ops, a, b):
         return None
     
 def special_stuff(ops, n):
-    if ops == 'fakultät':
+    if ops == 'f':
         return weird_shit.fakultät(n)
-    elif ops == 'gauss':
+    elif ops == 'g':
         return weird_shit.gauss_summe(n)
     else:
         print("geht nicht weiter")
