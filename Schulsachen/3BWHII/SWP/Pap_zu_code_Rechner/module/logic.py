@@ -30,7 +30,7 @@ def special_stuff(ops, n):
         print("Ungültige Operation.")
         return None
 
-def big_boy():
+def logic_big_boy():
     rechenart = input(' "G" = normal Rechnen "S" weird Gauss/Fakultät:').lower()  # alles zu Klenbuchstabn
 
     if rechenart == 's':
