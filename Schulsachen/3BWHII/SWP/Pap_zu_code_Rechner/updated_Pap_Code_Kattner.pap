@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<FRAME GUID="2FB25471-B62C-4EE6-BD43-F819C095ACF8" FORMAT="0000" APP_VERSION="2.2.0.8" CHECKSUM="868AED6C2DA667D0">
-  <PROJECT FORMAT="1.00" NAME="updated_Pap_Code_Kattner" AUTHOR="Markus" CREATED="2024.10.10 12:40:50" MODIFIED="2024.10.10 13:19:01">
+<FRAME GUID="2FB25471-B62C-4EE6-BD43-F819C095ACF8" FORMAT="0000" APP_VERSION="2.2.0.8" CHECKSUM="5FE687CE21A4C6D7">
+  <PROJECT FORMAT="1.00" NAME="updated_Pap_Code_Kattner" AUTHOR="Markus" CREATED="2024.10.10 12:40:50" MODIFIED="2024.10.17 13:19:37">
     <DIAGRAMS>
       <DIAGRAM FORMAT="1.00" ID="1" NAME="main.py" CREATED="2024.10.10 12:44:24" MODIFIED="2024.10.10 12:44:24">
         <LAYOUT FORMAT="1.00" COLUMNS="1" ROWS="4">
@@ -32,8 +32,94 @@
           <CONNECTION FORMAT="1.00" ID="7" FROM="6" TO="2" TEXT="" />
         </CONNECTIONS>
       </DIAGRAM>
-      <DIAGRAM FORMAT="1.00" ID="2" NAME="logic.big_boy()" CREATED="2024.10.10 12:45:14" MODIFIED="2024.10.10 12:45:14">
-        <LAYOUT FORMAT="1.00" COLUMNS="7" ROWS="7">
+      <DIAGRAM FORMAT="1.00" ID="3" NAME="special_stuff(ops, n)" CREATED="2024.10.10 12:46:25" MODIFIED="2024.10.17 13:19:37">
+        <LAYOUT FORMAT="1.00" COLUMNS="4" ROWS="6">
+          <ENTRIES>
+            <ENTRY COLUMN="0" ROW="0" ANCHOR="True">
+              <FIGURE SUBTYPE="PapTitle" FORMAT="1.00" ID="0">
+                <TEXT><![CDATA[special_stuff(ops, n)]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="0" ROW="1">
+              <FIGURE SUBTYPE="PapStart" FORMAT="1.00" ID="1">
+                <TEXT><![CDATA[Start]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="0" ROW="2">
+              <FIGURE SUBTYPE="PapCondition" FORMAT="1.00" ID="4">
+                <TEXT><![CDATA[wurde f eingeben?]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="0" ROW="3">
+              <FIGURE SUBTYPE="PapCondition" FORMAT="1.00" ID="6">
+                <TEXT><![CDATA[wurde g eingegebn?]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="0" ROW="4">
+              <FIGURE SUBTYPE="PapConnector" FORMAT="1.00" ID="23">
+                <TEXT><![CDATA[]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="0" ROW="5">
+              <FIGURE SUBTYPE="PapEnd" FORMAT="1.00" ID="2">
+                <TEXT><![CDATA[Ende]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="1" ROW="2">
+              <FIGURE SUBTYPE="PapActivity" FORMAT="1.00" ID="12">
+                <TEXT><![CDATA[return weird_shit.fakultät(n)]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="1" ROW="3">
+              <FIGURE SUBTYPE="PapActivity" FORMAT="1.00" ID="14">
+                <TEXT><![CDATA[return weird_shit.gauss_summe(n)]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="2" ROW="2">
+              <FIGURE SUBTYPE="PapModule" FORMAT="1.00" ID="8">
+                <TEXT><![CDATA[weird_shit.fakultät(n)]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="2" ROW="3">
+              <FIGURE SUBTYPE="PapModule" FORMAT="1.00" ID="10">
+                <TEXT><![CDATA[weird_shit.gauss_summe(n)]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="3" ROW="2">
+              <FIGURE SUBTYPE="PapConnector" FORMAT="1.00" ID="16">
+                <TEXT><![CDATA[]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="3" ROW="3">
+              <FIGURE SUBTYPE="PapConnector" FORMAT="1.00" ID="17">
+                <TEXT><![CDATA[]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="3" ROW="4">
+              <FIGURE SUBTYPE="PapConnector" FORMAT="1.00" ID="21">
+                <TEXT><![CDATA[]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+          </ENTRIES>
+        </LAYOUT>
+        <CONNECTIONS>
+          <CONNECTION FORMAT="1.00" ID="3" FROM="1" TO="4" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="5" FROM="4" TO="6" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="24" FROM="23" TO="2" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="9" FROM="4" TO="12" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="11" FROM="6" TO="14" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="13" FROM="12" TO="8" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="15" FROM="14" TO="10" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="18" FROM="8" TO="16" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="19" FROM="10" TO="17" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="20" FROM="16" TO="17" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="22" FROM="17" TO="21" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="7" FROM="6" TO="23" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="25" FROM="21" TO="23" TEXT="" />
+        </CONNECTIONS>
+      </DIAGRAM>
+      <DIAGRAM FORMAT="1.00" ID="2" NAME="logic.big_boy()" CREATED="2024.10.10 12:45:14" MODIFIED="2024.10.17 13:19:37">
+        <LAYOUT FORMAT="1.00" COLUMNS="10" ROWS="8">
           <ENTRIES>
             <ENTRY COLUMN="0" ROW="0" ANCHOR="True">
               <FIGURE SUBTYPE="PapTitle" FORMAT="1.00" ID="0">
@@ -52,12 +138,12 @@
             </ENTRY>
             <ENTRY COLUMN="0" ROW="3">
               <FIGURE SUBTYPE="PapCondition" FORMAT="1.00" ID="10">
-                <TEXT><![CDATA[Wurde s eingegebn]]></TEXT>
+                <TEXT><![CDATA[Wurde g eingegebn]]></TEXT>
               </FIGURE>
             </ENTRY>
             <ENTRY COLUMN="0" ROW="4">
               <FIGURE SUBTYPE="PapCondition" FORMAT="1.00" ID="18">
-                <TEXT><![CDATA[wurde g eingegebn]]></TEXT>
+                <TEXT><![CDATA[wurde s eingegebn]]></TEXT>
               </FIGURE>
             </ENTRY>
             <ENTRY COLUMN="0" ROW="5">
@@ -66,6 +152,11 @@
               </FIGURE>
             </ENTRY>
             <ENTRY COLUMN="0" ROW="6">
+              <FIGURE SUBTYPE="PapConnector" FORMAT="1.00" ID="49">
+                <TEXT><![CDATA[]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="0" ROW="7">
               <FIGURE SUBTYPE="PapEnd" FORMAT="1.00" ID="2">
                 <TEXT><![CDATA[Ende]]></TEXT>
               </FIGURE>
@@ -90,29 +181,64 @@
                 <TEXT><![CDATA[Gib f für fakultät oder g für gauss]]></TEXT>
               </FIGURE>
             </ENTRY>
+            <ENTRY COLUMN="4" ROW="3">
+              <FIGURE SUBTYPE="PapActivity" FORMAT="1.00" ID="54">
+                <TEXT><![CDATA[fertich = grundstuff(ops, a, b)]]></TEXT>
+              </FIGURE>
+            </ENTRY>
             <ENTRY COLUMN="4" ROW="4">
               <FIGURE SUBTYPE="PapInput" FORMAT="1.00" ID="29">
                 <TEXT><![CDATA[Gib die Zahl ein]]></TEXT>
               </FIGURE>
             </ENTRY>
-            <ENTRY COLUMN="5" ROW="3">
-              <FIGURE SUBTYPE="PapModule" FORMAT="1.00" ID="16">
-                <TEXT><![CDATA[grund_stuff(a, b, c)]]></TEXT>
+            <ENTRY COLUMN="5" ROW="4">
+              <FIGURE SUBTYPE="PapActivity" FORMAT="1.00" ID="56">
+                <TEXT><![CDATA[fertich = special_stuff(a, b)]]></TEXT>
               </FIGURE>
             </ENTRY>
-            <ENTRY COLUMN="5" ROW="4">
+            <ENTRY COLUMN="6" ROW="3">
+              <FIGURE SUBTYPE="PapModule" FORMAT="1.00" ID="16">
+                <TEXT><![CDATA[grund_stuff(ops, a, b)]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="6" ROW="4">
               <FIGURE SUBTYPE="PapModule" FORMAT="1.00" ID="17">
                 <TEXT><![CDATA[special_stuff(a, b)]]></TEXT>
               </FIGURE>
             </ENTRY>
-            <ENTRY COLUMN="5" ROW="5">
+            <ENTRY COLUMN="6" ROW="5">
               <FIGURE SUBTYPE="PapOutput" FORMAT="1.00" ID="23">
                 <TEXT><![CDATA[Ausgabe von Ungültige Eingabe. Bitte Zahlen eingeben.]]></TEXT>
               </FIGURE>
             </ENTRY>
-            <ENTRY COLUMN="6" ROW="5">
+            <ENTRY COLUMN="7" ROW="3">
+              <FIGURE SUBTYPE="PapConnector" FORMAT="1.00" ID="37">
+                <TEXT><![CDATA[]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="7" ROW="4">
+              <FIGURE SUBTYPE="PapConnector" FORMAT="1.00" ID="38">
+                <TEXT><![CDATA[]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="8" ROW="5">
               <FIGURE SUBTYPE="PapActivity" FORMAT="1.00" ID="24">
                 <TEXT><![CDATA[return]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="9" ROW="4">
+              <FIGURE SUBTYPE="PapConnector" FORMAT="1.00" ID="42">
+                <TEXT><![CDATA[]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="9" ROW="5">
+              <FIGURE SUBTYPE="PapConnector" FORMAT="1.00" ID="44">
+                <TEXT><![CDATA[]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="9" ROW="6">
+              <FIGURE SUBTYPE="PapConnector" FORMAT="1.00" ID="47">
+                <TEXT><![CDATA[]]></TEXT>
               </FIGURE>
             </ENTRY>
           </ENTRIES>
@@ -124,42 +250,29 @@
           <CONNECTION FORMAT="1.00" ID="13" FROM="10" TO="31" TEXT="" />
           <CONNECTION FORMAT="1.00" ID="20" FROM="18" TO="27" TEXT="" />
           <CONNECTION FORMAT="1.00" ID="19" FROM="18" TO="21" TEXT="" />
-          <CONNECTION FORMAT="1.00" ID="22" FROM="21" TO="2" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="50" FROM="49" TO="2" TEXT="" />
           <CONNECTION FORMAT="1.00" ID="25" FROM="21" TO="23" TEXT="" />
           <CONNECTION FORMAT="1.00" ID="26" FROM="23" TO="24" TEXT="" />
           <CONNECTION FORMAT="1.00" ID="28" FROM="27" TO="29" TEXT="" />
-          <CONNECTION FORMAT="1.00" ID="30" FROM="29" TO="17" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="30" FROM="29" TO="56" TEXT="" />
           <CONNECTION FORMAT="1.00" ID="32" FROM="31" TO="33" TEXT="" />
           <CONNECTION FORMAT="1.00" ID="34" FROM="33" TO="35" TEXT="" />
-          <CONNECTION FORMAT="1.00" ID="36" FROM="35" TO="16" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="36" FROM="35" TO="54" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="39" FROM="37" TO="38" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="45" FROM="24" TO="44" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="41" FROM="38" TO="42" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="46" FROM="42" TO="44" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="48" FROM="44" TO="47" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="22" FROM="21" TO="49" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="51" FROM="47" TO="49" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="52" FROM="17" TO="38" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="53" FROM="16" TO="37" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="55" FROM="54" TO="16" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="57" FROM="56" TO="17" TEXT="" />
         </CONNECTIONS>
       </DIAGRAM>
-      <DIAGRAM FORMAT="1.00" ID="3" NAME="special_stuff(ops, n)" CREATED="2024.10.10 12:46:25" MODIFIED="2024.10.10 12:46:25">
-        <LAYOUT FORMAT="1.00" COLUMNS="1" ROWS="3">
-          <ENTRIES>
-            <ENTRY COLUMN="0" ROW="0" ANCHOR="True">
-              <FIGURE SUBTYPE="PapTitle" FORMAT="1.00" ID="0">
-                <TEXT><![CDATA[special_stuff(ops, n)]]></TEXT>
-              </FIGURE>
-            </ENTRY>
-            <ENTRY COLUMN="0" ROW="1">
-              <FIGURE SUBTYPE="PapStart" FORMAT="1.00" ID="1">
-                <TEXT><![CDATA[Start]]></TEXT>
-              </FIGURE>
-            </ENTRY>
-            <ENTRY COLUMN="0" ROW="2">
-              <FIGURE SUBTYPE="PapEnd" FORMAT="1.00" ID="2">
-                <TEXT><![CDATA[Ende]]></TEXT>
-              </FIGURE>
-            </ENTRY>
-          </ENTRIES>
-        </LAYOUT>
-        <CONNECTIONS>
-          <CONNECTION FORMAT="1.00" ID="3" FROM="1" TO="2" TEXT="" />
-        </CONNECTIONS>
-      </DIAGRAM>
-      <DIAGRAM FORMAT="1.00" ID="4" NAME="grund_stuff(ops, a, b)" CREATED="2024.10.10 12:46:42" MODIFIED="2024.10.10 12:46:42">
-        <LAYOUT FORMAT="1.00" COLUMNS="3" ROWS="8">
+      <DIAGRAM FORMAT="1.00" ID="4" NAME="grund_stuff(ops, a, b)" CREATED="2024.10.10 12:46:42" MODIFIED="2024.10.17 13:19:37">
+        <LAYOUT FORMAT="1.00" COLUMNS="5" ROWS="9">
           <ENTRIES>
             <ENTRY COLUMN="0" ROW="0" ANCHOR="True">
               <FIGURE SUBTYPE="PapTitle" FORMAT="1.00" ID="0">
@@ -197,28 +310,33 @@
               </FIGURE>
             </ENTRY>
             <ENTRY COLUMN="0" ROW="7">
+              <FIGURE SUBTYPE="PapConnector" FORMAT="1.00" ID="69">
+                <TEXT><![CDATA[]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="0" ROW="8">
               <FIGURE SUBTYPE="PapEnd" FORMAT="1.00" ID="2">
                 <TEXT><![CDATA[Ende]]></TEXT>
               </FIGURE>
             </ENTRY>
             <ENTRY COLUMN="1" ROW="2">
               <FIGURE SUBTYPE="PapModule" FORMAT="1.00" ID="8">
-                <TEXT><![CDATA[addiere(a, b)]]></TEXT>
+                <TEXT><![CDATA[grundstuff.addiere(a, b)]]></TEXT>
               </FIGURE>
             </ENTRY>
             <ENTRY COLUMN="1" ROW="3">
               <FIGURE SUBTYPE="PapModule" FORMAT="1.00" ID="9">
-                <TEXT><![CDATA[subtrahiere(a, b)]]></TEXT>
+                <TEXT><![CDATA[grundstuff.subtrahiere(a, b)]]></TEXT>
               </FIGURE>
             </ENTRY>
             <ENTRY COLUMN="1" ROW="4">
               <FIGURE SUBTYPE="PapModule" FORMAT="1.00" ID="11">
-                <TEXT><![CDATA[multipliziere(a, b)]]></TEXT>
+                <TEXT><![CDATA[grundstuff.multipliziere(a, b)]]></TEXT>
               </FIGURE>
             </ENTRY>
             <ENTRY COLUMN="1" ROW="5">
               <FIGURE SUBTYPE="PapModule" FORMAT="1.00" ID="10">
-                <TEXT><![CDATA[dividiere(a, b)]]></TEXT>
+                <TEXT><![CDATA[grundstuff.dividiere(a, b)]]></TEXT>
               </FIGURE>
             </ENTRY>
             <ENTRY COLUMN="1" ROW="6">
@@ -226,9 +344,44 @@
                 <TEXT><![CDATA[Geh in die Grundschule zurück]]></TEXT>
               </FIGURE>
             </ENTRY>
-            <ENTRY COLUMN="2" ROW="6">
+            <ENTRY COLUMN="2" ROW="2">
+              <FIGURE SUBTYPE="PapConnector" FORMAT="1.00" ID="50">
+                <TEXT><![CDATA[]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="2" ROW="3">
+              <FIGURE SUBTYPE="PapConnector" FORMAT="1.00" ID="51">
+                <TEXT><![CDATA[]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="2" ROW="4">
+              <FIGURE SUBTYPE="PapConnector" FORMAT="1.00" ID="52">
+                <TEXT><![CDATA[]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="2" ROW="5">
+              <FIGURE SUBTYPE="PapConnector" FORMAT="1.00" ID="53">
+                <TEXT><![CDATA[]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="3" ROW="6">
               <FIGURE SUBTYPE="PapActivity" FORMAT="1.00" ID="47">
                 <TEXT><![CDATA[return none]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="4" ROW="5">
+              <FIGURE SUBTYPE="PapConnector" FORMAT="1.00" ID="63">
+                <TEXT><![CDATA[]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="4" ROW="6">
+              <FIGURE SUBTYPE="PapConnector" FORMAT="1.00" ID="72">
+                <TEXT><![CDATA[]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="4" ROW="7">
+              <FIGURE SUBTYPE="PapConnector" FORMAT="1.00" ID="67">
+                <TEXT><![CDATA[]]></TEXT>
               </FIGURE>
             </ENTRY>
           </ENTRIES>
@@ -243,17 +396,175 @@
           <CONNECTION FORMAT="1.00" ID="33" FROM="6" TO="8" TEXT="" />
           <CONNECTION FORMAT="1.00" ID="40" FROM="38" TO="11" TEXT="" />
           <CONNECTION FORMAT="1.00" ID="42" FROM="41" TO="44" TEXT="" />
-          <CONNECTION FORMAT="1.00" ID="45" FROM="44" TO="2" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="70" FROM="69" TO="2" TEXT="" />
           <CONNECTION FORMAT="1.00" ID="48" FROM="44" TO="46" TEXT="" />
           <CONNECTION FORMAT="1.00" ID="49" FROM="46" TO="47" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="54" FROM="52" TO="53" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="55" FROM="51" TO="52" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="56" FROM="50" TO="51" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="57" FROM="8" TO="50" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="58" FROM="9" TO="51" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="59" FROM="11" TO="52" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="60" FROM="10" TO="53" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="45" FROM="44" TO="69" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="62" FROM="53" TO="63" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="66" FROM="63" TO="72" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="73" FROM="72" TO="67" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="74" FROM="47" TO="72" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="71" FROM="67" TO="69" TEXT="" />
         </CONNECTIONS>
       </DIAGRAM>
-      <DIAGRAM FORMAT="1.00" ID="5" NAME="addiere(a, b)" CREATED="2024.10.10 12:47:19" MODIFIED="2024.10.10 12:47:19">
+      <DIAGRAM FORMAT="1.00" ID="5" NAME="grundstuff.addiere(a, b)" CREATED="2024.10.10 12:47:19" MODIFIED="2024.10.17 13:19:37">
+        <LAYOUT FORMAT="1.00" COLUMNS="1" ROWS="4">
+          <ENTRIES>
+            <ENTRY COLUMN="0" ROW="0" ANCHOR="True">
+              <FIGURE SUBTYPE="PapTitle" FORMAT="1.00" ID="0">
+                <TEXT><![CDATA[grundstuff.addiere(a, b)]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="0" ROW="1">
+              <FIGURE SUBTYPE="PapStart" FORMAT="1.00" ID="1">
+                <TEXT><![CDATA[Start]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="0" ROW="2">
+              <FIGURE SUBTYPE="PapActivity" FORMAT="1.00" ID="4">
+                <TEXT><![CDATA[return a + b]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="0" ROW="3">
+              <FIGURE SUBTYPE="PapEnd" FORMAT="1.00" ID="2">
+                <TEXT><![CDATA[Ende]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+          </ENTRIES>
+        </LAYOUT>
+        <CONNECTIONS>
+          <CONNECTION FORMAT="1.00" ID="3" FROM="1" TO="4" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="5" FROM="4" TO="2" TEXT="" />
+        </CONNECTIONS>
+      </DIAGRAM>
+      <DIAGRAM FORMAT="1.00" ID="6" NAME="grundstuff.subtrahiere(a, b)" CREATED="2024.10.10 12:47:29" MODIFIED="2024.10.17 13:19:37">
+        <LAYOUT FORMAT="1.00" COLUMNS="1" ROWS="4">
+          <ENTRIES>
+            <ENTRY COLUMN="0" ROW="0" ANCHOR="True">
+              <FIGURE SUBTYPE="PapTitle" FORMAT="1.00" ID="0">
+                <TEXT><![CDATA[grundstuff.subtrahiere(a, b)]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="0" ROW="1">
+              <FIGURE SUBTYPE="PapStart" FORMAT="1.00" ID="1">
+                <TEXT><![CDATA[Start]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="0" ROW="2">
+              <FIGURE SUBTYPE="PapActivity" FORMAT="1.00" ID="4">
+                <TEXT><![CDATA[return a - b]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="0" ROW="3">
+              <FIGURE SUBTYPE="PapEnd" FORMAT="1.00" ID="2">
+                <TEXT><![CDATA[Ende]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+          </ENTRIES>
+        </LAYOUT>
+        <CONNECTIONS>
+          <CONNECTION FORMAT="1.00" ID="3" FROM="1" TO="4" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="5" FROM="4" TO="2" TEXT="" />
+        </CONNECTIONS>
+      </DIAGRAM>
+      <DIAGRAM FORMAT="1.00" ID="7" NAME="grundstuff.multipliziere(a, b)" CREATED="2024.10.10 12:47:36" MODIFIED="2024.10.17 13:19:37">
+        <LAYOUT FORMAT="1.00" COLUMNS="1" ROWS="4">
+          <ENTRIES>
+            <ENTRY COLUMN="0" ROW="0" ANCHOR="True">
+              <FIGURE SUBTYPE="PapTitle" FORMAT="1.00" ID="0">
+                <TEXT><![CDATA[grundstuff.multipliziere(a, b)]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="0" ROW="1">
+              <FIGURE SUBTYPE="PapStart" FORMAT="1.00" ID="1">
+                <TEXT><![CDATA[Start]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="0" ROW="2">
+              <FIGURE SUBTYPE="PapActivity" FORMAT="1.00" ID="4">
+                <TEXT><![CDATA[return a * b]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="0" ROW="3">
+              <FIGURE SUBTYPE="PapEnd" FORMAT="1.00" ID="2">
+                <TEXT><![CDATA[Ende]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+          </ENTRIES>
+        </LAYOUT>
+        <CONNECTIONS>
+          <CONNECTION FORMAT="1.00" ID="3" FROM="1" TO="4" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="5" FROM="4" TO="2" TEXT="" />
+        </CONNECTIONS>
+      </DIAGRAM>
+      <DIAGRAM FORMAT="1.00" ID="8" NAME="grundstuff.dividiere(a, b)" CREATED="2024.10.10 12:47:44" MODIFIED="2024.10.17 13:19:37">
+        <LAYOUT FORMAT="1.00" COLUMNS="2" ROWS="6">
+          <ENTRIES>
+            <ENTRY COLUMN="0" ROW="0" ANCHOR="True">
+              <FIGURE SUBTYPE="PapTitle" FORMAT="1.00" ID="0">
+                <TEXT><![CDATA[grundstuff.dividiere(a, b)]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="0" ROW="1">
+              <FIGURE SUBTYPE="PapStart" FORMAT="1.00" ID="1">
+                <TEXT><![CDATA[Start]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="0" ROW="2">
+              <FIGURE SUBTYPE="PapCondition" FORMAT="1.00" ID="6">
+                <TEXT><![CDATA[if b <= 0]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="0" ROW="3">
+              <FIGURE SUBTYPE="PapActivity" FORMAT="1.00" ID="4">
+                <TEXT><![CDATA[return None]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="0" ROW="4">
+              <FIGURE SUBTYPE="PapConnector" FORMAT="1.00" ID="14">
+                <TEXT><![CDATA[]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="0" ROW="5">
+              <FIGURE SUBTYPE="PapEnd" FORMAT="1.00" ID="2">
+                <TEXT><![CDATA[Ende]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="1" ROW="2">
+              <FIGURE SUBTYPE="PapActivity" FORMAT="1.00" ID="8">
+                <TEXT><![CDATA[return a / b]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="1" ROW="4">
+              <FIGURE SUBTYPE="PapConnector" FORMAT="1.00" ID="12">
+                <TEXT><![CDATA[]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+          </ENTRIES>
+        </LAYOUT>
+        <CONNECTIONS>
+          <CONNECTION FORMAT="1.00" ID="3" FROM="1" TO="6" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="15" FROM="14" TO="2" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="7" FROM="6" TO="4" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="9" FROM="6" TO="8" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="5" FROM="4" TO="14" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="11" FROM="8" TO="12" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="16" FROM="12" TO="14" TEXT="" />
+        </CONNECTIONS>
+      </DIAGRAM>
+      <DIAGRAM FORMAT="1.00" ID="9" NAME="weird_shit.gauss_summe(n)" CREATED="2024.10.10 12:47:53" MODIFIED="2024.10.17 13:19:37">
         <LAYOUT FORMAT="1.00" COLUMNS="1" ROWS="3">
           <ENTRIES>
             <ENTRY COLUMN="0" ROW="0" ANCHOR="True">
               <FIGURE SUBTYPE="PapTitle" FORMAT="1.00" ID="0">
-                <TEXT><![CDATA[addiere(a, b)]]></TEXT>
+                <TEXT><![CDATA[weird_shit.gauss_summe(n)]]></TEXT>
               </FIGURE>
             </ENTRY>
             <ENTRY COLUMN="0" ROW="1">
@@ -272,12 +583,12 @@
           <CONNECTION FORMAT="1.00" ID="3" FROM="1" TO="2" TEXT="" />
         </CONNECTIONS>
       </DIAGRAM>
-      <DIAGRAM FORMAT="1.00" ID="6" NAME="subtrahiere(a, b)" CREATED="2024.10.10 12:47:29" MODIFIED="2024.10.10 12:47:29">
-        <LAYOUT FORMAT="1.00" COLUMNS="1" ROWS="3">
+      <DIAGRAM FORMAT="1.00" ID="10" NAME="weird_shit.fakultät(n)" CREATED="2024.10.10 12:48:05" MODIFIED="2024.10.17 13:19:37">
+        <LAYOUT FORMAT="1.00" COLUMNS="2" ROWS="7">
           <ENTRIES>
             <ENTRY COLUMN="0" ROW="0" ANCHOR="True">
               <FIGURE SUBTYPE="PapTitle" FORMAT="1.00" ID="0">
-                <TEXT><![CDATA[subtrahiere(a, b)]]></TEXT>
+                <TEXT><![CDATA[weird_shit.fakultät(n)]]></TEXT>
               </FIGURE>
             </ENTRY>
             <ENTRY COLUMN="0" ROW="1">
@@ -286,110 +597,57 @@
               </FIGURE>
             </ENTRY>
             <ENTRY COLUMN="0" ROW="2">
+              <FIGURE SUBTYPE="PapActivity" FORMAT="1.00" ID="8">
+                <TEXT><![CDATA[result = 1]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="0" ROW="3">
+              <FIGURE SUBTYPE="PapCondition" FORMAT="1.00" ID="4">
+                <TEXT><![CDATA[n < 0]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="0" ROW="4">
+              <FIGURE SUBTYPE="PapOutput" FORMAT="1.00" ID="6">
+                <TEXT><![CDATA[Valueerror. n nix negativ]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="0" ROW="5">
+              <FIGURE SUBTYPE="PapConnector" FORMAT="1.00" ID="16">
+                <TEXT><![CDATA[]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="0" ROW="6">
               <FIGURE SUBTYPE="PapEnd" FORMAT="1.00" ID="2">
                 <TEXT><![CDATA[Ende]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="1" ROW="3">
+              <FIGURE SUBTYPE="PapLoopStart" FORMAT="1.00" ID="10" ASSOCIATE="11">
+                <TEXT><![CDATA[for i in range(1, n +1)]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="1" ROW="4">
+              <FIGURE SUBTYPE="PapLoopEnd" FORMAT="1.00" ID="11" ASSOCIATE="10">
+                <TEXT><![CDATA[result *= i]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="1" ROW="5">
+              <FIGURE SUBTYPE="PapConnector" FORMAT="1.00" ID="14">
+                <TEXT><![CDATA[]]></TEXT>
               </FIGURE>
             </ENTRY>
           </ENTRIES>
         </LAYOUT>
         <CONNECTIONS>
-          <CONNECTION FORMAT="1.00" ID="3" FROM="1" TO="2" TEXT="" />
-        </CONNECTIONS>
-      </DIAGRAM>
-      <DIAGRAM FORMAT="1.00" ID="7" NAME="multipliziere(a, b)" CREATED="2024.10.10 12:47:36" MODIFIED="2024.10.10 12:47:36">
-        <LAYOUT FORMAT="1.00" COLUMNS="1" ROWS="3">
-          <ENTRIES>
-            <ENTRY COLUMN="0" ROW="0" ANCHOR="True">
-              <FIGURE SUBTYPE="PapTitle" FORMAT="1.00" ID="0">
-                <TEXT><![CDATA[multipliziere(a, b)]]></TEXT>
-              </FIGURE>
-            </ENTRY>
-            <ENTRY COLUMN="0" ROW="1">
-              <FIGURE SUBTYPE="PapStart" FORMAT="1.00" ID="1">
-                <TEXT><![CDATA[Start]]></TEXT>
-              </FIGURE>
-            </ENTRY>
-            <ENTRY COLUMN="0" ROW="2">
-              <FIGURE SUBTYPE="PapEnd" FORMAT="1.00" ID="2">
-                <TEXT><![CDATA[Ende]]></TEXT>
-              </FIGURE>
-            </ENTRY>
-          </ENTRIES>
-        </LAYOUT>
-        <CONNECTIONS>
-          <CONNECTION FORMAT="1.00" ID="3" FROM="1" TO="2" TEXT="" />
-        </CONNECTIONS>
-      </DIAGRAM>
-      <DIAGRAM FORMAT="1.00" ID="8" NAME="dividiere(a, b)" CREATED="2024.10.10 12:47:44" MODIFIED="2024.10.10 12:47:44">
-        <LAYOUT FORMAT="1.00" COLUMNS="1" ROWS="3">
-          <ENTRIES>
-            <ENTRY COLUMN="0" ROW="0" ANCHOR="True">
-              <FIGURE SUBTYPE="PapTitle" FORMAT="1.00" ID="0">
-                <TEXT><![CDATA[dividiere(a, b)]]></TEXT>
-              </FIGURE>
-            </ENTRY>
-            <ENTRY COLUMN="0" ROW="1">
-              <FIGURE SUBTYPE="PapStart" FORMAT="1.00" ID="1">
-                <TEXT><![CDATA[Start]]></TEXT>
-              </FIGURE>
-            </ENTRY>
-            <ENTRY COLUMN="0" ROW="2">
-              <FIGURE SUBTYPE="PapEnd" FORMAT="1.00" ID="2">
-                <TEXT><![CDATA[Ende]]></TEXT>
-              </FIGURE>
-            </ENTRY>
-          </ENTRIES>
-        </LAYOUT>
-        <CONNECTIONS>
-          <CONNECTION FORMAT="1.00" ID="3" FROM="1" TO="2" TEXT="" />
-        </CONNECTIONS>
-      </DIAGRAM>
-      <DIAGRAM FORMAT="1.00" ID="9" NAME="gauss_summe(n)" CREATED="2024.10.10 12:47:53" MODIFIED="2024.10.10 12:47:53">
-        <LAYOUT FORMAT="1.00" COLUMNS="1" ROWS="3">
-          <ENTRIES>
-            <ENTRY COLUMN="0" ROW="0" ANCHOR="True">
-              <FIGURE SUBTYPE="PapTitle" FORMAT="1.00" ID="0">
-                <TEXT><![CDATA[gauss_summe(n)]]></TEXT>
-              </FIGURE>
-            </ENTRY>
-            <ENTRY COLUMN="0" ROW="1">
-              <FIGURE SUBTYPE="PapStart" FORMAT="1.00" ID="1">
-                <TEXT><![CDATA[Start]]></TEXT>
-              </FIGURE>
-            </ENTRY>
-            <ENTRY COLUMN="0" ROW="2">
-              <FIGURE SUBTYPE="PapEnd" FORMAT="1.00" ID="2">
-                <TEXT><![CDATA[Ende]]></TEXT>
-              </FIGURE>
-            </ENTRY>
-          </ENTRIES>
-        </LAYOUT>
-        <CONNECTIONS>
-          <CONNECTION FORMAT="1.00" ID="3" FROM="1" TO="2" TEXT="" />
-        </CONNECTIONS>
-      </DIAGRAM>
-      <DIAGRAM FORMAT="1.00" ID="10" NAME="fakultät(n)" CREATED="2024.10.10 12:48:05" MODIFIED="2024.10.10 12:48:05">
-        <LAYOUT FORMAT="1.00" COLUMNS="1" ROWS="3">
-          <ENTRIES>
-            <ENTRY COLUMN="0" ROW="0" ANCHOR="True">
-              <FIGURE SUBTYPE="PapTitle" FORMAT="1.00" ID="0">
-                <TEXT><![CDATA[fakultät(n)]]></TEXT>
-              </FIGURE>
-            </ENTRY>
-            <ENTRY COLUMN="0" ROW="1">
-              <FIGURE SUBTYPE="PapStart" FORMAT="1.00" ID="1">
-                <TEXT><![CDATA[Start]]></TEXT>
-              </FIGURE>
-            </ENTRY>
-            <ENTRY COLUMN="0" ROW="2">
-              <FIGURE SUBTYPE="PapEnd" FORMAT="1.00" ID="2">
-                <TEXT><![CDATA[Ende]]></TEXT>
-              </FIGURE>
-            </ENTRY>
-          </ENTRIES>
-        </LAYOUT>
-        <CONNECTIONS>
-          <CONNECTION FORMAT="1.00" ID="3" FROM="1" TO="2" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="3" FROM="1" TO="8" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="5" FROM="4" TO="6" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="17" FROM="16" TO="2" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="9" FROM="8" TO="4" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="12" FROM="10" TO="11" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="13" FROM="4" TO="10" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="15" FROM="11" TO="14" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="7" FROM="6" TO="16" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="18" FROM="14" TO="16" TEXT="" />
         </CONNECTIONS>
       </DIAGRAM>
     </DIAGRAMS>
