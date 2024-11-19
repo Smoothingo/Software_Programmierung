@@ -1,0 +1,23 @@
+{
+  "wooden_sword": {
+    "name": "wooden_sword",
+    "value": 5,
+    "Attack": 4,
+    "Defense": 1,
+    "description": "A wooden sword. It's not very powerful, but it's better than nothing."
+  },
+  "iron_sword": {
+    "name": "iron_sword",
+    "value": 5,
+    "Attack": 7,
+    "Defense": 3,
+    "description": "An iron sword. It's much stronger than a wooden sword."
+  },
+  "diamond_sword": {
+    "name": "diamond_sword",
+    "value": 15,
+    "Attack": 10,
+    "Defense": 5,
+    "description": "A diamond sword. It's the strongest sword in the game."
+  }
+}
