@@ -34,18 +34,12 @@ class Character:
 
 class Player():
     # Erbt alles von Character
-    def __init__(self, name: str, level: int, inventory: list = [], strength: int = 1, mana: int = 1, coins: int = 1000, vitality: int = 1, defense: int = 100, health: int = 100):
+    def __init__(self, inventory: list = [], name: str = "", level: int = 1, strength: int = 1, mana: int = 1, coins: int = 1000, vitality: int = 1, defense: int = 100, health: int = 100):
         # Ruft den Konstruktor der Superklasse auf
         # Initialisiert die zusätzlichen Instanzvariablen
         self.__level = level
         self.strength = strength
         self.mana = mana
-
-    @staticmethod
-    def load_item_from_json(file_path, item_key):
-        with open(file_path, 'r') as file:
-            data = json.load(file)
-        return data['items'][item_key]
     
     def level_up(self):
         # Erhöht den Level des Spielers um 1
@@ -112,10 +106,4 @@ class Lootdrops(Inventory):
         super().remove_item(item)
         print(f"{item} wurde entfernt!")
 
-# Beispiel für die Verwendung
-player = Player("Steve", 1)
-print(player.name)  # Ruft den Getter der Superklasse auf und gibt "Steve" aus
-print(player.coins)  # Erbt das Attribut von der Superklasse und gibt 1000 aus
-player.level_up()
-print(player.level)  # Gibt 2 aus
-print(f"Health: {player.health}")  # Gibt den Wert von health aus
+
