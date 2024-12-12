@@ -2,7 +2,7 @@ import json
 import os
 from modules import Characters as ch
 
-class JSONUtilsMixin:
+class JSON:
     @staticmethod
     def read_json(file_path):
         with open(file_path, 'r') as file:
@@ -20,7 +20,7 @@ class JSONUtilsMixin:
         else:
             print(value)
 
-class AddItemsMixin:
+class AddItems:
     def __init__(self):
         self.items = []
 
@@ -43,7 +43,7 @@ class AddItemsMixin:
             data = json.load(file)
         return data['items'][item_key]
 
-class Island(JSONUtilsMixin):
+class Island(JSON):
     def __init__(self, name, description, npcs, resources, actions):
         self.name = name
         self.description = description
@@ -64,7 +64,7 @@ class Island(JSONUtilsMixin):
 
     @staticmethod
     def load_islands_from_json(file_path):
-        data = JSONUtilsMixin.read_json(file_path)
+        data = JSON.read_json(file_path)
         islands = []
         for island_data in data['story']['islands']:
             island = Island(
@@ -77,7 +77,7 @@ class Island(JSONUtilsMixin):
             islands.append(island)
         return islands
 
-class Start(JSONUtilsMixin):
+class Start(JSON):
     def __init__(self):
         self.player = ch.Player(name="Default", level=1)
 
@@ -88,6 +88,4 @@ class Start(JSONUtilsMixin):
         data = self.read_json(os.path.join(os.path.dirname(__file__), 'story_blocks.json'))
         self.print_text_from_json(data, 'story.intro.title')
         self.print_text_from_json(data, 'story.intro.description')
-        print("Objectives:")
         self.print_text_from_json(data, 'story.intro.objectives')
-        self.player.add_start_item()

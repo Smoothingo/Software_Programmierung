@@ -1,5 +1,6 @@
 {
   "wooden_sword": {
+    "id": 1,
     "name": "wooden_sword",
     "value": 5,
     "Attack": 4,
@@ -7,6 +8,7 @@
     "description": "A wooden sword. It's not very powerful, but it's better than nothing."
   },
   "iron_sword": {
+    "id": 2,
     "name": "iron_sword",
     "value": 5,
     "Attack": 7,
@@ -14,10 +16,20 @@
     "description": "An iron sword. It's much stronger than a wooden sword."
   },
   "diamond_sword": {
+    "id": 3,
     "name": "diamond_sword",
     "value": 15,
     "Attack": 10,
     "Defense": 5,
     "description": "A diamond sword. It's the strongest sword in the game."
+  },
+  "wooden_armour": {
+    "id": 4,
+    "name": "wooden_armour",
+    "value": 4,
+    "Attack": -1,
+    "Defense": 4,
+    "description": "An Armour that gives you basic protection on ur arms and legs. Tough it does cost you a bit of agility"
   }
+  
 }

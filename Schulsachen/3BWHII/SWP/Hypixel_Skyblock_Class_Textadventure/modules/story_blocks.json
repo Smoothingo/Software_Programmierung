@@ -3,18 +3,20 @@
     "intro": {
       "title": "Welcome to the Archipelago",
       "description": "You awaken on a peaceful island, your Personal Island. An unfamiliar voice calls out: Welcome, adventurer. Your journey across the Archipelago awaits. ",
-      "objectives": ["Talk with Jerry"]
+      "action": [
+        "Objectives:\n    [1]Ask God who you are\n   [2]Search your pockets\n    [3]Travel to the Hub Island"
+      ]
+      }
     },
     "islands": [
       {
         "name": "Personal Island",
-        "description": "A quiet and serene place where your journey begins. You can build and expand this island as you progress.",
+        "description": "It's a quiet and serene place where your journey begins. You can build and expand this island as you progress.",
         "npcs": [
           {
             "name": "Jerry",
             "role": "Guide",
             "dialogue": "Welcome to your Personal Island. I’m Jerry, your guide. Let’s start your adventure!"
-            
           }
         ],
         "resources": [],
@@ -37,7 +39,8 @@
           {
             "name": "Wolf Slayer",
             "role": "Slayer Master",
-            "dialogue": "The wolves of this land are cursed, spreading chaos. Hunt them, and I’ll share their secrets. Bring me their pelts, and I’ll tell you more."
+            "dialogue": "The wolves of this land are cursed, spreading chaos. Hunt them, and I’ll share their secrets. Bring me their pelts, and I’ll tell you more.",
+            "items": ""
           },
           {
             "name": "Bazaar Keeper",

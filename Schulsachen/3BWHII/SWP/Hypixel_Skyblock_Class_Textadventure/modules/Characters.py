@@ -92,18 +92,17 @@ class Lootdrops(Inventory):
     # Erbt alles von Inventory
     def __init__(self, items: list = []):
         # Ruft den Konstruktor der Superklasse auf
-        super().__init__(items)
+        ...
 
     def add_item(self, item):
         # Überschreibt die Methode add_item aus der Superklasse
         # Fügt ein Item zur Liste hinzu und gibt eine Nachricht aus
-        super().add_item(item)
         print(f"{item} wurde hinzugefügt!")
 
     def remove_item(self, item):
         # Überschreibt die Methode remove_item aus der Superklasse
         # Entfernt ein Item aus der Liste und gibt eine Nachricht aus
-        super().remove_item(item)
+    
         print(f"{item} wurde entfernt!")
 
 

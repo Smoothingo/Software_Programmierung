@@ -1,18 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<FRAME GUID="2FB25471-B62C-4EE6-BD43-F819C095ACF8" FORMAT="0000" APP_VERSION="2.2.0.8" CHECKSUM="CB8A1A852DF99631">
-  <PROJECT FORMAT="1.00" NAME="updated_Pap_Code_Kattner" AUTHOR="Markus" CREATED="2024.10.10 12:40:50" MODIFIED="2024.11.07 13:18:33">
+<FRAME GUID="2FB25471-B62C-4EE6-BD43-F819C095ACF8" FORMAT="0000" APP_VERSION="2.2.0.8" CHECKSUM="B1A341A8ACBDFD87">
+  <PROJECT FORMAT="1.00" NAME="updated_Pap_Code_Kattner" AUTHOR="Markus" CREATED="2024.10.10 12:40:50" MODIFIED="2024.11.28 13:19:45">
     <DIAGRAMS>
-      <DIAGRAM FORMAT="1.00" ID="1" NAME="main.py" CREATED="2024.10.10 12:44:24" MODIFIED="2024.11.07 13:18:33">
-        <LAYOUT FORMAT="1.00" COLUMNS="6" ROWS="16">
+      <DIAGRAM FORMAT="1.00" ID="1" NAME="main.py" CREATED="2024.10.10 12:44:24" MODIFIED="2024.11.28 13:19:45">
+        <LAYOUT FORMAT="1.00" COLUMNS="6" ROWS="17">
           <ENTRIES>
-            <ENTRY COLUMN="0" ROW="6">
-              <FIGURE SUBTYPE="PapConnector" FORMAT="1.00" ID="48">
+            <ENTRY COLUMN="0" ROW="7">
+              <FIGURE SUBTYPE="PapConnector" FORMAT="1.00" ID="144">
                 <TEXT><![CDATA[]]></TEXT>
               </FIGURE>
             </ENTRY>
-            <ENTRY COLUMN="0" ROW="14">
-              <FIGURE SUBTYPE="PapConnector" FORMAT="1.00" ID="64">
-                <TEXT><![CDATA[]]></TEXT>
+            <ENTRY COLUMN="0" ROW="16">
+              <FIGURE SUBTYPE="PapEnd" FORMAT="1.00" ID="2">
+                <TEXT><![CDATA[Ende]]></TEXT>
               </FIGURE>
             </ENTRY>
             <ENTRY COLUMN="1" ROW="0" ANCHOR="True">
@@ -42,57 +42,47 @@
             </ENTRY>
             <ENTRY COLUMN="1" ROW="5">
               <FIGURE SUBTYPE="PapCondition" FORMAT="1.00" ID="12">
-                <TEXT><![CDATA[N > 0]]></TEXT>
+                <TEXT><![CDATA[N >= 0]]></TEXT>
               </FIGURE>
             </ENTRY>
             <ENTRY COLUMN="1" ROW="6">
+              <FIGURE SUBTYPE="PapOutput" FORMAT="1.00" ID="42">
+                <TEXT><![CDATA[Graphische ausgabe x_inside/outside und y_inside/outside]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="1" ROW="7">
               <FIGURE SUBTYPE="PapCondition" FORMAT="1.00" ID="21">
                 <TEXT><![CDATA[while i < n ist]]></TEXT>
               </FIGURE>
             </ENTRY>
-            <ENTRY COLUMN="1" ROW="7">
+            <ENTRY COLUMN="1" ROW="8">
               <FIGURE SUBTYPE="PapActivity" FORMAT="1.00" ID="46">
                 <TEXT><![CDATA[i++]]></TEXT>
               </FIGURE>
             </ENTRY>
-            <ENTRY COLUMN="1" ROW="8">
+            <ENTRY COLUMN="1" ROW="9">
               <FIGURE SUBTYPE="PapActivity" FORMAT="1.00" ID="23">
                 <TEXT><![CDATA[y = random.uniform-1, 1)]]></TEXT>
               </FIGURE>
             </ENTRY>
-            <ENTRY COLUMN="1" ROW="9">
+            <ENTRY COLUMN="1" ROW="10">
               <FIGURE SUBTYPE="PapActivity" FORMAT="1.00" ID="25">
                 <TEXT><![CDATA[x = random.uniform(-1, 1)]]></TEXT>
               </FIGURE>
             </ENTRY>
-            <ENTRY COLUMN="1" ROW="10">
+            <ENTRY COLUMN="1" ROW="11">
               <FIGURE SUBTYPE="PapCondition" FORMAT="1.00" ID="27">
-                <TEXT><![CDATA[when sqrt(y**2 + x**2) <= 1 ist]]></TEXT>
+                <TEXT><![CDATA[when sqrt(y**2 + x**2) <= r ist]]></TEXT>
               </FIGURE>
             </ENTRY>
-            <ENTRY COLUMN="1" ROW="11">
+            <ENTRY COLUMN="1" ROW="12">
               <FIGURE SUBTYPE="PapActivity" FORMAT="1.00" ID="29">
                 <TEXT><![CDATA[inside_points += 1]]></TEXT>
               </FIGURE>
             </ENTRY>
-            <ENTRY COLUMN="1" ROW="12">
+            <ENTRY COLUMN="1" ROW="13">
               <FIGURE SUBTYPE="PapActivity" FORMAT="1.00" ID="33">
                 <TEXT><![CDATA[x_inside.append(x) y_inside.append(y)]]></TEXT>
-              </FIGURE>
-            </ENTRY>
-            <ENTRY COLUMN="1" ROW="13">
-              <FIGURE SUBTYPE="PapOutput" FORMAT="1.00" ID="42">
-                <TEXT><![CDATA[Graphische ausgabe x_inside und y_inside]]></TEXT>
-              </FIGURE>
-            </ENTRY>
-            <ENTRY COLUMN="1" ROW="14">
-              <FIGURE SUBTYPE="PapConnector" FORMAT="1.00" ID="66">
-                <TEXT><![CDATA[]]></TEXT>
-              </FIGURE>
-            </ENTRY>
-            <ENTRY COLUMN="1" ROW="15">
-              <FIGURE SUBTYPE="PapEnd" FORMAT="1.00" ID="2">
-                <TEXT><![CDATA[Ende]]></TEXT>
               </FIGURE>
             </ENTRY>
             <ENTRY COLUMN="2" ROW="5">
@@ -100,19 +90,49 @@
                 <TEXT><![CDATA[Lost. Nix unter 0]]></TEXT>
               </FIGURE>
             </ENTRY>
-            <ENTRY COLUMN="3" ROW="10">
+            <ENTRY COLUMN="2" ROW="11">
               <FIGURE SUBTYPE="PapActivity" FORMAT="1.00" ID="31">
                 <TEXT><![CDATA[outside_points += 1]]></TEXT>
               </FIGURE>
             </ENTRY>
-            <ENTRY COLUMN="4" ROW="10">
+            <ENTRY COLUMN="2" ROW="13">
+              <FIGURE SUBTYPE="PapActivity" FORMAT="1.00" ID="110">
+                <TEXT><![CDATA[update x and y]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="2" ROW="15">
+              <FIGURE SUBTYPE="PapOutput" FORMAT="1.00" ID="160">
+                <TEXT><![CDATA[Ausgabe von x y]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="3" ROW="11">
               <FIGURE SUBTYPE="PapActivity" FORMAT="1.00" ID="35">
                 <TEXT><![CDATA[x_outside.append(x) y_outside.append(y)]]></TEXT>
               </FIGURE>
             </ENTRY>
-            <ENTRY COLUMN="5" ROW="10">
-              <FIGURE SUBTYPE="PapOutput" FORMAT="1.00" ID="44">
-                <TEXT><![CDATA[Graphische Ausgabe x_outside und y_outside]]></TEXT>
+            <ENTRY COLUMN="4" ROW="11">
+              <FIGURE SUBTYPE="PapConnector" FORMAT="1.00" ID="113">
+                <TEXT><![CDATA[]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="4" ROW="13">
+              <FIGURE SUBTYPE="PapConnector" FORMAT="1.00" ID="115">
+                <TEXT><![CDATA[]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="5" ROW="7">
+              <FIGURE SUBTYPE="PapConnector" FORMAT="1.00" ID="141">
+                <TEXT><![CDATA[]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="5" ROW="14">
+              <FIGURE SUBTYPE="PapConnector" FORMAT="1.00" ID="127">
+                <TEXT><![CDATA[]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="5" ROW="15">
+              <FIGURE SUBTYPE="PapConnector" FORMAT="1.00" ID="166">
+                <TEXT><![CDATA[]]></TEXT>
               </FIGURE>
             </ENTRY>
           </ENTRIES>
@@ -120,7 +140,6 @@
         <CONNECTIONS>
           <CONNECTION FORMAT="1.00" ID="3" FROM="1" TO="19" TEXT="" />
           <CONNECTION FORMAT="1.00" ID="11" FROM="10" TO="12" TEXT="" />
-          <CONNECTION FORMAT="1.00" ID="13" FROM="12" TO="21" TEXT="ja" />
           <CONNECTION FORMAT="1.00" ID="18" FROM="12" TO="14" TEXT="nein" />
           <CONNECTION FORMAT="1.00" ID="41" FROM="40" TO="10" TEXT="" />
           <CONNECTION FORMAT="1.00" ID="22" FROM="21" TO="46" TEXT="ja" />
@@ -129,16 +148,22 @@
           <CONNECTION FORMAT="1.00" ID="28" FROM="27" TO="29" TEXT="ja" />
           <CONNECTION FORMAT="1.00" ID="30" FROM="29" TO="33" TEXT="" />
           <CONNECTION FORMAT="1.00" ID="32" FROM="27" TO="31" TEXT="nein" />
-          <CONNECTION FORMAT="1.00" ID="34" FROM="33" TO="42" TEXT="" />
           <CONNECTION FORMAT="1.00" ID="37" FROM="31" TO="35" TEXT="" />
           <CONNECTION FORMAT="1.00" ID="20" FROM="19" TO="40" TEXT="" />
-          <CONNECTION FORMAT="1.00" ID="67" FROM="66" TO="2" TEXT="" />
-          <CONNECTION FORMAT="1.00" ID="45" FROM="35" TO="44" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="117" FROM="113" TO="115" TEXT="" />
           <CONNECTION FORMAT="1.00" ID="47" FROM="46" TO="23" TEXT="" />
-          <CONNECTION FORMAT="1.00" ID="49" FROM="21" TO="48" TEXT="nein" />
-          <CONNECTION FORMAT="1.00" ID="43" FROM="42" TO="66" TEXT="" />
-          <CONNECTION FORMAT="1.00" ID="51" FROM="48" TO="64" TEXT="" />
-          <CONNECTION FORMAT="1.00" ID="68" FROM="64" TO="66" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="112" FROM="42" TO="21" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="84" FROM="33" TO="110" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="114" FROM="35" TO="113" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="13" FROM="12" TO="42" TEXT="ja" />
+          <CONNECTION FORMAT="1.00" ID="118" FROM="115" TO="110" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="161" FROM="110" TO="160" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="163" FROM="160" TO="166" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="130" FROM="127" TO="141" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="143" FROM="141" TO="21" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="145" FROM="21" TO="144" TEXT="nein" />
+          <CONNECTION FORMAT="1.00" ID="168" FROM="166" TO="127" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="147" FROM="144" TO="2" TEXT="" />
         </CONNECTIONS>
       </DIAGRAM>
       <DIAGRAM FORMAT="1.00" ID="3" NAME="special_stuff(ops, n)" CREATED="2024.10.10 12:46:25" MODIFIED="2024.10.17 13:19:37">
