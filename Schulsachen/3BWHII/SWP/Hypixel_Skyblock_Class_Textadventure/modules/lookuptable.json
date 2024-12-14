@@ -1,35 +1,95 @@
 {
-  "wooden_sword": {
-    "id": 1,
-    "name": "wooden_sword",
-    "value": 5,
-    "Attack": 4,
-    "Defense": 1,
-    "description": "A wooden sword. It's not very powerful, but it's better than nothing."
-  },
-  "iron_sword": {
-    "id": 2,
-    "name": "iron_sword",
-    "value": 5,
-    "Attack": 7,
-    "Defense": 3,
-    "description": "An iron sword. It's much stronger than a wooden sword."
-  },
-  "diamond_sword": {
-    "id": 3,
-    "name": "diamond_sword",
-    "value": 15,
-    "Attack": 10,
-    "Defense": 5,
-    "description": "A diamond sword. It's the strongest sword in the game."
-  },
-  "wooden_armour": {
-    "id": 4,
-    "name": "wooden_armour",
-    "value": 4,
-    "Attack": -1,
-    "Defense": 4,
-    "description": "An Armour that gives you basic protection on ur arms and legs. Tough it does cost you a bit of agility"
+  "items": {
+    "1": {
+      "id": 1,
+      "name": "Map",
+      "description": "A map of the Archipelago.",
+      "value": 10,
+      "amount": 1
+    },
+    "2": {
+      "id": 2,
+      "name": "Gold",
+      "description": "Gold coins.",
+      "value": 10,
+      "amount": 100
+    },
+    "3": {
+      "id": 3,
+      "name": "Sword",
+      "description": "A sharp sword.",
+      "value": 50,
+      "amount": 1
+    },
+    "4": {
+      "id": 4,
+      "name": "Shield",
+      "description": "A sturdy shield.",
+      "value": 40,
+      "amount": 1
+    },
+    "5": {
+      "id": 5,
+      "name": "Potion",
+      "description": "A healing potion.",
+      "value": 20,
+      "amount": 1
+    },
+    "6": {
+      "id": 6,
+      "name": "Armor",
+      "description": "Protective armor.",
+      "value": 100,
+      "amount": 1
+    },
+    "7": {
+      "id": 7,
+      "name": "Wood",
+      "description": "Natural Wood",
+      "value": 1,
+      "amount": 1
+    },
+    "8": {
+      "id": 8,
+      "name": "Stone",
+      "description": "Hard Rock",
+      "value": 1,
+      "amount": 1
+    },
+    "9": {
+      "id": 9,
+      "name": "Coal",
+      "description": "A piece of coal.",
+      "value": 5,
+      "amount": 1
+    },
+    "10": {
+      "id": 10,
+      "name": "Wheat",
+      "description": "A bundle of wheat.",
+      "value": 2,
+      "amount": 1
+    },
+    "11": {
+      "id": 11,
+      "name": "Carrot",
+      "description": "A fresh carrot.",
+      "value": 3,
+      "amount": 1
+    },
+    "12": {
+      "id": 12,
+      "name": "Goblin Ear",
+      "description": "An ear from a goblin.",
+      "value": 15,
+      "amount": 1
+    },
+    "13": {
+      "id": 13,
+      "name": "Orc Tooth",
+      "description": "A tooth from an orc.",
+      "value": 20,
+      "amount": 1
+    }
   }
-  
 }
