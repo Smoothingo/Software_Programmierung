@@ -1,5 +1,6 @@
 import json
 import os
+import random
 from typing import List, Dict, Any
 
 class Inventory:
@@ -129,8 +130,49 @@ class Game:
                 print(f"[{idx}] {item['name']} - Quantity: {item['amount']}")
         print("-" * 40)
 
-    def initiate_combat(self):
-        print("⚔️ Combat initiated! Placeholder for combat system.")
+
+    def initiate_combat(self, mob_name):
+        print("⚔️ Combat initiated! Prepare for battle.")
+        mobs = self.current_island.get('mobs', [])
+        mob = next((m for m in mobs if m['name'] == mob_name), None)
+        if not mob:
+            print("No such enemy to fight here.")
+            return
+
+        print(f"You encounter a {mob['name']}!")
+        print(mob['description'])
+
+        player_health = 100
+        enemy_health = mob['stats']['health']
+
+        while player_health > 0 and enemy_health > 0:
+            action = input("Choose your action: [1] Attack [2] Run: ").strip()
+            if action == "1":
+                damage = random.randint(5, 15)
+                enemy_health -= damage
+                print(f"You dealt {damage} damage to the {mob['name']}. Enemy health: {enemy_health}")
+
+                if enemy_health <= 0:
+                    print(f"You defeated the {mob['name']}!")
+                    self.modify_inventory(mob['drops'], add=True)
+                    break
+
+                enemy_damage = random.randint(0, mob['stats']['attack'])
+                player_health -= enemy_damage
+                print(f"The {mob['name']} dealt {enemy_damage} damage to you. Your health: {player_health}")
+
+                if player_health <= 0:
+                    print("You have been defeated!")
+                    break
+            elif action == "2":
+                print("You ran away from the battle.")
+                break
+            else:
+                print("Invalid action. Choose [1] to Attack or [2] to Run.")
+
+        self.display_island()
+
+    # ...existing code...
 
 if __name__ == "__main__":
     story_path = r"modules/story_blocks.json"

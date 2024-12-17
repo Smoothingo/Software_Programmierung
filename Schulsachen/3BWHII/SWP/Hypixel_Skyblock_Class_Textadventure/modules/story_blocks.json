@@ -64,15 +64,9 @@
       ],
       "actions": [
         {
-          "description": "Trade with merchants",
-          "id": 7,
-          "response": "You trade your resources with merchants and acquire new items.",
-          "add_items": { "3": 1, "4": 1 }
-        },
-        {
           "description": "Visit the Bazaar",
           "id": 8,
-          "response": "You visit the Bazaar and see various items for sale."
+          "response": "You visit the Bazaar and see various items for sale.shop system incoming."
         },
         {
           "description": "Prepare for a journey",
@@ -181,18 +175,33 @@
           "dialogue": "Welcome to the Combat Island. Prepare yourself for battle!"
         }
       ],
+      "mobs": [
+        {
+          "name": "Goblin",
+          "description": "A small, green-skinned creature with sharp teeth and claws.",
+          "stats": { "health": 20, "attack": 5, "defense": 2 },
+          "drops": { "12": 1 }
+        },
+        {
+          "name": "Orc",
+          "description": "A large, brutish humanoid with a fierce expression and powerful muscles.",
+          "stats": { "health": 50, "attack": 10, "defense": 5 },
+          "drops": { "13": 1 }
+        }
+      ],
+
       "actions": [
         {
           "description": "Fight Goblins",
           "id": 18,
-          "response": "You fight a group of goblins and earn some loot.",
-          "add_items": { "12": 3 }
+          "response": "// initiate combat",
+          "mob": "Goblin"
         },
         {
           "description": "Fight Orcs",
           "id": 19,
-          "response": "You fight a group of orcs and earn some loot.",
-          "add_items": { "13": 2 }
+          "response": "// initiate combat",
+          "mob": "Orc"
         },
         {
           "description": "Travel to Hub Island",
