@@ -66,7 +66,7 @@
         {
           "description": "Visit the Bazaar",
           "id": 8,
-          "response": "You visit the Bazaar and see various items for sale.shop system incoming."
+          "response": "// bazzar"
         },
         {
           "description": "Prepare for a journey",

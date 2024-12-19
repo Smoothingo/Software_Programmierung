@@ -94,6 +94,8 @@ class Game:
             self.show_inventory()
         elif action.get("response") == "// initiate combat":
             self.initiate_combat()
+        elif action.get("response") == "// bazzar":
+            self.bazaar()
         else:
             print(f"\n{action.get('response', 'No response available.')}")
             if "add_items" in action:
@@ -172,7 +174,58 @@ class Game:
 
         self.display_island()
 
-    # ...existing code...
+    def bazaar(self):
+        items = self.load_item_data(r'modules/lookuptable.json')
+        while True:
+            print("\n🛒 Bazaar:")
+            for item_id, item in items.items():
+                print(f"[{item_id}] {item['name']} - {item['description']} - Value: {item['value']} Gold")
+            print("[0] Exit Bazaar")
+
+            choice = input("Choose an item to buy/sell or exit: ").strip()
+            if choice == "0":
+                break
+
+            try:
+                item_id = int(choice)
+                if str(item_id) in items:
+                    self.trade_item(item_id, items[str(item_id)])
+                else:
+                    print("Invalid choice. Try again.")
+            except ValueError:
+                print("Please enter a valid number.")
+
+    def trade_item(self, item_id: int, item: Dict[str, Any]):
+        print(f"\nTrading {item['name']}:")
+        print("[1] Buy")
+        print("[2] Sell")
+        print("[0] Cancel")
+
+        choice = input("Choose an action: ").strip()
+        if choice == "1":
+            self.buy_item(item_id, item)
+        elif choice == "2":
+            self.sell_item(item_id, item)
+        elif choice == "0":
+            return
+        else:
+            print("Invalid choice. Try again.")
+
+    def buy_item(self, item_id: int, item: Dict[str, Any]):
+        if self.player.gold >= item['value']:
+            self.player.gold -= item['value']
+            self.player.inventory.add_item(item_id)
+            print(f"Bought {item['name']} for {item['value']} Gold. Remaining Gold: {self.player.gold}")
+        else:
+            print("Not enough gold to buy this item.")
+
+    def sell_item(self, item_id: int, item: Dict[str, Any]):
+        if any(i['id'] == item_id for i in self.player.inventory.items):
+            self.player.inventory.remove_item(item_id)
+            self.player.gold += item['value']
+            print(f"Sold {item['name']} for {item['value']} Gold. Total Gold: {self.player.gold}")
+        else:
+            print("You don't have this item in your inventory.")
 
 if __name__ == "__main__":
     story_path = r"modules/story_blocks.json"
