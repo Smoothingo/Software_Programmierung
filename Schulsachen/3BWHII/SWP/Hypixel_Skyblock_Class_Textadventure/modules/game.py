@@ -1,5 +1,5 @@
 from os import environ
-environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "1"
+environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "1"  #source https://www.youtube.com/watch?v=xdkY6yhEccA
 import json
 import os
 import io
@@ -10,7 +10,10 @@ import pygame
 import threading
 import sys
 
-def play_audio(file_path_music: str):
+#docstrings und paar comments mit chatgpt
+
+
+def play_audio(file_path_music: str): #https://www.youtube.com/watch?v=xdkY6yhEccA
     """
     Plays an audio file using pygame.
 
@@ -57,6 +60,12 @@ def faster_print(text: str, delay: float = 0.07):
         text (str): The text to print.
         delay (float): The delay between each character.
     """
+    for char in text:
+        print(char, end='', flush=True)
+        time.sleep(delay)
+    print()
+
+def describe_print(text: str, delay: float = 0.0875):
     for char in text:
         print(char, end='', flush=True)
         time.sleep(delay)
@@ -158,29 +167,53 @@ class Inventory:
 
 class Character:
     def __init__(self, name: str):
-        self.name = name
+        self.__name = name  # private Varible
+
+    @property
+    def name(self):
+        return self.__name
+
+    @name.setter
+    def name(self, name: str):
+        self.__name = name
+
+    def describe(self) -> None:
+        """
+        Describes the character.
+        """
+        print(f"{self.name} is a character in the game.")
+        
 
 class Player(Character):
-    def __init__(self, name: str, game):
+    def __init__(self, name: str, game, base_health: int = 100, base_attack: int = 10, base_defense: int = 5):
         """
         Initializes a player with default health.
         """
         super().__init__(name)
-        self.game = game  # Reference to the Game instance
-        self.inventory = Inventory()
-        self.level = 1
-        self.xp = 0
-        self.base_health = 100
-        self.base_attack = 10
-        self.base_defense = 5
+        self.game: 'Game' = game
+        self.inventory: Inventory = Inventory()
+        self.__level: int = 1  # Private level
+        self.xp: int = 0
+        self.base_health = base_health
+        self.base_attack = base_attack
+        self.base_defense = base_defense
         self.health = self.base_health
         self.attack = self.base_attack
         self.defense = self.base_defense
-        self.gold_item_id = 2
-        self.initial_items_added = False  # Flag to track if initial items have been added
-        self.equipped_sword = None
-        self.equipped_armor = None
-        self.teleported_to_ender_island = False
+        self.gold_item_id: int = 2
+        self.initial_items_added: bool = False  # Flag to track if initial items have been added
+        self.equipped_sword: str = None
+        self.equipped_armor: str = None
+        self.teleported_to_ender_island: bool = False
+
+    @property
+    def level(self):
+        return self.__level
+
+    @level.setter
+    def level(self, level: int):
+        self.__level = level
+
 
     def gain_xp(self, amount: int):
         self.xp += amount
@@ -207,6 +240,31 @@ class Player(Character):
         self.health = self.base_health
         self.attack = self.base_attack
         self.defense = self.base_defense
+    
+    def describe(self) -> None:
+        """
+        Describes the player.
+        """
+        describe_print(
+            f"Welcome, brave adventurer {self.name}! 🌟\n"
+            f"You stand at the dawn of an epic journey, filled with peril and glory.\n"
+            f"At Level {self.level}, you are just beginning to uncover your true potential.\n"
+            f"Health: {self.health}/{self.base_health} - Your vitality is strong, ready to face the challenges ahead.\n"
+            f"Attack: {self.attack} - Your strikes are precise, capable of felling your foes.\n"
+            f"Defense: {self.defense} - Your defenses are sturdy, protecting you from harm.\n"
+            f"\n"
+            f"Hear me, {self.name}, for you are chosen among mortals. Your journey is one of legend, and your deeds will echo through the annals of time.\n"
+            f"Equipped with the strength of titans and the wisdom of sages, you will carve your path through the darkness, illuminating the way for others.\n"
+            f"Your heart is pure, your resolve unbreakable. No foe can stand before you, no challenge too great.\n"
+            f"\n"
+            f"Rise, {self.name}, and begin your quest. The world watches in awe, and the gods themselves whisper your name in reverence.\n"
+            f"May your blade stay sharp, your armor strong, and your spirit forever indomitable.\n"
+            f"\n"
+            f"Go forth, {self.name}, and let your legend be written in the stars.\n"
+            f"Remember, as you grow stronger and gain experience, you will face greater challenges.\n"
+            f"One day, you may need to confront the mighty Ender Dragon. Prepare yourself, for that battle will test your limits like never before.\n"
+            f"Level up, gather powerful equipment, and hone your skills. The fate of this world may one day rest in your hands."
+        )
 
     def take_damage(self, amount: int):
         """
@@ -228,6 +286,9 @@ class Player(Character):
             player_death()
 
     def use_item(self, item_id: int, target=None):
+        """
+        Method for using an item specific to the player.
+        """
         item = next((i for i in self.inventory.items if i['id'] == item_id), None)
         if item:
             item_data = self.inventory.load_item_data(r'modules/lookuptable.json', item_id)
@@ -295,15 +356,15 @@ class Player(Character):
 
                 if swords:
                     print("\nChoose a sword to equip:")
-                    for idx, sword in enumerate(swords, start=1):
+                    for vorne_id, sword in enumerate(swords, start=1):
                         item_data = self.inventory.load_item_data(r'modules/lookuptable.json', sword['id'])
-                        print(f"[{idx}] {sword['name']} - Attack: +{item_data['stats']['attack']}")
+                        print(f"[{vorne_id}] {sword['name']} - Attack: +{item_data['stats']['attack']}")
                     sword_choice = input("Enter the sword number to equip or 0 to skip: ").strip()
                     if sword_choice != "0":
                         try:
-                            sword_idx = int(sword_choice) - 1
-                            if 0 <= sword_idx < len(swords):
-                                self.use_item(swords[sword_idx]['id'])
+                            sword_vorne_id = int(sword_choice) - 1
+                            if 0 <= sword_vorne_id < len(swords):
+                                self.use_item(swords[sword_vorne_id]['id'])
                             else:
                                 print("Invalid choice. No sword equipped.")
                         except ValueError:
@@ -311,15 +372,15 @@ class Player(Character):
 
                 if armors:
                     print("\nChoose an armor to equip:")
-                    for idx, armor in enumerate(armors, start=1):
+                    for vorne_id, armor in enumerate(armors, start=1):
                         item_data = self.inventory.load_item_data(r'modules/lookuptable.json', armor['id'])
-                        print(f"[{idx}] {armor['name']} - Defense: +{item_data['stats']['defense']}")
+                        print(f"[{vorne_id}] {armor['name']} - Defense: +{item_data['stats']['defense']}")
                     armor_choice = input("Enter the armor number to equip or 0 to skip: ").strip()
                     if armor_choice != "0":
                         try:
-                            armor_idx = int(armor_choice) - 1
-                            if 0 <= armor_idx < len(armors):
-                                self.use_item(armors[armor_idx]['id'])
+                            armor_vorne_id = int(armor_choice) - 1
+                            if 0 <= armor_vorne_id < len(armors):
+                                self.use_item(armors[armor_vorne_id]['id'])
                             else:
                                 print("Invalid choice. No armor equipped.")
                         except ValueError:
@@ -352,7 +413,7 @@ class Game:
     def start(self):
         """ Starts the game by welcoming the player and displaying the first island. """
         self.player.name = input("Enter your name: ").strip()
-        print(f"Welcome, {self.player.name}! Let the adventure begin.")
+        slow_print(f"Welcome, {self.player.name}! Let the adventure begin.")
         self.display_island()
 
     def display_island(self):
@@ -368,8 +429,8 @@ class Game:
     def display_actions(self, actions: List[Dict[str, Any]]):
         while True:
             print("Available Actions:")
-            for idx, action in enumerate(actions, start=1):
-                print(f"[{idx}] {action['description']}")
+            for vorne_id, action in enumerate(actions, start=1):
+                print(f"[{vorne_id}] {action['description']}")
             print("[0] Exit Game")
 
             choice = input("Choose an action: ").strip()
@@ -398,6 +459,10 @@ class Game:
             player_death()
         elif action.get("response") == "// travel":
             self.travel_to(action.get("next_location"))
+        elif action.get("response") == "// ask god who you are":
+            audio_thread = threading.Thread(target=play_audio, args=(r'modules\audio\player_introduc.mp3',))
+            audio_thread.start()
+            self.player.describe()
 
         elif action.get("response") == "// change loadout":
             self.player.choose_equipment()
@@ -476,8 +541,8 @@ class Game:
         if not self.player.inventory.items:
             print("Your inventory is empty.")
         else:
-            for idx, item in enumerate(self.player.inventory.items, start=1):
-                print(f"[{idx}] {item['name']} - Quantity: {item['amount']}")
+            for vorne_id, item in enumerate(self.player.inventory.items, start=1):
+                print(f"[{vorne_id}] {item['name']} - Quantity: {item['amount']}")
         print("-" * 40)
 
     def initiate_combat(self, mob_name):
@@ -529,16 +594,16 @@ class Game:
                 if not potions:
                     print("You have no usable items.")
                     continue
-                for idx, potion in enumerate(potions, start=1):
+                for vorne_id, potion in enumerate(potions, start=1):
                     item_data = self.player.inventory.load_item_data(r'modules/lookuptable.json', potion['id'])
-                    print(f"[{idx}] {potion['name']} - {item_data['description']}")
+                    print(f"[{vorne_id}] {potion['name']} - {item_data['description']}")
                 item_choice = input("Enter the item number to use or 0 to cancel: ").strip()
                 if item_choice == "0":
                     continue
                 try:
-                    item_idx = int(item_choice) - 1
-                    if 0 <= item_idx < len(potions):
-                        item = potions[item_idx]
+                    item_vorne_id = int(item_choice) - 1
+                    if 0 <= item_vorne_id < len(potions):
+                        item = potions[item_vorne_id]
                         heal_amount = self.player.use_item(item['id'], target=mob)
                         player_health = min(player_health + heal_amount, self.player.base_health)  # Ensure health does not exceed base health
                         self.player.health = player_health  # Update player's health after using item

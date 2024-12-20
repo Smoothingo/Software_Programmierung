@@ -6,7 +6,7 @@
       "actions": [
         {
           "description": "Ask God who you are",
-          "response": "You are an adventurer chosen to explore and conquer the Archipelago."
+          "response": "// ask god who you are"
         },
         {
           "description": "Search your pockets",
@@ -16,7 +16,7 @@
           "description": "Talk with Jerry",
           "response": "Welcome to your Personal Island. I’m Jerry, your guide. Let’s start your adventure!",
           "next_location": "Personal Island",
-          "add_items": { "1": 1, "2": 10, "3": 1, "5": 1, "6": 1, "16": 1, "17": 1 },
+          "add_items": { "1": 1, "2": 10, "3": 1, "5": 1, "6": 1},
           "add_xp": 10
         },
         {
@@ -208,7 +208,7 @@
           "description": "Fight Slimes",
           "response": "// initiate combat",
           "mob": "Slime",
-          "add_xp": 991
+          "add_xp": 10
         },
         {
           "description": "Fight Goblins",
