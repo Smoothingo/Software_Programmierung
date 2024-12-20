@@ -65,7 +65,7 @@ def faster_print(text: str, delay: float = 0.07):
         time.sleep(delay)
     print()
 
-def describe_print(text: str, delay: float = 0.0875):
+def describe_print(text: str, delay: float = 0.084):
     for char in text:
         print(char, end='', flush=True)
         time.sleep(delay)
