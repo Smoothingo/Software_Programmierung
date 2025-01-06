@@ -117,7 +117,7 @@
         {
           "description": "Mine Coal",
           "response": "You mine some coal, a valuable resource for crafting and trading.",
-          "add_items": { "9": 2 },
+          "add_items": { "9": 2},
           "add_xp": 10
         },
         {
@@ -188,19 +188,19 @@
           "name": "Slime",
           "description": "A small, gooey creature with a mischievous grin.",
           "stats": { "health": 25, "attack": 5, "defense": 2 },
-          "drops": { "22": 3 }
+          "drops": { "21": 3 }
         },
         {
           "name": "Goblin",
           "description": "A small, green-skinned creature with sharp teeth and claws.",
           "stats": { "health": 50, "attack": 12, "defense": 2 },
-          "drops": { "12": 1, "20": 1 }
+          "drops": { "12": 1, "19": 1 }
         },
         {
           "name": "Orc",
           "description": "A large, brutish humanoid with a fierce expression and powerful muscles.",
           "stats": { "health": 72, "attack": 20, "defense": 5 },
-          "drops": { "13": 1, "21": 1 }
+          "drops": { "13": 1, "20": 1 }
         }
       ],
       "actions": [

@@ -160,8 +160,8 @@
         "defense": 15
       }
     },
-    "19": {
-      "id": 19,
+    "18": {
+      "id": 18,
       "name": "Poison Potion",
       "description": "A potion that poisons the enemy, dealing 30 damage.",
       "value": 40,
@@ -171,8 +171,8 @@
         "poison": 30
       }
     },
-    "20": {
-      "id": 20,
+    "19": {
+      "id": 19,
       "name": "Goblin Dagger",
       "description": "A small dagger used by goblins.",
       "value": 25,
@@ -182,8 +182,8 @@
         "attack": 5
       }
     },
-    "21": {
-      "id": 21,
+    "20": {
+      "id": 20,
       "name": "Orc Helmet",
       "description": "A helmet worn by orcs.",
       "value": 60,
@@ -193,8 +193,8 @@
         "defense": 5
       }
     },
-    "22": {
-      "id": 22,
+    "21": {
+      "id": 21,
       "name": "Slime Goey",
       "description": "A goey substance from a slime.",
       "value": 5,

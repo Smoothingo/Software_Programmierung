@@ -2,7 +2,7 @@ from os import environ
 environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "1"  #source https://www.youtube.com/watch?v=xdkY6yhEccA
 import json
 import os
-import io
+import io 
 import random
 import time
 from typing import List, Dict, Any
@@ -127,9 +127,11 @@ class Inventory:
         else:
             print(f"Item with ID {item_id} not found in inventory.")
 
+
     def get_item_quantity(self, item_id: int) -> int:
         item = next((i for i in self.items if i['id'] == item_id), None)
         return item['amount'] if item else 0
+
 
     def modify_item_quantity(self, item_id: int, quantity: int):
         item = next((i for i in self.items if i['id'] == item_id), None)
@@ -648,25 +650,30 @@ class Game:
                 if items:
                     print(f"\n{category.capitalize()}:")
                     for item_id, item in items.items():
-                        quantity = self.player.inventory.get_item_quantity(item_id)
+                        quantity = self.player.inventory.get_item_quantity(int(item_id))  # Ensure item_id is an integer
                         print(f"[{item_id}] {item['name']} - {item['description']} - Value: {item['value']} Gold - You have: {quantity}")
 
             print("\n[0] Exit Bazaar")
             print("=" * 40)
 
             choice = input("Choose an item to buy/sell or exit: ").strip()
+
             if choice == "0":
                 break
 
             try:
-                item_id = int(choice)
-                if str(item_id) in items:
-                    self.trade_item(item_id, items[str(item_id)])
-                else:
+                item_id = int(choice)  # Convert choice to integer
+                found = False
+                for category, items in categorized_items.items():
+                    if item_id in map(int, items.keys()):  # Ensure keys are compared as integers
+                        self.trade_item(item_id, items[str(item_id)])  # Convert item_id back to string for dictionary lookup
+                        found = True
+                        break
+                if not found:
                     print("Invalid choice. Try again.")
             except ValueError:
                 print("Please enter a valid number.")
-
+                        
     def trade_item(self, item_id: int, item: Dict[str, Any]):
         while True:
             print("\n" + "-" * 40)
@@ -680,7 +687,7 @@ class Game:
             if choice == "1":
                 self.buy_item(item_id, item)
             elif choice == "2":
-                self.sell_item(item_id, item) 
+                self.sell_item(item_id, item)
             elif choice == "0":
                 return
             else:
@@ -722,6 +729,24 @@ class Game:
             print(f"Sold {amount} {item['name']} for {total_value} Gold. Total Gold: {self.player.inventory.get_item_quantity(self.player.gold_item_id)}")
         else:
             print("You don't have enough of this item in your inventory.")
+
+        def sell_item(self, item_id: int, item: Dict[str, Any]):
+            try:
+                amount = int(input(f"How many {item['name']} do you want to sell? (You have {self.player.inventory.get_item_quantity(item_id)}): "))
+                if amount <= 0:
+                    print("Amount must be greater than zero.")
+                    return
+            except ValueError:
+                print("Invalid amount. Please enter a number.")
+                return
+
+            if self.player.inventory.get_item_quantity(item_id) >= amount:
+                total_value = item['value'] * amount
+                self.player.inventory.remove_item(item_id, amount)
+                self.player.inventory.modify_item_quantity(self.player.gold_item_id, total_value)
+                print(f"Sold {amount} {item['name']} for {total_value} Gold. Total Gold: {self.player.inventory.get_item_quantity(self.player.gold_item_id)}")
+            else:
+                print("You don't have enough of this item in your inventory.")
 
 if __name__ == "__main__":
     story_path = r"modules/story_blocks.json"

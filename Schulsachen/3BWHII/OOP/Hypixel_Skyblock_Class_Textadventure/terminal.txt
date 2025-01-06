@@ -1,0 +1,482 @@
+PS C:\Users\Smooth\Documents\GitHub\Software_Programmierung\Schulsachen\3BWHII\SWP\Hypixel_Skyblock_Class_Textadventure> & C:/Users/Smooth/anaconda3/envs/Try_dumb_shit/python.exe c:/Users/Smooth/Documents/GitHub/Software_Programmierung/Schulsachen/3BWHII/SWP/Hypixel_Skyblock_Class_Textadventure/modules/game.py
+Enter your name: mark
+Welcome, mark! Let the adventure begin.
+
+Intro
+You awaken on a peaceful island, your Personal Island. An unfamiliar voice calls out: Welcome, adventurer. Your journey across the Archipelago awaits.
+----------------------------------------
+Available Actions:
+[1] Ask God who you are
+[2] Search your pockets
+[3] Talk with Jerry
+[4] View Stats or View/Change Loadout
+[0] Exit Game
+Choose an action: 2
+
+🧳 Inventory:
+Your inventory is empty.
+----------------------------------------
+Available Actions:
+[1] Ask God who you are
+[2] Search your pockets
+[3] Talk with Jerry
+[4] View Stats or View/Change Loadout
+[0] Exit Game
+Choose an action: 4
+
+Choose an option:
+[1] View current loadout/Stats
+[2] Change loadout
+[0] Cancel
+Enter your choice: 2
+You can't change loadout, you have nothing available.
+
+Choose an option:
+[1] View current loadout/Stats
+[2] Change loadout
+[0] Cancel
+Enter your choice: 0
+Available Actions:
+[1] Ask God who you are
+[2] Search your pockets
+[3] Talk with Jerry
+[4] View Stats or View/Change Loadout
+[0] Exit Game
+Choose an action: 3
+
+Welcome to your Personal Island. I’m Jerry, your guide. Let’s start your adventure!
+You gained 10 XP. Total XP: 10
+🔋 XP: 10/100
+
+Personal Island
+It's a quiet and serene place where your journey begins. You can build and expand this island as you progress.
+----------------------------------------
+Available Actions:
+[1] Build a shelter
+[2] Gather resources
+[3] Travel to the Hub Island
+[4] Search your pockets
+[5] View Stats or View/Change Loadout
+[0] Exit Game
+Choose an action: 3
+
+You travel to the Hub Island, the bustling center of the Archipelago.
+
+Hub Island
+The bustling center of the Archipelago. Merchants and adventurers gather here to trade and prepare for journeys to other islands.
+Quest-Giver (Quest-Giver): I have a quest for you, adventurer. Are you ready to accept it?
+----------------------------------------
+Available Actions:
+[1] Visit the Bazaar
+[2] Prepare for a journey
+[3] Travel to Mining Island
+[4] Travel to Farming Island
+[5] Travel to Combat Island
+[6] Search your pockets
+[7] View Stats or View/Change Loadout
+[0] Exit Game
+Choose an action: 7
+
+Choose an option:
+[1] View current loadout/Stats
+[2] Change loadout
+[0] Cancel
+Enter your choice: 2
+
+Choose a sword to equip:
+[1] Sword - Attack: +10
+Enter the sword number to equip or 0 to skip: 1
+You equipped a Sword. Current attack: 20
+
+Choose an armor to equip:
+[1] Armor - Defense: +5
+Enter the armor number to equip or 0 to skip: 1
+You equipped a Armor. Current defense: 10
+
+Choose an option:
+[1] View current loadout/Stats
+[2] Change loadout
+[0] Cancel
+Enter your choice: 0
+Available Actions:
+[1] Visit the Bazaar
+[2] Prepare for a journey
+[3] Travel to Mining Island
+[4] Travel to Farming Island
+[5] Travel to Combat Island
+[6] Search your pockets
+[7] View Stats or View/Change Loadout
+[0] Exit Game
+Choose an action: 1
+
+========================================
+🛒 Bazaar:
+========================================
+
+Weapon:
+[3] Sword - A sharp sword. - Value: 50 Gold - You have: 1
+[14] Excalibur - The legendary sword of King Arthur. - Value: 200 Gold - You have: 0
+[15] Battle Axe - A heavy axe used in battle. - Value: 150 Gold - You have: 0
+[16] Dragon Slayer - A sword forged to slay dragons. - Value: 300 Gold - You have: 0
+[19] Goblin Dagger - A small dagger used by goblins. - Value: 25 Gold - You have: 0
+
+Armor:
+[4] Shield - A sturdy shield. - Value: 40 Gold - You have: 0
+[6] Armor - Protective armor. - Value: 100 Gold - You have: 1
+[17] Knight's Armor - Armor worn by knights. - Value: 150 Gold - You have: 0
+[20] Orc Helmet - A helmet worn by orcs. - Value: 60 Gold - You have: 0
+
+Potion:
+[5] Potion - A healing potion. - Value: 20 Gold - You have: 1
+[18] Poison Potion - A potion that poisons the enemy, dealing 30 damage. - Value: 40 Gold - You have: 0
+
+Ressource:
+[7] Wood - Natural Wood - Value: 1 Gold - You have: 0
+[8] Stone - Hard Rock - Value: 1 Gold - You have: 0
+[9] Coal - A piece of coal. - Value: 5 Gold - You have: 0
+[10] Wheat - A bundle of wheat. - Value: 2 Gold - You have: 0
+[11] Carrot - A fresh carrot. - Value: 3 Gold - You have: 0
+
+Monster_drops:
+[12] Goblin Ear - An ear from a goblin. - Value: 15 Gold - You have: 0
+[13] Orc Tooth - A tooth from an orc. - Value: 20 Gold - You have: 0
+[21] Slime Goey - A goey substance from a slime. - Value: 5 Gold - You have: 0
+
+Misc:
+[1] Map - A map of the Archipelago. - Value: 10 Gold - You have: 1
+
+[0] Exit Bazaar
+========================================
+Choose an item to buy/sell or exit: 1
+
+
+----------------------------------------
+
+Trading Map:
+[1] Buy
+[2] Sell
+[0] Cancel
+----------------------------------------
+Choose an action: 2
+How many Map do you want to sell? (You have 1): 1
+Sold 1 Map for 10 Gold. Total Gold: 20
+
+----------------------------------------
+
+Trading Map:
+[1] Buy
+[2] Sell
+[0] Cancel
+----------------------------------------
+Choose an action: 0
+
+========================================
+🛒 Bazaar:
+========================================
+
+Weapon:
+[3] Sword - A sharp sword. - Value: 50 Gold - You have: 1
+[14] Excalibur - The legendary sword of King Arthur. - Value: 200 Gold - You have: 0
+[15] Battle Axe - A heavy axe used in battle. - Value: 150 Gold - You have: 0
+[16] Dragon Slayer - A sword forged to slay dragons. - Value: 300 Gold - You have: 0
+[19] Goblin Dagger - A small dagger used by goblins. - Value: 25 Gold - You have: 0
+
+Armor:
+[4] Shield - A sturdy shield. - Value: 40 Gold - You have: 0
+[6] Armor - Protective armor. - Value: 100 Gold - You have: 1
+[17] Knight's Armor - Armor worn by knights. - Value: 150 Gold - You have: 0
+[20] Orc Helmet - A helmet worn by orcs. - Value: 60 Gold - You have: 0
+
+Potion:
+[5] Potion - A healing potion. - Value: 20 Gold - You have: 1
+[18] Poison Potion - A potion that poisons the enemy, dealing 30 damage. - Value: 40 Gold - You have: 0
+
+Ressource:
+[7] Wood - Natural Wood - Value: 1 Gold - You have: 0
+[8] Stone - Hard Rock - Value: 1 Gold - You have: 0
+[9] Coal - A piece of coal. - Value: 5 Gold - You have: 0
+[10] Wheat - A bundle of wheat. - Value: 2 Gold - You have: 0
+[11] Carrot - A fresh carrot. - Value: 3 Gold - You have: 0
+
+Monster_drops:
+[12] Goblin Ear - An ear from a goblin. - Value: 15 Gold - You have: 0
+[13] Orc Tooth - A tooth from an orc. - Value: 20 Gold - You have: 0
+[21] Slime Goey - A goey substance from a slime. - Value: 5 Gold - You have: 0
+
+Misc:
+[1] Map - A map of the Archipelago. - Value: 10 Gold - You have: 0
+
+[0] Exit Bazaar
+========================================
+Choose an item to buy/sell or exit: 0
+
+Available Actions:
+[1] Visit the Bazaar
+[2] Prepare for a journey
+[3] Travel to Mining Island
+[4] Travel to Farming Island
+[5] Travel to Combat Island
+[6] Search your pockets
+[7] View Stats or View/Change Loadout
+[0] Exit Game
+Choose an action: 2
+
+You gather supplies and prepare for your next journey.
+You gained 10 XP. Total XP: 20
+🔋 XP: 20/100
+
+Hub Island
+The bustling center of the Archipelago. Merchants and adventurers gather here to trade and prepare for journeys to other islands.
+Quest-Giver (Quest-Giver): I have a quest for you, adventurer. Are you ready to accept it?
+----------------------------------------
+Available Actions:
+[1] Visit the Bazaar
+[2] Prepare for a journey
+[3] Travel to Mining Island
+[4] Travel to Farming Island
+[5] Travel to Combat Island
+[6] Search your pockets
+[7] View Stats or View/Change Loadout
+[0] Exit Game
+Choose an action: 3
+
+You travel to the Mining Island, a rugged island rich in resources.
+
+Mining Island
+A rugged island rich in resources. Adventurers come here to mine valuable ores.
+Miner (Guide): Welcome to the Mining Island. Pick up a tool and start digging!
+----------------------------------------
+Available Actions:
+[1] Mine Coal
+[2] Travel to Hub Island
+[3] Search your pockets
+[4] View Stats or View/Change Loadout
+[0] Exit Game
+Choose an action: 1
+
+You mine some coal, a valuable resource for crafting and trading.
+You gained 10 XP. Total XP: 30
+🔋 XP: 30/100
+
+Mining Island
+A rugged island rich in resources. Adventurers come here to mine valuable ores.
+Miner (Guide): Welcome to the Mining Island. Pick up a tool and start digging!
+----------------------------------------
+Available Actions:
+[1] Mine Coal
+[2] Travel to Hub Island
+[3] Search your pockets
+[4] View Stats or View/Change Loadout
+[0] Exit Game
+Choose an action: 1
+
+You mine some coal, a valuable resource for crafting and trading.
+You gained 10 XP. Total XP: 40
+🔋 XP: 40/100
+
+Mining Island
+A rugged island rich in resources. Adventurers come here to mine valuable ores.
+Miner (Guide): Welcome to the Mining Island. Pick up a tool and start digging!
+----------------------------------------
+Available Actions:
+[1] Mine Coal
+[2] Travel to Hub Island
+[3] Search your pockets
+[4] View Stats or View/Change Loadout
+[0] Exit Game
+Choose an action: 2
+
+You travel back to the Hub Island.
+
+Hub Island
+The bustling center of the Archipelago. Merchants and adventurers gather here to trade and prepare for journeys to other islands.
+Quest-Giver (Quest-Giver): I have a quest for you, adventurer. Are you ready to accept it?
+----------------------------------------
+Available Actions:
+[1] Visit the Bazaar
+[2] Prepare for a journey
+[3] Travel to Mining Island
+[4] Travel to Farming Island
+[5] Travel to Combat Island
+[6] Search your pockets
+[7] View Stats or View/Change Loadout
+[0] Exit Game
+Choose an action: 5
+
+You travel to the Combat Island, a dangerous place filled with enemies.
+
+Combat Island
+A dangerous place filled with enemies. Adventurers come here to fight and earn valuable rewards.
+Warrior (Guide): Welcome to the Combat Island. Prepare yourself for battle!
+----------------------------------------
+Available Actions:
+[1] Fight Slimes
+[2] Fight Goblins
+[3] Fight Orcs
+[4] Travel to Hub Island
+[5] Search your pockets
+[6] View Stats or View/Change Loadout
+[0] Exit Game
+Choose an action: 1
+⚔️ Combat initiated! Prepare for battle.
+You encounter a Slime!
+A small, gooey creature with a mischievous grin.
+
+Choose your action:
+[1] Attack
+[2] Use Item
+[3] Run
+Enter your choice: 1
+You dealt 26 damage to the Slime. Enemy health: -1
+You defeated the Slime!
+You gained 10 XP. Total XP: 50
+🔋 XP: 50/100
+
+Combat Island
+A dangerous place filled with enemies. Adventurers come here to fight and earn valuable rewards.
+Warrior (Guide): Welcome to the Combat Island. Prepare yourself for battle!
+----------------------------------------
+Available Actions:
+[1] Fight Slimes
+[2] Fight Goblins
+[3] Fight Orcs
+[4] Travel to Hub Island
+[5] Search your pockets
+[6] View Stats or View/Change Loadout
+[0] Exit Game
+Choose an action: 4
+
+You travel back to the Hub Island.
+
+Hub Island
+The bustling center of the Archipelago. Merchants and adventurers gather here to trade and prepare for journeys to other islands.
+Quest-Giver (Quest-Giver): I have a quest for you, adventurer. Are you ready to accept it?
+----------------------------------------
+Available Actions:
+[1] Visit the Bazaar
+[2] Prepare for a journey
+[3] Travel to Mining Island
+[4] Travel to Farming Island
+[5] Travel to Combat Island
+[6] Search your pockets
+[7] View Stats or View/Change Loadout
+[0] Exit Game
+Choose an action: 1
+
+========================================
+🛒 Bazaar:
+========================================
+
+Weapon:
+[3] Sword - A sharp sword. - Value: 50 Gold - You have: 1
+[14] Excalibur - The legendary sword of King Arthur. - Value: 200 Gold - You have: 0
+[15] Battle Axe - A heavy axe used in battle. - Value: 150 Gold - You have: 0
+[16] Dragon Slayer - A sword forged to slay dragons. - Value: 300 Gold - You have: 0
+[19] Goblin Dagger - A small dagger used by goblins. - Value: 25 Gold - You have: 0
+
+Armor:
+[4] Shield - A sturdy shield. - Value: 40 Gold - You have: 0
+[6] Armor - Protective armor. - Value: 100 Gold - You have: 1
+[17] Knight's Armor - Armor worn by knights. - Value: 150 Gold - You have: 0
+[20] Orc Helmet - A helmet worn by orcs. - Value: 60 Gold - You have: 0
+
+Potion:
+[5] Potion - A healing potion. - Value: 20 Gold - You have: 1
+[18] Poison Potion - A potion that poisons the enemy, dealing 30 damage. - Value: 40 Gold - You have: 0
+
+Ressource:
+[7] Wood - Natural Wood - Value: 1 Gold - You have: 0
+[8] Stone - Hard Rock - Value: 1 Gold - You have: 0
+[9] Coal - A piece of coal. - Value: 5 Gold - You have: 2
+[10] Wheat - A bundle of wheat. - Value: 2 Gold - You have: 0
+[11] Carrot - A fresh carrot. - Value: 3 Gold - You have: 0
+
+Monster_drops:
+[12] Goblin Ear - An ear from a goblin. - Value: 15 Gold - You have: 0
+[13] Orc Tooth - A tooth from an orc. - Value: 20 Gold - You have: 0
+[21] Slime Goey - A goey substance from a slime. - Value: 5 Gold - You have: 3
+
+Misc:
+[1] Map - A map of the Archipelago. - Value: 10 Gold - You have: 0
+
+[0] Exit Bazaar
+========================================
+Choose an item to buy/sell or exit: 21
+
+
+----------------------------------------
+
+Trading Slime Goey:
+[1] Buy
+[2] Sell
+[0] Cancel
+----------------------------------------
+Choose an action: 2
+How many Slime Goey do you want to sell? (You have 3): 3
+Sold 3 Slime Goey for 15 Gold. Total Gold: 35
+
+----------------------------------------
+
+Trading Slime Goey:
+[1] Buy
+[2] Sell
+[0] Cancel
+----------------------------------------
+Choose an action: 0
+
+========================================
+🛒 Bazaar:
+========================================
+
+Weapon:
+[3] Sword - A sharp sword. - Value: 50 Gold - You have: 1
+[14] Excalibur - The legendary sword of King Arthur. - Value: 200 Gold - You have: 0
+[15] Battle Axe - A heavy axe used in battle. - Value: 150 Gold - You have: 0
+[16] Dragon Slayer - A sword forged to slay dragons. - Value: 300 Gold - You have: 0
+[19] Goblin Dagger - A small dagger used by goblins. - Value: 25 Gold - You have: 0
+
+Armor:
+[4] Shield - A sturdy shield. - Value: 40 Gold - You have: 0
+[6] Armor - Protective armor. - Value: 100 Gold - You have: 1
+[17] Knight's Armor - Armor worn by knights. - Value: 150 Gold - You have: 0
+[20] Orc Helmet - A helmet worn by orcs. - Value: 60 Gold - You have: 0
+
+Potion:
+[5] Potion - A healing potion. - Value: 20 Gold - You have: 1
+[18] Poison Potion - A potion that poisons the enemy, dealing 30 damage. - Value: 40 Gold - You have: 0
+
+Ressource:
+[7] Wood - Natural Wood - Value: 1 Gold - You have: 0
+[8] Stone - Hard Rock - Value: 1 Gold - You have: 0
+[9] Coal - A piece of coal. - Value: 5 Gold - You have: 2
+[10] Wheat - A bundle of wheat. - Value: 2 Gold - You have: 0
+[11] Carrot - A fresh carrot. - Value: 3 Gold - You have: 0
+
+Monster_drops:
+[12] Goblin Ear - An ear from a goblin. - Value: 15 Gold - You have: 0
+[13] Orc Tooth - A tooth from an orc. - Value: 20 Gold - You have: 0
+[21] Slime Goey - A goey substance from a slime. - Value: 5 Gold - You have: 0
+
+Misc:
+[1] Map - A map of the Archipelago. - Value: 10 Gold - You have: 0
+
+[0] Exit Bazaar
+========================================
+Choose an item to buy/sell or exit: 0
+
+Available Actions:
+[1] Visit the Bazaar
+[2] Prepare for a journey
+[3] Travel to Mining Island
+[4] Travel to Farming Island
+[5] Travel to Combat Island
+[6] Search your pockets
+[7] View Stats or View/Change Loadout
+[0] Exit Game
+Choose an action:
+
+
+
+
+NICHT DAS ENDE> DAFÜR MÜSSEN SIE ES SPIELEN
+sorry für verspätung hatte noch ideen mit ki stimmen etc
