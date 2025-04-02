@@ -1,11 +1,10 @@
 import sys
 import json
 
-output = {}
+results = {}
 
 for line in sys.stdin:
-    word, count = line.strip().split('\t')
-    output[word] = int(count)
+    year, avg = line.strip().split('\t')
+    results[year] = float(avg)
 
-with open('output.json', 'w') as json_file:
-    json.dump(output, json_file, indent=4)
+print(json.dumps(results, indent=2))

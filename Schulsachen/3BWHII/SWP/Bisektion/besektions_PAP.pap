@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<FRAME GUID="2FB25471-B62C-4EE6-BD43-F819C095ACF8" FORMAT="0000" APP_VERSION="2.2.0.8" CHECKSUM="FEA80334CD889C08">
-  <PROJECT FORMAT="1.00" NAME="besektions_PAP" AUTHOR="Markus" CREATED="2025.03.25 11:55:55" MODIFIED="2025.03.25 12:30:05">
+<FRAME GUID="2FB25471-B62C-4EE6-BD43-F819C095ACF8" FORMAT="0000" APP_VERSION="2.2.0.8" CHECKSUM="5C2CCBB7C54E5653">
+  <PROJECT FORMAT="1.00" NAME="besektions_PAP" AUTHOR="Markus" CREATED="2025.03.25 11:55:55" MODIFIED="2025.03.27 13:10:20">
     <DIAGRAMS>
-      <DIAGRAM FORMAT="1.00" ID="0" NAME="Hauptprogramm 1" CREATED="2025.03.25 11:56:02" MODIFIED="2025.03.25 12:30:05">
+      <DIAGRAM FORMAT="1.00" ID="0" NAME="Hauptprogramm 1" CREATED="2025.03.25 11:56:02" MODIFIED="2025.03.27 13:10:20">
         <LAYOUT FORMAT="1.00" COLUMNS="4" ROWS="19">
           <ENTRIES>
             <ENTRY COLUMN="0" ROW="2">
@@ -10,12 +10,12 @@
                 <TEXT><![CDATA[]]></TEXT>
               </FIGURE>
             </ENTRY>
-            <ENTRY COLUMN="0" ROW="6">
+            <ENTRY COLUMN="0" ROW="4">
               <FIGURE SUBTYPE="PapOutput" FORMAT="1.00" ID="19">
                 <TEXT><![CDATA[Ausgabe von " Im angegebenen Intervall wurde keine Nullstelle gefunden"]]></TEXT>
               </FIGURE>
             </ENTRY>
-            <ENTRY COLUMN="0" ROW="10">
+            <ENTRY COLUMN="0" ROW="9">
               <FIGURE SUBTYPE="PapConnector" FORMAT="1.00" ID="58">
                 <TEXT><![CDATA[]]></TEXT>
               </FIGURE>
@@ -41,54 +41,48 @@
               </FIGURE>
             </ENTRY>
             <ENTRY COLUMN="1" ROW="3">
-              <FIGURE SUBTYPE="PapActivity" FORMAT="1.00" ID="9">
-                <TEXT><![CDATA[f(x) = x**2 - a]]></TEXT>
+              <FIGURE SUBTYPE="PapModule" FORMAT="1.00" ID="118">
+                <TEXT><![CDATA[fa = f(a) fb = f(b)]]></TEXT>
               </FIGURE>
             </ENTRY>
             <ENTRY COLUMN="1" ROW="4">
-              <FIGURE SUBTYPE="PapModule" FORMAT="1.00" ID="114">
-                <TEXT><![CDATA[Funktion(a, b)]]></TEXT>
-              </FIGURE>
-            </ENTRY>
-            <ENTRY COLUMN="1" ROW="5">
-              <FIGURE SUBTYPE="PapActivity" FORMAT="1.00" ID="7">
-                <TEXT><![CDATA[fa = f(a)
-fb = f(b)]]></TEXT>
-              </FIGURE>
-            </ENTRY>
-            <ENTRY COLUMN="1" ROW="6">
               <FIGURE SUBTYPE="PapCondition" FORMAT="1.00" ID="12">
                 <TEXT><![CDATA[fa * fb <= 0?]]></TEXT>
               </FIGURE>
             </ENTRY>
-            <ENTRY COLUMN="1" ROW="7">
+            <ENTRY COLUMN="1" ROW="5">
               <FIGURE SUBTYPE="PapCondition" FORMAT="1.00" ID="23">
                 <TEXT><![CDATA[fa = 0?]]></TEXT>
               </FIGURE>
             </ENTRY>
-            <ENTRY COLUMN="1" ROW="8">
+            <ENTRY COLUMN="1" ROW="6">
               <FIGURE SUBTYPE="PapCondition" FORMAT="1.00" ID="28">
                 <TEXT><![CDATA[fb = 0?]]></TEXT>
               </FIGURE>
             </ENTRY>
-            <ENTRY COLUMN="1" ROW="9">
-              <FIGURE SUBTYPE="PapActivity" FORMAT="1.00" ID="53">
-                <TEXT><![CDATA[fc = infi (unendlich)]]></TEXT>
+            <ENTRY COLUMN="1" ROW="7">
+              <FIGURE SUBTYPE="PapActivity" FORMAT="1.00" ID="33">
+                <TEXT><![CDATA[c = (a + b) / 2]]></TEXT>
               </FIGURE>
             </ENTRY>
-            <ENTRY COLUMN="1" ROW="10">
+            <ENTRY COLUMN="1" ROW="8">
+              <FIGURE SUBTYPE="PapModule" FORMAT="1.00" ID="114">
+                <TEXT><![CDATA[fc = Funktion(c, b)]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="1" ROW="9">
               <FIGURE SUBTYPE="PapCondition" FORMAT="1.00" ID="51">
                 <TEXT><![CDATA[|fc| > epsilon?]]></TEXT>
               </FIGURE>
             </ENTRY>
             <ENTRY COLUMN="1" ROW="11">
-              <FIGURE SUBTYPE="PapActivity" FORMAT="1.00" ID="33">
-                <TEXT><![CDATA[c = (a + b) / 2]]></TEXT>
+              <FIGURE SUBTYPE="PapActivity" FORMAT="1.00" ID="36">
+                <TEXT><![CDATA[fc = f(c)]]></TEXT>
               </FIGURE>
             </ENTRY>
             <ENTRY COLUMN="1" ROW="12">
-              <FIGURE SUBTYPE="PapActivity" FORMAT="1.00" ID="36">
-                <TEXT><![CDATA[fc = f(c)]]></TEXT>
+              <FIGURE SUBTYPE="PapModule" FORMAT="1.00" ID="124">
+                <TEXT><![CDATA[fa = f(a) fb = f(b)]]></TEXT>
               </FIGURE>
             </ENTRY>
             <ENTRY COLUMN="1" ROW="13">
@@ -121,35 +115,35 @@ fb = f(b)]]></TEXT>
                 <TEXT><![CDATA[Ende]]></TEXT>
               </FIGURE>
             </ENTRY>
-            <ENTRY COLUMN="2" ROW="2">
+            <ENTRY COLUMN="2" ROW="1">
               <FIGURE SUBTYPE="PapComment" FORMAT="1.00" ID="6">
                 <TEXT><![CDATA[a.... linke Grenze des Intervalls, zb: 1
 b ... rechte Grenze des Intervalls zb: 100
 epsilon .... Genauigkeit zb: 0.0001]]></TEXT>
               </FIGURE>
             </ENTRY>
-            <ENTRY COLUMN="2" ROW="5">
+            <ENTRY COLUMN="2" ROW="3">
               <FIGURE SUBTYPE="PapComment" FORMAT="1.00" ID="11">
                 <TEXT><![CDATA[fa ... Funktionswert am Punkt a
 fb .... Funktionswert am Punkt b]]></TEXT>
               </FIGURE>
             </ENTRY>
-            <ENTRY COLUMN="2" ROW="7">
+            <ENTRY COLUMN="2" ROW="5">
               <FIGURE SUBTYPE="PapOutput" FORMAT="1.00" ID="27">
                 <TEXT><![CDATA[Ausgabe von die Lösung ist a]]></TEXT>
               </FIGURE>
             </ENTRY>
-            <ENTRY COLUMN="2" ROW="8">
+            <ENTRY COLUMN="2" ROW="6">
               <FIGURE SUBTYPE="PapOutput" FORMAT="1.00" ID="32">
                 <TEXT><![CDATA[Ausgabe von Lösung ist b]]></TEXT>
               </FIGURE>
             </ENTRY>
-            <ENTRY COLUMN="2" ROW="10">
+            <ENTRY COLUMN="2" ROW="9">
               <FIGURE SUBTYPE="PapOutput" FORMAT="1.00" ID="109">
                 <TEXT><![CDATA[Ausgabe von Lösung ist c]]></TEXT>
               </FIGURE>
             </ENTRY>
-            <ENTRY COLUMN="2" ROW="11">
+            <ENTRY COLUMN="2" ROW="10">
               <FIGURE SUBTYPE="PapComment" FORMAT="1.00" ID="35">
                 <TEXT><![CDATA[c ist der Mittelpunkt des Intervalls [a, b]]]></TEXT>
               </FIGURE>
@@ -169,17 +163,17 @@ fb .... Funktionswert am Punkt b]]></TEXT>
                 <TEXT><![CDATA[]]></TEXT>
               </FIGURE>
             </ENTRY>
-            <ENTRY COLUMN="3" ROW="7">
+            <ENTRY COLUMN="3" ROW="5">
               <FIGURE SUBTYPE="PapConnector" FORMAT="1.00" ID="68">
                 <TEXT><![CDATA[]]></TEXT>
               </FIGURE>
             </ENTRY>
-            <ENTRY COLUMN="3" ROW="8">
+            <ENTRY COLUMN="3" ROW="6">
               <FIGURE SUBTYPE="PapConnector" FORMAT="1.00" ID="67">
                 <TEXT><![CDATA[]]></TEXT>
               </FIGURE>
             </ENTRY>
-            <ENTRY COLUMN="3" ROW="10">
+            <ENTRY COLUMN="3" ROW="9">
               <FIGURE SUBTYPE="PapConnector" FORMAT="1.00" ID="111">
                 <TEXT><![CDATA[]]></TEXT>
               </FIGURE>
@@ -193,18 +187,17 @@ fb .... Funktionswert am Punkt b]]></TEXT>
         </LAYOUT>
         <CONNECTIONS>
           <CONNECTION FORMAT="1.00" ID="3" FROM="1" TO="4" TEXT="" />
-          <CONNECTION FORMAT="1.00" ID="5" FROM="4" TO="9" TEXT="" />
-          <CONNECTION FORMAT="1.00" ID="8" FROM="7" TO="12" TEXT="" />
-          <CONNECTION FORMAT="1.00" ID="10" FROM="9" TO="114" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="123" FROM="114" TO="51" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="121" FROM="33" TO="114" TEXT="" />
           <CONNECTION FORMAT="1.00" ID="13" FROM="12" TO="23" TEXT="ja" />
           <CONNECTION FORMAT="1.00" ID="22" FROM="20" TO="4" TEXT="" />
           <CONNECTION FORMAT="1.00" ID="15" FROM="12" TO="19" TEXT="nein" />
           <CONNECTION FORMAT="1.00" ID="24" FROM="23" TO="28" TEXT="nein" />
           <CONNECTION FORMAT="1.00" ID="26" FROM="23" TO="27" TEXT="ja" />
-          <CONNECTION FORMAT="1.00" ID="29" FROM="28" TO="53" TEXT="nein" />
+          <CONNECTION FORMAT="1.00" ID="8" FROM="118" TO="12" TEXT="" />
           <CONNECTION FORMAT="1.00" ID="31" FROM="28" TO="32" TEXT="ja" />
-          <CONNECTION FORMAT="1.00" ID="34" FROM="33" TO="36" TEXT="" />
-          <CONNECTION FORMAT="1.00" ID="37" FROM="36" TO="38" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="29" FROM="28" TO="33" TEXT="nein" />
+          <CONNECTION FORMAT="1.00" ID="37" FROM="36" TO="124" TEXT="" />
           <CONNECTION FORMAT="1.00" ID="39" FROM="38" TO="40" TEXT="ja" />
           <CONNECTION FORMAT="1.00" ID="105" FROM="100" TO="106" TEXT="" />
           <CONNECTION FORMAT="1.00" ID="43" FROM="38" TO="42" TEXT="nein" />
@@ -212,8 +205,7 @@ fb .... Funktionswert am Punkt b]]></TEXT>
           <CONNECTION FORMAT="1.00" ID="47" FROM="44" TO="46" TEXT="" />
           <CONNECTION FORMAT="1.00" ID="99" FROM="48" TO="95" TEXT="" />
           <CONNECTION FORMAT="1.00" ID="50" FROM="46" TO="48" TEXT="" />
-          <CONNECTION FORMAT="1.00" ID="52" FROM="51" TO="33" TEXT="ja" />
-          <CONNECTION FORMAT="1.00" ID="54" FROM="53" TO="51" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="52" FROM="51" TO="36" TEXT="ja" />
           <CONNECTION FORMAT="1.00" ID="59" FROM="58" TO="51" TEXT="" />
           <CONNECTION FORMAT="1.00" ID="97" FROM="95" TO="58" TEXT="" />
           <CONNECTION FORMAT="1.00" ID="41" FROM="40" TO="48" TEXT="" />
@@ -226,8 +218,9 @@ fb .... Funktionswert am Punkt b]]></TEXT>
           <CONNECTION FORMAT="1.00" ID="110" FROM="51" TO="109" TEXT="nein" />
           <CONNECTION FORMAT="1.00" ID="74" FROM="67" TO="111" TEXT="" />
           <CONNECTION FORMAT="1.00" ID="113" FROM="109" TO="111" TEXT="" />
-          <CONNECTION FORMAT="1.00" ID="115" FROM="114" TO="7" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="5" FROM="4" TO="118" TEXT="" />
           <CONNECTION FORMAT="1.00" ID="117" FROM="116" TO="2" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="125" FROM="124" TO="38" TEXT="" />
         </CONNECTIONS>
       </DIAGRAM>
       <DIAGRAM FORMAT="1.00" ID="1" NAME="Funktion(a, b)" CREATED="2025.03.25 12:26:15" MODIFIED="2025.03.25 12:30:05">
