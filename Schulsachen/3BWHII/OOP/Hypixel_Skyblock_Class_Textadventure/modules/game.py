@@ -12,8 +12,7 @@ import sys
 
 #docstrings und paar comments mit chatgpt
 
-
-def play_audio(file_path_music: str): #https://www.youtube.com/watch?v=xdkY6yhEccA
+def play_audio(file_path_music: str, print_func=print): #https://www.youtube.com/watch?v=xdkY6yhEccA
     """
     Plays an audio file using pygame.
 
@@ -22,7 +21,7 @@ def play_audio(file_path_music: str): #https://www.youtube.com/watch?v=xdkY6yhEc
     """
     absolute_path = os.path.abspath(file_path_music)
     if not os.path.exists(absolute_path):
-        print(f"File not found: {absolute_path}")
+        print_func(f"File not found: {absolute_path}")
         return
     
     # Redirect stdout to suppress the pygame welcome message
@@ -39,37 +38,49 @@ def play_audio(file_path_music: str): #https://www.youtube.com/watch?v=xdkY6yhEc
     while pygame.mixer.music.get_busy():
         pygame.time.Clock().tick(10)
 
-def slow_print(text: str, delay: float = 0.1):
+def slow_print(text: str, delay: float = 0.1, print_func=print):
     """
     Prints text slowly, character by character.
 
     Args:
         text (str): The text to print.
         delay (float): The delay between each character.
+        print_func (callable): The function to use for printing (default is `print`).
     """
     for char in text:
-        print(char, end='', flush=True)
+        print_func(char, end='', flush=True)
         time.sleep(delay)
-    print()
+    print_func("")  # Add a newline at the end
 
-def faster_print(text: str, delay: float = 0.07):
+
+def faster_print(text: str, delay: float = 0.07, print_func=print):
     """
     Prints text faster than slow_print, character by character.
 
     Args:
         text (str): The text to print.
         delay (float): The delay between each character.
+        print_func (callable): The function to use for printing (default is `print`).
     """
     for char in text:
-        print(char, end='', flush=True)
+        print_func(char, end='', flush=True)
         time.sleep(delay)
-    print()
+    print_func("")  # Add a newline at the end
 
-def describe_print(text: str, delay: float = 0.084):
+
+def describe_print(text: str, delay: float = 0.084, print_func=print):
+    """
+    Prints descriptive text slowly, character by character.
+
+    Args:
+        text (str): The text to print.
+        delay (float): The delay between each character.
+        print_func (callable): The function to use for printing (default is `print`).
+    """
     for char in text:
-        print(char, end='', flush=True)
+        print_func(char, end='', flush=True)
         time.sleep(delay)
-    print()
+    print_func("")  # Add a newline at the end
 
 def load_ascii_art(filename):
     """
@@ -125,7 +136,7 @@ class Inventory:
             else:
                 self.items.remove(item)
         else:
-            print(f"Item with ID {item_id} not found in inventory.")
+            self._print(f"Item with ID {item_id} not found in inventory.")
 
 
     def get_item_quantity(self, item_id: int) -> int:
@@ -145,7 +156,7 @@ class Inventory:
                     item['amount'] = quantity
                     self.items.append(item)
             else:
-                print(f"Item with ID {item_id} not found in inventory.")
+                self._print(f"Item with ID {item_id} not found in inventory.")
 
     @staticmethod
     def load_item_data(file_path: str, item_id: int = None) -> Dict[str, Any]:
@@ -219,8 +230,8 @@ class Player(Character):
 
     def gain_xp(self, amount: int):
         self.xp += amount
-        print(f"You gained {amount} XP. Total XP: {self.xp}")
-        print(f"🔋 XP: {self.xp}/{self.level * 100}")
+        self.game._print(f"You gained {amount} XP. Total XP: {self.xp}")
+        self.game._print(f"🔋 XP: {self.xp}/{self.level * 100}")
         self.check_level_up()  # Call check_level_up without returning a value
 
     def check_level_up(self):
@@ -231,8 +242,8 @@ class Player(Character):
             self.base_attack += 2   # Increase base attack on level up
             self.base_defense += 2  # Increase base defense on level up
             self.reset_stats()
-            print(f"Congratulations! You leveled up to Level {self.level}.")
-            print(f"New stats - Health: {self.health}, Attack: {self.attack}, Defense: {self.defense}")
+            self.game._print(f"Congratulations! You leveled up to Level {self.level}.")
+            self.game._print(f"New stats - Health: {self.health}, Attack: {self.attack}, Defense: {self.defense}")
 
             if self.level >= 10 and not self.teleported_to_ender_island:
                 self.teleported_to_ender_island = True
@@ -265,7 +276,8 @@ class Player(Character):
             f"Go forth, {self.name}, and let your legend be written in the stars.\n"
             f"Remember, as you grow stronger and gain experience, you will face greater challenges.\n"
             f"One day, you may need to confront the mighty Ender Dragon. Prepare yourself, for that battle will test your limits like never before.\n"
-            f"Level up, gather powerful equipment, and hone your skills. The fate of this world may one day rest in your hands."
+            f"Level up, gather powerful equipment, and hone your skills. The fate of this world may one day rest in your hands.",
+            print_func=self.game._print
         )
 
     def take_damage(self, amount: int):
@@ -276,7 +288,7 @@ class Player(Character):
             amount (int): The amount of damage to take.
         """
         self.health -= amount
-        print(f"You took {amount} damage. Health is now {self.health}.")
+        self.game._print(f"You took {amount} damage. Health is now {self.health}.")
         if self.health <= 0:
             player_death()
 
@@ -301,49 +313,49 @@ class Player(Character):
                     heal_amount = stats['heal']
                     self.health = min(self.health + heal_amount, self.base_health)  # Ensure health does not exceed base health
                     self.inventory.remove_item(item_id, 1)  # Remove one potion from inventory
-                    print(f"You used a {item_data['name']} and restored {heal_amount} health.")
+                    self.game._print(f"You used a {item_data['name']} and restored {heal_amount} health.")
                     return heal_amount  # Return the amount of health restored
                 if 'poison' in stats and target:
                     target['health'] -= stats['poison']
                     self.inventory.remove_item(item_id, 1)  # Remove one potion from inventory
-                    print(f"You used a {item_data['name']} and dealt {stats['poison']} poison damage to the {target['name']}. Enemy health: {target['health']}")
+                    self.game._print(f"You used a {item_data['name']} and dealt {stats['poison']} poison damage to the {target['name']}. Enemy health: {target['health']}")
             elif item_type == 'weapon':
                 if 'attack' in stats:
                     self.attack += stats['attack']
                     self.equipped_sword = item_data['name']
-                    print(f"You equipped a {item_data['name']}. Current attack: {self.attack}")
+                    self.game._print(f"You equipped a {item_data['name']}. Current attack: {self.attack}")
             elif item_type == 'armor':
                 if 'defense' in stats:
                     self.defense += stats['defense']
                     self.equipped_armor = item_data['name']
-                    print(f"You equipped a {item_data['name']}. Current defense: {self.defense}")
+                    self.game._print(f"You equipped a {item_data['name']}. Current defense: {self.defense}")
         else:
-            print("Item not found in inventory.")
+            self.game._print("Item not found in inventory.")
         return 0  # Return 0 if no health was restored
 
     def choose_equipment(self):
         while True:
-            print("\nChoose an option:")
-            print("[1] View current loadout/Stats")
-            print("[2] Change loadout")
-            print("[0] Cancel")
-            choice = input("Enter your choice: ").strip()
+            self.game._print("\nChoose an option:")
+            self.game._print("[1] View current loadout/Stats")
+            self.game._print("[2] Change loadout")
+            self.game._print("[0] Cancel")
+            choice = self.game._input("Enter your choice: ").strip()
 
             if choice == "1":
-                print(f"\nCurrent Loadout:")
-                print(f"🆙 Level: {self.level}")
-                print(f"🔋 XP: {self.xp}/{self.level * 100}")
-                print(f"❤️ Health: {self.health}")
-                print(f"⚔️ Attack: {self.attack}")
-                print(f"🛡️ Defense: {self.defense}")
+                self.game._print(f"\nCurrent Loadout:")
+                self.game._print(f"🆙 Level: {self.level}")
+                self.game._print(f"🔋 XP: {self.xp}/{self.level * 100}")
+                self.game._print(f"❤️ Health: {self.health}")
+                self.game._print(f"⚔️ Attack: {self.attack}")
+                self.game._print(f"🛡️ Defense: {self.defense}")
                 if self.equipped_sword:
-                    print(f"🗡️ Sword: {self.equipped_sword}")
+                    self.game._print(f"🗡️ Sword: {self.equipped_sword}")
                 else:
-                    print("🗡️ Sword: Player is a no skin homeless nude enthusiast")
+                    self.game._print("🗡️ Sword: Player is a no skin homeless nude enthusiast")
                 if self.equipped_armor:
-                    print(f"🛡️ Armor: {self.equipped_armor}")
+                    self.game._print(f"🛡️ Armor: {self.equipped_armor}")
                 else:
-                    print("🛡️ Armor: Player is a no skin homeless nude enthusiast")
+                    self.game._print("🛡️ Armor: Player is a no skin homeless nude enthusiast")
             elif choice == "2":
                 self.reset_stats()  # resets stat
                 self.equipped_sword = None
@@ -352,51 +364,51 @@ class Player(Character):
                 armors = [item for item in self.inventory.items if self.inventory.load_item_data(r'modules/lookuptable.json', item['id']).get('type') == 'armor']
 
                 if not swords and not armors:
-                    print("You can't change loadout, you have nothing available.")
+                    self.game._print("You can't change loadout, you have nothing available.")
                     continue
 
 
                 if swords:
-                    print("\nChoose a sword to equip:")
+                    self.game._print("\nChoose a sword to equip:")
                     for vorne_id, sword in enumerate(swords, start=1):
                         item_data = self.inventory.load_item_data(r'modules/lookuptable.json', sword['id'])
-                        print(f"[{vorne_id}] {sword['name']} - Attack: +{item_data['stats']['attack']}")
-                    sword_choice = input("Enter the sword number to equip or 0 to skip: ").strip()
+                        self.game._print(f"[{vorne_id}] {sword['name']} - Attack: +{item_data['stats']['attack']}")
+                    sword_choice = self.game._input("Enter the sword number to equip or 0 to skip: ").strip()
                     if sword_choice != "0":
                         try:
                             sword_vorne_id = int(sword_choice) - 1
                             if 0 <= sword_vorne_id < len(swords):
                                 self.use_item(swords[sword_vorne_id]['id'])
                             else:
-                                print("Invalid choice. No sword equipped.")
+                                self.game._print("Invalid choice. No sword equipped.")
                         except ValueError:
-                            print("Invalid input. No sword equipped.")
+                            self.game._print("Invalid input. No sword equipped.")
 
                 if armors:
-                    print("\nChoose an armor to equip:")
+                    self.game._print("\nChoose an armor to equip:")
                     for vorne_id, armor in enumerate(armors, start=1):
                         item_data = self.inventory.load_item_data(r'modules/lookuptable.json', armor['id'])
-                        print(f"[{vorne_id}] {armor['name']} - Defense: +{item_data['stats']['defense']}")
-                    armor_choice = input("Enter the armor number to equip or 0 to skip: ").strip()
+                        self.game._print(f"[{vorne_id}] {armor['name']} - Defense: +{item_data['stats']['defense']}")
+                    armor_choice = self.game._input("Enter the armor number to equip or 0 to skip: ").strip()
                     if armor_choice != "0":
                         try:
                             armor_vorne_id = int(armor_choice) - 1
                             if 0 <= armor_vorne_id < len(armors):
                                 self.use_item(armors[armor_vorne_id]['id'])
                             else:
-                                print("Invalid choice. No armor equipped.")
+                                self.game._print("Invalid choice. No armor equipped.")
                         except ValueError:
-                            print("Invalid input. No armor equipped.")
+                            self.game._print("Invalid input. No armor equipped.")
             elif choice == "0":
                 break
             else:
-                print("Invalid choice. Please choose a valid option.")
+                self.game._print("Invalid choice. Please choose a valid option.")
 
-def player_death():
+def player_death(self):
     """
     Handles the player's death by playing a sound and printing a game over message.
     """
-    print("You have died.")
+    self.game._print("You have died.")
     play_audio(r'modules\audio\death_sound.mp3')  # Optional: Play a death sound
     slow_print("Game Over. Better luck next time!", 0.1)
     exit()
@@ -407,35 +419,45 @@ class Game:
         self.player = Player(name="Adventurer", game=self)  # Pass the Game instance to Player
         self.current_island = self.story['islands'][0]  # Start at the first island (Intro)
 
+        self._print = print
+        self._input = input
     @staticmethod
     def load_story(file_path: str) -> Dict[str, Any]:
         with open(file_path, 'r', encoding='utf-8') as file:
             return json.load(file)
+        
+    def set_io(self, print_func, input_func):
+        """
+        Allows overriding of the default print and input methods.
+        This is used by the GUI to redirect output and input.
+        """
+        self._print = print_func
+        self._input = input_func
 
     def start(self):
         """ Starts the game by welcoming the player and displaying the first island. """
-        self.player.name = input("Enter your name: ").strip()
-        slow_print(f"Welcome, {self.player.name}! Let the adventure begin.")
+        self.player.name = self._input("Enter your name: ").strip()
+        slow_print(f"Welcome, {self.player.name}! Let the adventure begin.", print_func=self._print)
         self.display_island()
 
     def display_island(self):
         """ Displays the current island's description, NPCs, and available actions. """
 
-        print(f"\n{self.current_island['name']}")
-        print(self.current_island['description'])
+        self._print(f"\n{self.current_island['name']}")
+        self._print(self.current_island['description'])
         for npc in self.current_island.get('npcs', []):
-            print(f"{npc['name']} ({npc['role']}): {npc['dialogue']}")
-        print("-" * 40)
+            self._print(f"{npc['name']} ({npc['role']}): {npc['dialogue']}")
+        self._print("-" * 40)
         self.display_actions(self.current_island['actions'])
 
     def display_actions(self, actions: List[Dict[str, Any]]):
         while True:
-            print("Available Actions:")
+            self._print("Available Actions:")
             for vorne_id, action in enumerate(actions, start=1):
-                print(f"[{vorne_id}] {action['description']}")
-            print("[0] Exit Game")
+                self._print(f"[{vorne_id}] {action['description']}")
+            self._print("[0] Exit Game")
 
-            choice = input("Choose an action: ").strip()
+            choice = self._input("Choose an action: ").strip()
             if choice == "0":
                 player_death()
 
@@ -445,9 +467,9 @@ class Game:
                     selected_action = actions[selected_id]
                     self.handle_action(selected_action)
                 else:
-                    print("Invalid choice. Try again.")
+                    self._print("Invalid choice. Try again.")
             except ValueError:
-                print("Please enter a valid number.")
+                self._print("Please enter a valid number.")
 
     def handle_action(self, action: Dict[str, Any]):
         if action.get("response") == "// show inventory":
@@ -457,19 +479,19 @@ class Game:
         elif action.get("response") == "// bazzar":
             self.bazaar()
         elif action.get("response") == "// loser":
-            print("You are a loser.")
+            self._print("You are a loser.")
             player_death()
         elif action.get("response") == "// travel":
             self.travel_to(action.get("next_location"))
         elif action.get("response") == "// ask god who you are":
-            audio_thread = threading.Thread(target=play_audio, args=(r'modules\audio\player_introduc.mp3',))
+            audio_thread = threading.Thread(target=play_audio, args=(r'modules\audio\player_introduc.mp3',self._print))
             audio_thread.start()
             self.player.describe()
 
         elif action.get("response") == "// change loadout":
             self.player.choose_equipment()
         else:
-            print(f"\n{action.get('response', 'No response available.')}")
+            self._print(f"\n{action.get('response', 'No response available.')}")
             if "add_items" in action:  # items in inventar hinzufügen
                 self.modify_inventory(action["add_items"], add=True)
             if "remove_items" in action:  # items aus inventor entfernen
@@ -487,16 +509,16 @@ class Game:
         Handles the encounter with the god character, playing audio and printing messages.
         """
         os.system('cls' if os.name == 'nt' else 'clear')  # Clear terminal
-        audio_thread = threading.Thread(target=play_audio, args=(r'modules\audio\GODTEXT.mp3',))
+        audio_thread = threading.Thread(target=play_audio, args=(r'modules\audio\GODTEXT.mp3',self._print))
         audio_thread.start()
-        print("👼 AN ANGEL APPEARS BEFORE YOU...")
-        print(ANGEL_ASCII_ART)
+        self._print("👼 AN ANGEL APPEARS BEFORE YOU...")
+        self._print(ANGEL_ASCII_ART)
         time.sleep(1)
-        print(GOD_ASCII_ART)
-        faster_print("Hello Adventurer, I am the God of this world.")
-        faster_print("\nYou are the chosen hero who must fight the Ender Dragon.")
-        faster_print("You are being teleported to Ender Island to save the Human race and become the strongest Adventurer that ever lived...\n")
-        input("Press Enter to continue...")
+        self._print(GOD_ASCII_ART)
+        faster_print("Hello Adventurer, I am the God of this world.", print_func=self._print)
+        faster_print("\nYou are the chosen hero who must fight the Ender Dragon.", print_func=self._print)
+        faster_print("You are being teleported to Ender Island to save the Human race and become the strongest Adventurer that ever lived...\n", print_func=self._print)
+        self._input("Press Enter to continue...")
         self.travel_to("Ender Island")
 
     def modify_inventory(self, items: Dict[int, int], add: bool = True):
@@ -525,56 +547,56 @@ class Game:
             self.current_island = island
             self.display_island()
         else:
-            print("Island not found.")
+            self._print("Island not found.")
 
     def ender_dragon_defeated(self):
         """
         Handles the event when the Ender Dragon is defeated.
         """
-        slow_print("Congratulations! You have defeated the Ender Dragon!")
-        slow_print("You are being teleported back to the hub...\n")
+        slow_print("Congratulations! You have defeated the Ender Dragon!", print_func=self._print)
+        slow_print("You are being teleported back to the hub...\n", print_func=self._print)
         self.travel_to("Hub Island")  # Teleport  hub
 
     def show_inventory(self):
         """
         Displays the player's inventory.
         """
-        print("\n🧳 Inventory:")
+        self._print("\n🧳 Inventory:")
         if not self.player.inventory.items:
-            print("Your inventory is empty.")
+            self._print("Your inventory is empty.")
         else:
             for vorne_id, item in enumerate(self.player.inventory.items, start=1):
-                print(f"[{vorne_id}] {item['name']} - Quantity: {item['amount']}")
-        print("-" * 40)
+                self._print(f"[{vorne_id}] {item['name']} - Quantity: {item['amount']}")
+        self._print("-" * 40)
 
     def initiate_combat(self, mob_name):
-        print("⚔️ Combat initiated! Prepare for battle.")
+        self._print("⚔️ Combat initiated! Prepare for battle.")
         mobs = self.current_island.get('mobs', [])
         mob = next((m for m in mobs if m['name'] == mob_name), None)
         if not mob:
-            print("No such enemy to fight here.")
+            self._print("No such enemy to fight here.")
             return
 
-        print(f"You encounter a {mob['name']}!")
-        print(mob['description'])
+        self._print(f"You encounter a {mob['name']}!")
+        self._print(mob['description'])
 
         player_health = self.player.health
         enemy_health = mob['stats']['health']
 
         while player_health > 0 and enemy_health > 0:
-            print("\nChoose your action:")
-            print("[1] Attack")
-            print("[2] Use Item")
-            print("[3] Run")
-            action = input("Enter your choice: ").strip()
+            self._print("\nChoose your action:")
+            self._print("[1] Attack")
+            self._print("[2] Use Item")
+            self._print("[3] Run")
+            action = self._input("Enter your choice: ").strip()
 
             if action == "1":
                 damage = max(0, random.randint(5, 15) + self.player.attack - mob['stats']['defense'])
                 enemy_health -= damage
-                print(f"You dealt {damage} damage to the {mob['name']}. Enemy health: {enemy_health}")
+                self._print(f"You dealt {damage} damage to the {mob['name']}. Enemy health: {enemy_health}")
 
                 if enemy_health <= 0:
-                    print(f"You defeated the {mob['name']}!")
+                    self._print(f"You defeated the {mob['name']}!")
                     self.modify_inventory(mob['drops'], add=True)
                     xp_gain = next((action['add_xp'] for action in self.current_island['actions'] if action.get('mob') == mob_name), 50)
                     self.player.gain_xp(xp_gain)  # Use XP value from the story
@@ -586,20 +608,20 @@ class Game:
 
                 enemy_damage = max(0, random.randint(0, mob['stats']['attack']) - self.player.defense)
                 player_health -= enemy_damage
-                print(f"The {mob['name']} dealt {enemy_damage} damage to you. Your health: {player_health}")
+                self._print(f"The {mob['name']} dealt {enemy_damage} damage to you. Your health: {player_health}")
 
                 if player_health <= 0:
                     player_death()
             elif action == "2":
-                print("[0] Cancel")
+                self._print("[0] Cancel")
                 potions = [item for item in self.player.inventory.items if self.player.inventory.load_item_data(r'modules/lookuptable.json', item['id']).get('type') == 'potion']
                 if not potions:
-                    print("You have no usable items.")
+                    self._print("You have no usable items.")
                     continue
                 for vorne_id, potion in enumerate(potions, start=1):
                     item_data = self.player.inventory.load_item_data(r'modules/lookuptable.json', potion['id'])
-                    print(f"[{vorne_id}] {potion['name']} - {item_data['description']}")
-                item_choice = input("Enter the item number to use or 0 to cancel: ").strip()
+                    self._print(f"[{vorne_id}] {potion['name']} - {item_data['description']}")
+                item_choice = self._input("Enter the item number to use or 0 to cancel: ").strip()
                 if item_choice == "0":
                     continue
                 try:
@@ -609,16 +631,16 @@ class Game:
                         heal_amount = self.player.use_item(item['id'], target=mob)
                         player_health = min(player_health + heal_amount, self.player.base_health)  # Ensure health does not exceed base health
                         self.player.health = player_health  # Update player's health after using item
-                        print(f"Your health after using the item: {self.player.health}")
+                        self._print(f"Your health after using the item: {self.player.health}")
                     else:
-                        print("Invalid choice. Try again.")
+                        self._print("Invalid choice. Try again.")
                 except ValueError:
-                    print("Please enter a valid number.")
+                    self._print("Please enter a valid number.")
             elif action == "3":
-                print("You ran away from the battle.")
+                self._print("You ran away from the battle.")
                 break
             else:
-                print("Invalid action. Choose [1] to Attack, [2] to Use Item, or [3] to Run.")
+                self._print("Invalid action. Choose [1] to Attack, [2] to Use Item, or [3] to Run.")
 
         self.player.health = player_health  # Update player's health after combat
         self.display_island()
@@ -642,21 +664,21 @@ class Game:
             categorized_items[item['type']][item_id] = item
 
         while True:
-            print("\n" + "=" * 40)
-            print("🛒 Bazaar:")
-            print("=" * 40)
+            self._print("\n" + "=" * 40)
+            self._print("🛒 Bazaar:")
+            self._print("=" * 40)
 
             for category, items in categorized_items.items():
                 if items:
-                    print(f"\n{category.capitalize()}:")
+                    self._print(f"\n{category.capitalize()}:")
                     for item_id, item in items.items():
                         quantity = self.player.inventory.get_item_quantity(int(item_id))  # Ensure item_id is an integer
-                        print(f"[{item_id}] {item['name']} - {item['description']} - Value: {item['value']} Gold - You have: {quantity}")
+                        self._print(f"[{item_id}] {item['name']} - {item['description']} - Value: {item['value']} Gold - You have: {quantity}")
 
-            print("\n[0] Exit Bazaar")
-            print("=" * 40)
+            self._print("\n[0] Exit Bazaar")
+            self._print("=" * 40)
 
-            choice = input("Choose an item to buy/sell or exit: ").strip()
+            choice = self._input("Choose an item to buy/sell or exit: ").strip()
 
             if choice == "0":
                 break
@@ -670,20 +692,20 @@ class Game:
                         found = True
                         break
                 if not found:
-                    print("Invalid choice. Try again.")
+                    self._print("Invalid choice. Try again.")
             except ValueError:
-                print("Please enter a valid number.")
+                self._print("Please enter a valid number.")
                         
     def trade_item(self, item_id: int, item: Dict[str, Any]):
         while True:
-            print("\n" + "-" * 40)
-            print(f"\nTrading {item['name']}:")
-            print("[1] Buy")
-            print("[2] Sell")
-            print("[0] Cancel")
-            print("-" * 40)
+            self._print("\n" + "-" * 40)
+            self._print(f"\nTrading {item['name']}:")
+            self._print("[1] Buy")
+            self._print("[2] Sell")
+            self._print("[0] Cancel")
+            self._print("-" * 40)
 
-            choice = input("Choose an action: ").strip()
+            choice = self._input("Choose an action: ").strip()
             if choice == "1":
                 self.buy_item(item_id, item)
             elif choice == "2":
@@ -691,16 +713,16 @@ class Game:
             elif choice == "0":
                 return
             else:
-                print("Invalid choice. Try again.")
+                self._print("Invalid choice. Try again.")
 
     def buy_item(self, item_id: int, item: Dict[str, Any]):
         try:
-            amount = int(input(f"How many {item['name']} do you want to buy? (You have {self.player.inventory.get_item_quantity(item_id)}): "))
+            amount = int(self._input(f"How many {item['name']} do you want to buy? (You have {self.player.inventory.get_item_quantity(item_id)}): "))
             if amount <= 0:
-                print("Amount must be greater than zero.")
+                self._print("Amount must be greater than zero.")
                 return
         except ValueError:
-            print("Invalid amount. Please enter a number.")
+            self._print("Invalid amount. Please enter a number.")
             return
 
         total_cost = item['value'] * amount
@@ -708,45 +730,29 @@ class Game:
         if gold_quantity >= total_cost:
             self.player.inventory.modify_item_quantity(self.player.gold_item_id, -total_cost)
             self.player.inventory.add_item(item_id, amount)
-            print(f"Bought {amount} {item['name']} for {total_cost} Gold. Remaining Gold: {self.player.inventory.get_item_quantity(self.player.gold_item_id)}")
+            self._print(f"Bought {amount} {item['name']} for {total_cost} Gold. Remaining Gold: {self.player.inventory.get_item_quantity(self.player.gold_item_id)}")
         else:
-            print("Not enough gold to buy this item.")
+            self._print("Not enough gold to buy this item.")
 
     def sell_item(self, item_id: int, item: Dict[str, Any]):
         try:
-            amount = int(input(f"How many {item['name']} do you want to sell? (You have {self.player.inventory.get_item_quantity(item_id)}): "))
+            amount = int(self._input(f"How many {item['name']} do you want to sell? (You have {self.player.inventory.get_item_quantity(item_id)}): "))
             if amount <= 0:
-                print("Amount must be greater than zero.")
+                self._print("Amount must be greater than zero.")
                 return
         except ValueError:
-            print("Invalid amount. Please enter a number.")
+            self._print("Invalid amount. Please enter a number.")
             return
 
         if self.player.inventory.get_item_quantity(item_id) >= amount:
             total_value = item['value'] * amount
             self.player.inventory.remove_item(item_id, amount)
             self.player.inventory.modify_item_quantity(self.player.gold_item_id, total_value)
-            print(f"Sold {amount} {item['name']} for {total_value} Gold. Total Gold: {self.player.inventory.get_item_quantity(self.player.gold_item_id)}")
+            self._print(f"Sold {amount} {item['name']} for {total_value} Gold. Total Gold: {self.player.inventory.get_item_quantity(self.player.gold_item_id)}")
         else:
-            print("You don't have enough of this item in your inventory.")
+            self._print("You don't have enough of this item in your inventory.")
 
-        def sell_item(self, item_id: int, item: Dict[str, Any]):
-            try:
-                amount = int(input(f"How many {item['name']} do you want to sell? (You have {self.player.inventory.get_item_quantity(item_id)}): "))
-                if amount <= 0:
-                    print("Amount must be greater than zero.")
-                    return
-            except ValueError:
-                print("Invalid amount. Please enter a number.")
-                return
-
-            if self.player.inventory.get_item_quantity(item_id) >= amount:
-                total_value = item['value'] * amount
-                self.player.inventory.remove_item(item_id, amount)
-                self.player.inventory.modify_item_quantity(self.player.gold_item_id, total_value)
-                print(f"Sold {amount} {item['name']} for {total_value} Gold. Total Gold: {self.player.inventory.get_item_quantity(self.player.gold_item_id)}")
-            else:
-                print("You don't have enough of this item in your inventory.")
+        
 
 if __name__ == "__main__":
     story_path = r"modules/story_blocks.json"

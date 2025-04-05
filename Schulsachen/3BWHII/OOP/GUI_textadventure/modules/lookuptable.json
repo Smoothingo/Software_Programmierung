@@ -1,0 +1,205 @@
+{
+  "items": {
+    "1": {
+      "id": 1,
+      "name": "Map",
+      "description": "A map of the Archipelago.",
+      "value": 10,
+      "amount": 1,
+      "type": "misc"
+    },
+    "2": {
+      "id": 2,
+      "name": "Gold",
+      "description": "Gold coins.",
+      "value": 10,
+      "amount": 100,
+      "type": "currency"
+    },
+    "3": {
+      "id": 3,
+      "name": "Sword",
+      "description": "A sharp sword.",
+      "value": 50,
+      "amount": 1,
+      "type": "weapon",
+      "stats": {
+        "attack": 10
+      }
+    },
+    "4": {
+      "id": 4,
+      "name": "Shield",
+      "description": "A sturdy shield.",
+      "value": 40,
+      "amount": 1,
+      "type": "armor",
+      "stats": {
+        "defense": 10
+      }
+    },
+    "5": {
+      "id": 5,
+      "name": "Potion",
+      "description": "A healing potion.",
+      "value": 20,
+      "amount": 1,
+      "type": "potion",
+      "stats": {
+        "heal": 20
+      }
+    },
+    "6": {
+      "id": 6,
+      "name": "Armor",
+      "description": "Protective armor.",
+      "value": 100,
+      "amount": 1,
+      "type": "armor",
+      "stats": {
+        "defense": 5
+      }
+    },
+    "7": {
+      "id": 7,
+      "name": "Wood",
+      "description": "Natural Wood",
+      "value": 1,
+      "amount": 1,
+      "type": "ressource"
+    },
+    "8": {
+      "id": 8,
+      "name": "Stone",
+      "description": "Hard Rock",
+      "value": 1,
+      "amount": 1,
+      "type": "ressource"
+    },
+    "9": {
+      "id": 9,
+      "name": "Coal",
+      "description": "A piece of coal.",
+      "value": 5,
+      "amount": 1,
+      "type": "ressource"
+    },
+    "10": {
+      "id": 10,
+      "name": "Wheat",
+      "description": "A bundle of wheat.",
+      "value": 2,
+      "amount": 1,
+      "type": "ressource"
+    },
+    "11": {
+      "id": 11,
+      "name": "Carrot",
+      "description": "A fresh carrot.",
+      "value": 3,
+      "amount": 1,
+      "type": "ressource"
+    },
+    "12": {
+      "id": 12,
+      "name": "Goblin Ear",
+      "description": "An ear from a goblin.",
+      "value": 15,
+      "amount": 1,
+      "type": "monster_drops"
+    },
+    "13": {
+      "id": 13,
+      "name": "Orc Tooth",
+      "description": "A tooth from an orc.",
+      "value": 20,
+      "amount": 1,
+      "type": "monster_drops"
+    },
+    "14": {
+      "id": 14,
+      "name": "Excalibur",
+      "description": "The legendary sword of King Arthur.",
+      "value": 200,
+      "amount": 1,
+      "type": "weapon",
+      "stats": {
+        "attack": 20
+      }
+    },
+    "15": {
+      "id": 15,
+      "name": "Battle Axe",
+      "description": "A heavy axe used in battle.",
+      "value": 150,
+      "amount": 1,
+      "type": "weapon",
+      "stats": {
+        "attack": 23
+      }
+    },
+    "16": {
+      "id": 16,
+      "name": "Dragon Slayer",
+      "description": "A sword forged to slay dragons.",
+      "value": 300,
+      "amount": 1,
+      "type": "weapon",
+      "stats": {
+        "attack": 50
+      }
+    },
+    "17": {
+      "id": 17,
+      "name": "Knight's Armor",
+      "description": "Armor worn by knights.",
+      "value": 150,
+      "amount": 1,
+      "type": "armor",
+      "stats": {
+        "defense": 15
+      }
+    },
+    "18": {
+      "id": 18,
+      "name": "Poison Potion",
+      "description": "A potion that poisons the enemy, dealing 30 damage.",
+      "value": 40,
+      "amount": 1,
+      "type": "potion",
+      "stats": {
+        "poison": 30
+      }
+    },
+    "19": {
+      "id": 19,
+      "name": "Goblin Dagger",
+      "description": "A small dagger used by goblins.",
+      "value": 25,
+      "amount": 1,
+      "type": "weapon",
+      "stats": {
+        "attack": 5
+      }
+    },
+    "20": {
+      "id": 20,
+      "name": "Orc Helmet",
+      "description": "A helmet worn by orcs.",
+      "value": 60,
+      "amount": 1,
+      "type": "armor",
+      "stats": {
+        "defense": 5
+      }
+    },
+    "21": {
+      "id": 21,
+      "name": "Slime Goey",
+      "description": "A goey substance from a slime.",
+      "value": 5,
+      "amount": 1,
+      "type": "monster_drops"
+      }
+    }
+  }

@@ -1,0 +1,280 @@
+{
+  "islands": [
+    {
+      "name": "Intro",
+      "description": "You awaken on a peaceful island, your Personal Island. An unfamiliar voice calls out: Welcome, adventurer. Your journey across the Archipelago awaits.",
+      "actions": [
+        {
+          "description": "Ask God who you are",
+          "response": "// ask god who you are"
+        },
+        {
+          "description": "Search your pockets",
+          "response": "// show inventory"
+        },
+        {
+          "description": "Talk with Jerry",
+          "response": "Welcome to your Personal Island. I’m Jerry, your guide. Let’s start your adventure!",
+          "next_location": "Personal Island",
+          "add_items": { "1": 1, "2": 10, "3": 1, "5": 1, "6": 1},
+          "add_xp": 10
+        },
+        {
+          "description": "View Stats or View/Change Loadout",
+          "response": "// change loadout"
+        }
+      ]
+    },
+    {
+      "name": "Personal Island",
+      "description": "It's a quiet and serene place where your journey begins. You can build and expand this island as you progress.",
+      "resources": ["Wood", "Stone"],
+      "actions": [
+        {
+          "description": "Build a shelter",
+          "response": "You gather materials and build a small shelter to protect yourself.",
+          "add_xp": 5
+        },
+        {
+          "description": "Gather resources",
+          "response": "You gather wood, stone, and other resources from around the island.",
+          "add_items": { "8": 5, "7": 3 },
+          "add_xp": 10
+        },
+        {
+          "description": "Travel to the Hub Island",
+          "response": "You travel to the Hub Island, the bustling center of the Archipelago.",
+          "next_location": "Hub Island"
+        },
+        {
+          "description": "Search your pockets",
+          "response": "// show inventory"
+        },
+        {
+          "description": "View Stats or View/Change Loadout",
+          "response": "// change loadout"
+        }
+      ]
+    },
+    {
+      "name": "Hub Island",
+      "description": "The bustling center of the Archipelago. Merchants and adventurers gather here to trade and prepare for journeys to other islands.",
+      "npcs": [
+        {
+          "name": "Quest-Giver",
+          "role": "Quest-Giver",
+          "dialogue": "I have a quest for you, adventurer. Are you ready to accept it?"
+        }
+      ],
+      "actions": [
+        {
+          "description": "Visit the Bazaar",
+          "response": "// bazzar",
+          "add_xp": 5
+        },
+        {
+          "description": "Prepare for a journey",
+          "response": "You gather supplies and prepare for your next journey.",
+          "add_items": { "5": 1, "6": 1 },
+          "add_xp": 10
+        },
+        {
+          "description": "Travel to Mining Island",
+          "response": "You travel to the Mining Island, a rugged island rich in resources.",
+          "next_location": "Mining Island"
+        },
+        {
+          "description": "Travel to Farming Island",
+          "response": "You travel to the Farming Island, a fertile land full of crops.",
+          "next_location": "Farming Island"
+        },
+        {
+          "description": "Travel to Combat Island",
+          "response": "You travel to the Combat Island, a dangerous place filled with enemies.",
+          "next_location": "Combat Island"
+        },
+        {
+          "description": "Search your pockets",
+          "response": "// show inventory"
+        },
+        {
+          "description": "View Stats or View/Change Loadout",
+          "response": "// change loadout"
+        }
+      ]
+    },
+    {
+      "name": "Mining Island",
+      "description": "A rugged island rich in resources. Adventurers come here to mine valuable ores.",
+      "npcs": [
+        {
+          "name": "Miner",
+          "role": "Guide",
+          "dialogue": "Welcome to the Mining Island. Pick up a tool and start digging!"
+        }
+      ],
+      "actions": [
+        {
+          "description": "Mine Coal",
+          "response": "You mine some coal, a valuable resource for crafting and trading.",
+          "add_items": { "9": 2},
+          "add_xp": 10
+        },
+        {
+          "description": "Travel to Hub Island",
+          "response": "You travel back to the Hub Island.",
+          "next_location": "Hub Island"
+        },
+        {
+          "description": "Search your pockets",
+          "response": "// show inventory"
+        },
+        {
+          "description": "View Stats or View/Change Loadout",
+          "response": "// change loadout"
+        }
+      ]
+    },
+    {
+      "name": "Farming Island",
+      "description": "A fertile land full of crops. Adventurers come here to harvest food and other resources.",
+      "npcs": [
+        {
+          "name": "Farmer",
+          "role": "Guide",
+          "dialogue": "Welcome to the Farming Island. Grab a tool and start harvesting!"
+        }
+      ],
+      "actions": [
+        {
+          "description": "Harvest Wheat",
+          "response": "You harvest some wheat, a valuable resource for crafting and trading.",
+          "add_items": { "10": 5 },
+          "add_xp": 10
+        },
+        {
+          "description": "Harvest Carrots",
+          "response": "You harvest some carrots, a valuable resource for crafting and trading.",
+          "add_items": { "11": 5 },
+          "add_xp": 10
+        },
+        {
+          "description": "Travel to Hub Island",
+          "response": "You travel back to the Hub Island.",
+          "next_location": "Hub Island"
+        },
+        {
+          "description": "Search your pockets",
+          "response": "// show inventory"
+        },
+        {
+          "description": "View Stats or View/Change Loadout",
+          "response": "// change loadout"
+        }
+      ]
+    },
+    {
+      "name": "Combat Island",
+      "description": "A dangerous place filled with enemies. Adventurers come here to fight and earn valuable rewards.",
+      "npcs": [
+        {
+          "name": "Warrior",
+          "role": "Guide",
+          "dialogue": "Welcome to the Combat Island. Prepare yourself for battle!"
+        }
+      ],
+      "mobs": [
+        {
+          "name": "Slime",
+          "description": "A small, gooey creature with a mischievous grin.",
+          "stats": { "health": 25, "attack": 5, "defense": 2 },
+          "drops": { "21": 3 }
+        },
+        {
+          "name": "Goblin",
+          "description": "A small, green-skinned creature with sharp teeth and claws.",
+          "stats": { "health": 50, "attack": 12, "defense": 2 },
+          "drops": { "12": 1, "19": 1 }
+        },
+        {
+          "name": "Orc",
+          "description": "A large, brutish humanoid with a fierce expression and powerful muscles.",
+          "stats": { "health": 72, "attack": 20, "defense": 5 },
+          "drops": { "13": 1, "20": 1 }
+        }
+      ],
+      "actions": [
+        {
+          "description": "Fight Slimes",
+          "response": "// initiate combat",
+          "mob": "Slime",
+          "add_xp": 10
+        },
+        {
+          "description": "Fight Goblins",
+          "response": "// initiate combat",
+          "mob": "Goblin",
+          "add_xp": 30
+        },
+        {
+          "description": "Fight Orcs",
+          "response": "// initiate combat",
+          "mob": "Orc",
+          "add_xp": 50
+        },
+        {
+          "description": "Travel to Hub Island",
+          "response": "You travel back to the Hub Island.",
+          "next_location": "Hub Island"
+        },
+        {
+          "description": "Search your pockets",
+          "response": "// show inventory"
+        },
+        {
+          "description": "View Stats or View/Change Loadout",
+          "response": "// change loadout"
+        }
+      ]
+    },
+    {
+      "name": "Ender Island",
+      "description": "A dark and mysterious island where the final challenge awaits. Only the bravest adventurers can face the Ender Dragon.",
+      "npcs": [
+        {
+          "name": "Ender Guardian",
+          "role": "Guide",
+          "dialogue": "Welcome to Ender Island. Only those who have reached level 10 can face the Ender Dragon."
+        }
+      ],
+      "mobs": [
+        {
+          "name": "Ender Dragon",
+          "description": "The mighty Ender Dragon, the final boss of the Archipelago.",
+          "stats": { "health": 350, "attack": 60, "defense": 20 },
+          "drops": { "2": 1000, "14": 1 }  
+        }
+      ],
+      "actions": [
+        {
+          "description": "Fight the Ender Dragon",
+          "response": "// initiate combat",
+          "mob": "Ender Dragon",
+          "add_xp": 1000
+        },
+        {
+          "description": "Give up",
+          "response": "// loser"
+        },
+        {
+          "description": "Search your pockets",
+          "response": "// show inventory"
+        },
+        {
+          "description": "View Stats or View/Change Loadout",
+          "response": "// change loadout"
+        }
+      ]
+    }
+  ]
+}
