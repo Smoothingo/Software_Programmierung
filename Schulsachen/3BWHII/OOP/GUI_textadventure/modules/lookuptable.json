@@ -13,7 +13,7 @@
       "name": "Gold",
       "description": "Gold coins.",
       "value": 10,
-      "base_quantity": 100,
+      "base_quantity": 1,
       "type": "currency"
     },
     "3": {

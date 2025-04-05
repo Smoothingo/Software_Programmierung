@@ -3,16 +3,15 @@ import json
 class Inventory:
     def __init__(self):
         self.items = []
+        self.item_data = self.load_all_items()
         
     def add_item(self, item_id, quantity=1):
-        item_data = self.load_item_data(item_id)
+        item_data = self.item_data[str(item_id)]  # Access loaded item data
         existing = next((i for i in self.items if i['id'] == item_id), None)
         
         if existing:
-            # Add to existing stack, respecting item's base base_quantity
             existing['quantity'] += item_data['base_quantity'] * quantity
         else:
-            # Create new entry with base base_quantity * quantity
             new_item = {
                 'id': item_data['id'],
                 'name': item_data['name'],
@@ -41,11 +40,6 @@ class Inventory:
                 item['quantity'] -= quantity
             else:
                 self.items.remove(item)
-    
-    def load_item_data(self, item_id):
-        with open("modules/lookuptable.json", 'r') as f:
-            items = json.load(f)['items']
-            return items[str(item_id)]
         
     def get_total_value(self):
         return sum(item['quantity'] * item['value'] for item in self.items)
@@ -80,5 +74,9 @@ class Inventory:
     
     def get_gold(self):
         return self.get_item_quantity(2)
+    
+    def load_all_items(self):
+        with open("modules/lookuptable.json", 'r') as f:
+            return json.load(f)['items']
     
     

@@ -12,7 +12,7 @@
           "description": "Talk with Jerry",
           "response": "Welcome to your Personal Island. I’m Jerry, your guide. Let’s start your adventure!",
           "next_location": "Personal Island",
-          "add_items": { "1": 1, "2": 10, "3": 1, "5": 1, "6": 1},
+          "add_items": { "1": 1, "2": 30, "3": 1, "5": 1, "6": 1},
           "add_xp": 10
         },
         {

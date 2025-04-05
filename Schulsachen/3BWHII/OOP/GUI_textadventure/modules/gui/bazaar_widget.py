@@ -1,134 +1,130 @@
 import customtkinter as ctk
-from .widgets import ScrollableFrame
+from .fullscreen_widget import FullScreenWidget
 
-class BazaarWidget(ctk.CTkFrame):
+class BazaarWidget(FullScreenWidget):
     def __init__(self, master, game, on_close_callback):
-        super().__init__(master)
+        super().__init__(master, "Bazaar", on_close_callback)
         self.game = game
-        self.on_close = on_close_callback
-        self.selected_quantities = {}  # Track selected quantities for each item
-        self.create_widgets()
+        self.selected_quantity = 1
+        self.create_content()
         self.update_bazaar()
-
-    def create_widgets(self):
-        """Create all UI elements (pure GUI)"""
-        self.grid_columnconfigure(0, weight=1)
+        
+        # Configure grid layout
         self.grid_rowconfigure(1, weight=1)
-        
-        # Gold Display
-        self.gold_label = ctk.CTkLabel(self, font=("Arial", 14, "bold"))
-        self.gold_label.pack(pady=10)
-        
-        # Category Tabs
-        self.tabview = ctk.CTkTabview(self)
-        self.tabview.pack(fill="both", expand=True, padx=20, pady=10)
-        
-        # Item Display Frame
-        self.item_frame = ScrollableFrame(self.tabview)
-        self.tabview.add("Items")
-        self.tabview.tab("Items").grid_columnconfigure(0, weight=1)
-        
-        # Back Button
-        ctk.CTkButton(
-            self,
-            text="Back",
-            command=self.on_close
-        ).pack(pady=10)
+        self.grid_columnconfigure(0, weight=1)
+
+    def create_content(self):
+        # Configure content frame grid
+        self.content_frame.grid_rowconfigure(1, weight=1)  # For items container
+        self.content_frame.grid_columnconfigure(0, weight=1)
+
+        # Gold display
+        self.gold_frame = ctk.CTkFrame(self.content_frame)
+        self.gold_frame.grid(row=0, column=0, sticky="ew", pady=5)
+        self.gold_label = ctk.CTkLabel(
+            self.gold_frame, 
+            text="💰 Loading gold...",
+            font=("Arial", 18, "bold")
+        )
+        self.gold_label.pack(side="left", padx=10)
+
+        # Items container with scroll
+        self.items_container = ctk.CTkScrollableFrame(self.content_frame)
+        self.items_container.grid(row=1, column=0, sticky="nsew", pady=5)
+
+        # Exit button at bottom
+        exit_button = ctk.CTkButton(
+            self.content_frame,
+            text="Exit Bazaar",
+            command=self.on_close,
+            height=40,
+            font=("Arial", 14)
+        )
+        exit_button.grid(row=2, column=0, sticky="ew", pady=10)
+
+        # Configure grid weights
+        self.content_frame.grid_rowconfigure(1, weight=1)  # Items container expands
+
+    def adjust_quantity(self, change):
+        self.selected_quantity = max(1, self.selected_quantity + change)
+        self.qty_display.configure(text=str(self.selected_quantity))
 
     def update_bazaar(self):
-        """Update the bazaar UI (no game logic here)"""
-        gold = self.game.player.inventory.get_gold()
-        self.gold_label.configure(text=f"💰 Gold: {gold}")
-        
-        # Clear previous items
-        for widget in self.item_frame.winfo_children():
+        self.update_gold_display()
+        self.update_item_display()
+
+    def update_gold_display(self):
+        self.gold_label.configure(text=f"💰 {self.game.player.inventory.get_gold()} Gold")
+
+    def update_item_display(self):
+        for widget in self.items_container.winfo_children():
             widget.destroy()
         
-        # Load items from game data
-        for item_id, item in self.game.player.inventory.get_available_items().items():
-            if item['type'] == 'currency':
-                continue
-            self.create_item_row(item_id, item)
+        items = self.game.player.inventory.item_data
+        for item_id, item in items.items():
+            self.create_item_row(int(item_id), item)
 
     def create_item_row(self, item_id, item):
-        """Create a single item row (UI only)"""
-        item_frame = ctk.CTkFrame(self.item_frame)
-        item_frame.pack(fill="x", pady=5, padx=5)
+        item_frame = ctk.CTkFrame(self.items_container)
+        item_frame.pack(fill="x", pady=2, padx=5)
         
         # Item Info
-        ctk.CTkLabel(item_frame, text=item['name'],
-                   font=("Arial", 12)).pack(side="left", padx=10)
-        ctk.CTkLabel(item_frame, text=f"Value: {item['value']} Gold"
-                   ).pack(side="left", padx=10)
+        ctk.CTkLabel(
+            item_frame,
+            text=item['name'],
+            font=("Arial", 14),
+            width=180,
+            anchor="w"
+        ).pack(side="left")
         
-        # Current quantity
+        ctk.CTkLabel(
+            item_frame,
+            text=f"{item['value']} Gold",
+            font=("Arial", 13),
+            width=100
+        ).pack(side="left")
+        
         current_qty = self.game.player.inventory.get_item_quantity(item_id)
-        qty_label = ctk.CTkLabel(item_frame, text=f"Owned: {current_qty}")
-        qty_label.pack(side="left", padx=10)
+        qty_label = ctk.CTkLabel(
+            item_frame,
+            text=f"Owned: {current_qty}",
+            font=("Arial", 13),
+            width=100
+        )
+        qty_label.pack(side="left")
         
-        # Buy/Sell controls
-        self.create_trade_controls(item_frame, item_id, item['value'], qty_label)
-
-    def create_trade_controls(self, parent, item_id, value, qty_label):
-        """Create buy/sell UI controls"""
-        trade_frame = ctk.CTkFrame(parent)
-        trade_frame.pack(side="right", padx=10)
+        # Action buttons
+        btn_frame = ctk.CTkFrame(item_frame, fg_color="transparent")
+        btn_frame.pack(side="right")
         
-        # Buy controls
-        buy_frame = ctk.CTkFrame(trade_frame)
-        buy_frame.pack(side="left", padx=5)
-        self.create_quantity_controls(buy_frame, item_id, "buy", qty_label)
+        ctk.CTkButton(
+            btn_frame,
+            text="Buy",
+            width=80,
+            command=lambda iid=item_id: self.execute_trade(iid, "buy", qty_label)
+        ).pack(side="left", padx=5)
         
-        # Sell controls
-        sell_frame = ctk.CTkFrame(trade_frame)
-        sell_frame.pack(side="left", padx=5)
-        self.create_quantity_controls(sell_frame, item_id, "sell", qty_label)
-
-    def create_quantity_controls(self, parent, item_id, action, qty_label):
-        """Create quantity selector UI"""
-        if (item_id, action) not in self.selected_quantities:
-            self.selected_quantities[(item_id, action)] = 1
-            
-        # Quantity display
-        qty_display = ctk.CTkLabel(parent, text=str(self.selected_quantities[(item_id, action)]))
-        qty_display.pack(side="left", padx=5)
-        
-        # Decrease button
-        ctk.CTkButton(parent, text="-", width=30,
-            command=lambda: self.adjust_quantity(item_id, action, -1, qty_display)
-        ).pack(side="left")
-        
-        # Increase button
-        ctk.CTkButton(parent, text="+", width=30,
-            command=lambda: self.adjust_quantity(item_id, action, 1, qty_display)
-        ).pack(side="left")
-        
-        # Action button
-        ctk.CTkButton(parent, text=action.capitalize(), width=60,
-            command=lambda: self.execute_trade(item_id, action, qty_label)
+        ctk.CTkButton(
+            btn_frame,
+            text="Sell",
+            width=80,
+            command=lambda iid=item_id: self.execute_trade(iid, "sell", qty_label)
         ).pack(side="left", padx=5)
 
-    def adjust_quantity(self, item_id, action, change, qty_display):
-        """Adjust selected quantity (UI only)"""
-        key = (item_id, action)
-        new_qty = max(1, self.selected_quantities[key] + change)
-        self.selected_quantities[key] = new_qty
-        qty_display.configure(text=str(new_qty))
-
     def execute_trade(self, item_id, action, qty_label):
-        """Handle trade button click (delegates to game logic)"""
-        quantity = self.selected_quantities[(item_id, action)]
-        
         if action == "buy":
-            success = self.game.player.inventory.buy_item(item_id, quantity)
+            success = self.game.player.inventory.buy_item(item_id, self.selected_quantity)
         else:
-            success = self.game.player.inventory.sell_item(item_id, quantity)
+            success = self.game.player.inventory.sell_item(item_id, self.selected_quantity)
         
         if success:
-            self.update_display(qty_label, item_id)
-
-    def update_display(self, qty_label, item_id):
-        """Refresh UI after trade"""
-        current_qty = self.game.player.inventory.get_item_quantity(item_id)
-        qty_label.configure(text=f"Owned: {current_qty}")
-        self.update_bazaar()
+            self.update_gold_display()
+            current_qty = self.game.player.inventory.get_item_quantity(item_id)
+            qty_label.configure(text=f"Owned: {current_qty}")
+            
+            # Update parent inventory display
+            parent = self.master
+            while not hasattr(parent, 'update_inventory_display') and hasattr(parent, 'master'):
+                parent = parent.master
+            if hasattr(parent, 'update_inventory_display'):
+                parent.update_inventory_display()

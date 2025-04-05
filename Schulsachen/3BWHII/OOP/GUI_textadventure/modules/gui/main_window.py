@@ -39,8 +39,13 @@ class MainWindow(ctk.CTk):
         self.stats_label.pack(side="left", padx=10)
         
         # Main Content
-        self.content_frame = ScrollableFrame(self)
-        self.content_frame.grid(row=1, column=1, padx=20, pady=10, sticky="nsew")
+        self.content_container = ctk.CTkFrame(self)  # New container
+        self.content_container.grid(row=1, column=1, padx=20, pady=10, sticky="nsew")
+        self.content_container.grid_rowconfigure(0, weight=1)
+        self.content_container.grid_columnconfigure(0, weight=1)
+    
+        self.content_frame = ScrollableFrame(self.content_container, height=650)
+        self.content_frame.grid(row=0, column=0, sticky="nsew")
         
         # Action Buttons Frame
         self.actions_frame = ctk.CTkFrame(self.content_frame)
@@ -136,18 +141,26 @@ class MainWindow(ctk.CTk):
         self.update_inventory_display()
 
     def show_bazaar(self):
-        """Switch to bazaar mode"""
-        # Clear current content
-        for widget in self.content_frame.winfo_children():
-            widget.destroy()
+        # Hide all main content
+        self.sidebar_frame.grid_remove()
+        self.header_frame.grid_remove()
+        self.content_container.grid_remove()
         
-        # Create and show bazaar widget
+        # Create fullscreen bazaar
         self.bazaar_widget = BazaarWidget(
-            self.content_frame,
+            self,
             self.game,
-            on_close_callback=self.update_display
+            on_close_callback=self.return_to_main_view
         )
-        self.bazaar_widget.pack(fill="both", expand=True)
+        self.bazaar_widget.grid(row=0, column=0, columnspan=2, sticky="nsew")
+
+    def return_to_main_view(self):
+        if hasattr(self, 'bazaar_widget'):
+            self.bazaar_widget.destroy()
+        self.sidebar_frame.grid()
+        self.header_frame.grid()
+        self.content_container.grid()
+
 
     def show_message(self, message):
         self.log_text.configure(state="normal")
