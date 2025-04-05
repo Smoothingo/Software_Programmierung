@@ -9,10 +9,6 @@
           "response": "// ask god who you are"
         },
         {
-          "description": "Search your pockets",
-          "response": "// show inventory"
-        },
-        {
           "description": "Talk with Jerry",
           "response": "Welcome to your Personal Island. I’m Jerry, your guide. Let’s start your adventure!",
           "next_location": "Personal Island",
@@ -20,8 +16,8 @@
           "add_xp": 10
         },
         {
-          "description": "View Stats or View/Change Loadout",
-          "response": "// change loadout"
+          "description": "Change Equipment",
+          "response": "// change equipment"
         }
       ]
     },
@@ -32,8 +28,8 @@
       "actions": [
         {
           "description": "Build a shelter",
-          "response": "You gather materials and build a small shelter to protect yourself.",
-          "add_xp": 5
+          "response": "You gather materials and build a small shelter to protect yourself. You earn some experience.",
+          "add_xp": 25
         },
         {
           "description": "Gather resources",
@@ -46,13 +42,10 @@
           "response": "You travel to the Hub Island, the bustling center of the Archipelago.",
           "next_location": "Hub Island"
         },
+      
         {
-          "description": "Search your pockets",
-          "response": "// show inventory"
-        },
-        {
-          "description": "View Stats or View/Change Loadout",
-          "response": "// change loadout"
+          "description": "Change Equipment",
+          "response": "// change equipment"
         }
       ]
     },
@@ -69,12 +62,13 @@
       "actions": [
         {
           "description": "Visit the Bazaar",
-          "response": "// bazzar",
+          "response": "You visit the Bazaar, a marketplace filled with merchants selling various items.",
+          "type": "bazaar",
           "add_xp": 5
         },
         {
           "description": "Prepare for a journey",
-          "response": "You gather supplies and prepare for your next journey.",
+          "response": "You gather supplies and prepare for your next journey. (update on hold)",
           "add_items": { "5": 1, "6": 1 },
           "add_xp": 10
         },
@@ -94,12 +88,8 @@
           "next_location": "Combat Island"
         },
         {
-          "description": "Search your pockets",
-          "response": "// show inventory"
-        },
-        {
-          "description": "View Stats or View/Change Loadout",
-          "response": "// change loadout"
+          "description": "Change Equipment",
+          "response": "// change equipment"
         }
       ]
     },
@@ -126,12 +116,8 @@
           "next_location": "Hub Island"
         },
         {
-          "description": "Search your pockets",
-          "response": "// show inventory"
-        },
-        {
-          "description": "View Stats or View/Change Loadout",
-          "response": "// change loadout"
+          "description": "Change Equipment",
+          "response": "// change equipment"
         }
       ]
     },
@@ -164,12 +150,8 @@
           "next_location": "Hub Island"
         },
         {
-          "description": "Search your pockets",
-          "response": "// show inventory"
-        },
-        {
-          "description": "View Stats or View/Change Loadout",
-          "response": "// change loadout"
+          "description": "Change Equipment",
+          "response": "// change equipment"
         }
       ]
     },
@@ -188,19 +170,19 @@
           "name": "Slime",
           "description": "A small, gooey creature with a mischievous grin.",
           "stats": { "health": 25, "attack": 5, "defense": 2 },
-          "drops": { "21": 3 }
+          "add_items": { "21": 3 }
         },
         {
           "name": "Goblin",
           "description": "A small, green-skinned creature with sharp teeth and claws.",
           "stats": { "health": 50, "attack": 12, "defense": 2 },
-          "drops": { "12": 1, "19": 1 }
+          "add_items": { "12": 1, "19": 1 }
         },
         {
           "name": "Orc",
           "description": "A large, brutish humanoid with a fierce expression and powerful muscles.",
           "stats": { "health": 72, "attack": 20, "defense": 5 },
-          "drops": { "13": 1, "20": 1 }
+          "add_items": { "13": 1, "20": 1 }
         }
       ],
       "actions": [
@@ -228,12 +210,8 @@
           "next_location": "Hub Island"
         },
         {
-          "description": "Search your pockets",
-          "response": "// show inventory"
-        },
-        {
-          "description": "View Stats or View/Change Loadout",
-          "response": "// change loadout"
+          "description": "Change Equipment",
+          "response": "// change equipment"
         }
       ]
     },
@@ -252,7 +230,7 @@
           "name": "Ender Dragon",
           "description": "The mighty Ender Dragon, the final boss of the Archipelago.",
           "stats": { "health": 350, "attack": 60, "defense": 20 },
-          "drops": { "2": 1000, "14": 1 }  
+          "add_items": { "2": 1000, "14": 1 }  
         }
       ],
       "actions": [
@@ -267,12 +245,8 @@
           "response": "// loser"
         },
         {
-          "description": "Search your pockets",
-          "response": "// show inventory"
-        },
-        {
-          "description": "View Stats or View/Change Loadout",
-          "response": "// change loadout"
+          "description": "Change Equipment",
+          "response": "// change equipment"
         }
       ]
     }

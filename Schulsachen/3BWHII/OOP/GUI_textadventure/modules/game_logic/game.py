@@ -24,12 +24,11 @@ class Game:
         }
 
     def handle_action(self, action):
-        response = ""
-        if action.get("response") == "// show inventory":
-            return {"type": "inventory", "data": self.player.inventory.get_formatted_inventory()}
-        
-        if action.get("response")== "// ask god who you are":
+        if action.get("response") == "// ask god who you are":
             return {"type": "message", "text": f"You are {self.player.name}, a brave adventurer!"}
+        
+        if action.get("type") == "bazaar":
+            return {"type": "bazaar", "success": True}
 
         if "add_items" in action:
             for item_id, quantity in action["add_items"].items():

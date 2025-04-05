@@ -39,5 +39,5 @@ class InventoryWindow(ctk.CTkToplevel):
             
             ctk.CTkLabel(frame, text=f"{item['name']} x{item['quantity']}"
                         ).pack(side="left", padx=5)
-            ctk.CTkLabel(frame, text=item['description'], width=300,
-                        wraplength=300).pack(side="left", padx=5)
+            ctk.CTkLabel(frame, text=f"{item['value']}"            
+                        ).pack(side="left", padx=5)

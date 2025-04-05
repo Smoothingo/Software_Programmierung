@@ -1,7 +1,7 @@
 import customtkinter as ctk
 from .widgets import ScrollableFrame, ActionButton, InventoryWindow
 from .combat_window import CombatWindow
-from .bazaar_window import BazaarWindow
+from .bazaar_widget import BazaarWidget
 from .equipment_window import EquipmentWindow
 
 
@@ -12,29 +12,35 @@ class MainWindow(ctk.CTk):
         self.title("Archipelago Adventure")
         self.geometry("1000x800")
         
-        # Configure grid
-        self.grid_columnconfigure(0, weight=1)
+        # Configure grid layout (3 columns)
+        self.grid_columnconfigure(0, weight=0)  # Sidebar
+        self.grid_columnconfigure(1, weight=1)   # Main content
         self.grid_rowconfigure(1, weight=1)
         
         self.create_widgets()
         self.update_display()
 
     def create_widgets(self):
-        # Header Frame
+        # Sidebar Frame
+        self.sidebar_frame = ctk.CTkFrame(self, width=300)
+        self.sidebar_frame.grid(row=0, column=0, rowspan=2, sticky="nsew", padx=10, pady=10)
+        
+        # Inventory Section
+        ctk.CTkLabel(self.sidebar_frame, text="Inventory", font=("Arial", 14, "bold")).pack(pady=10)
+        self.inventory_scroll = ScrollableFrame(self.sidebar_frame)
+        self.inventory_scroll.pack(fill="both", expand=True, padx=5)
+
+        # Header Frame (main content area)
         self.header_frame = ctk.CTkFrame(self)
-        self.header_frame.grid(row=0, column=0, padx=20, pady=10, sticky="nsew")
+        self.header_frame.grid(row=0, column=1, padx=20, pady=10, sticky="nsew")
         
         # Stats Display
         self.stats_label = ctk.CTkLabel(self.header_frame, font=("Arial", 12))
         self.stats_label.pack(side="left", padx=10)
         
-        # Inventory Button
-        ctk.CTkButton(self.header_frame, text="Inventory", command=self.show_inventory
-                    ).pack(side="right", padx=10)
-        
         # Main Content
         self.content_frame = ScrollableFrame(self)
-        self.content_frame.grid(row=1, column=0, padx=20, pady=10, sticky="nsew")
+        self.content_frame.grid(row=1, column=1, padx=20, pady=10, sticky="nsew")
         
         # Action Buttons Frame
         self.actions_frame = ctk.CTkFrame(self.content_frame)
@@ -53,11 +59,14 @@ class MainWindow(ctk.CTk):
             f"HP: {stats['health']} | ATK: {stats['attack']} | DEF: {stats['defense']}"
         )
         
-        # Clear previous actions
+        # Update inventory
+        self.update_inventory_display()
+        
+        # Clear previous action buttons FIRST
         for widget in self.actions_frame.winfo_children():
             widget.destroy()
         
-        # Add new actions
+        # Add new actions from current location
         location_info = self.game.get_current_location_info()
         for action in location_info['actions']:
             ActionButton(
@@ -73,22 +82,72 @@ class MainWindow(ctk.CTk):
             self.log_text.insert("end", f"{npc['name']}: {npc['dialogue']}\n")
         self.log_text.configure(state="disabled")
 
+    def update_inventory_display(self):
+        # Clear existing inventory items
+        for widget in self.inventory_scroll.winfo_children():
+            widget.destroy()
+        
+        # Add current inventory items
+        for item in self.game.player.inventory.get_formatted_inventory():
+            item_frame = ctk.CTkFrame(self.inventory_scroll)
+            item_frame.pack(fill="x", pady=2)
+            
+            ctk.CTkLabel(
+                item_frame, 
+                text=f"{item['name']} x{item['quantity']}",
+                width=120,
+                anchor="w"
+            ).pack(side="left", padx=5)
+            
+            ctk.CTkLabel(
+                item_frame, 
+                text=f"💰 {item['value']}",  
+                width=100,
+                anchor="e"  # Right-aligned for numbers
+            ).pack(side="right", padx=5)
+
     def handle_action(self, action):
         result = self.game.handle_action(action)
         
         if result['type'] == "combat":
             CombatWindow(self, self.game, result['mob'])
         elif result['type'] == "bazaar":
-            BazaarWindow(self, self.game)
-        elif result['type'] == "inventory":
-            self.show_inventory(result['data'])
+            self.show_bazaar()
         elif result['type'] == "message":
             self.show_message(result['text'])
         elif result['type'] == "location_change":
-            self.update_display()
-            
-    def show_inventory(self, items=None):
-        InventoryWindow(self, self.game.player)
+            self.update_display()  # Full refresh for location changes
+        
+        # Always update stats and inventory after any action
+        self.refresh_ui()  # Add this line
+        
+        return result  # If you need to return the result
+
+    def refresh_ui(self):
+        """Update only the dynamic elements without recreating action buttons"""
+        # Update stats
+        stats = self.game.player.get_stats()
+        self.stats_label.configure(text=
+            f"Level: {stats['level']} | XP: {stats['xp']} | "
+            f"HP: {stats['health']} | ATK: {stats['attack']} | DEF: {stats['defense']}"
+        )
+        
+        # Update inventory
+        self.update_inventory_display()
+
+    def show_bazaar(self):
+        """Switch to bazaar mode"""
+        # Clear current content
+        for widget in self.content_frame.winfo_children():
+            widget.destroy()
+        
+        # Create and show bazaar widget
+        self.bazaar_widget = BazaarWidget(
+            self.content_frame,
+            self.game,
+            on_close_callback=self.update_display
+        )
+        self.bazaar_widget.pack(fill="both", expand=True)
 
     def show_message(self, message):
         self.log_text.configure(state="normal")
