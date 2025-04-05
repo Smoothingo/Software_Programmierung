@@ -1,24 +1,26 @@
 import sys
 
-current_word = None
-current_count = 0
+current_year = None
+sum_temp = 0
+count = 0
 
 for line in sys.stdin:
-    line = line.strip()
-    word, count = line.split('\t', 1)
+    year, mean = line.strip().split('\t')
+    mean = float(mean)
     
-    try:
-        count = int(count)
-    except ValueError:
-        continue
+    if year != current_year:
+        if current_year is not None:
+            # Print average for previous year
+            avg = sum_temp / count
+            print(f"{current_year}\t{avg:.2f}")
+        current_year = year
+        sum_temp = 0
+        count = 0
+    
+    sum_temp += mean
+    count += 1
 
-    if current_word == word:
-        current_count += count
-    else:
-        if current_word:
-            print(f"{current_word}\t{current_count}")
-        current_count = count
-        current_word = word
-
-if current_word == word:
-    print(f"{current_word}\t{current_count}")
+# Print the last year
+if current_year is not None:
+    avg = sum_temp / count
+    print(f"{current_year}\t{avg:.2f}")
