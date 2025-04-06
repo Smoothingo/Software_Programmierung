@@ -1,22 +1,26 @@
 import customtkinter as ctk
+
 class FullScreenWidget(ctk.CTkFrame):
     def __init__(self, master, title, on_close_callback):
         super().__init__(master)
         self.configure(fg_color="transparent")
+
+        # Configure grid layout for the entire widget
         self.grid_columnconfigure(0, weight=1)
-        self.grid_rowconfigure(1, weight=1)  # Main content area
-        
+        self.grid_rowconfigure(0, weight=0)  # Header row
+        self.grid_rowconfigure(1, weight=1)  # Main content area (expands fully)
+
         # Header frame
         self.header_frame = ctk.CTkFrame(self)
         self.header_frame.grid(row=0, column=0, sticky="ew", padx=20, pady=10)
-        
+
         # Title
         ctk.CTkLabel(
             self.header_frame, 
             text=title,
             font=("Arial", 24, "bold")
         ).pack(side="left")
-        
+
         # Close Button
         ctk.CTkButton(
             self.header_frame,
@@ -27,9 +31,9 @@ class FullScreenWidget(ctk.CTkFrame):
             hover_color="#2A2D2E",
             command=on_close_callback
         ).pack(side="right")
-        
-        # Content frame
+
+        # Content frame (main area for child widgets)
         self.content_frame = ctk.CTkFrame(self)
         self.content_frame.grid(row=1, column=0, sticky="nsew", padx=20, pady=10)
         self.content_frame.grid_columnconfigure(0, weight=1)
-        self.content_frame.grid_rowconfigure(1, weight=1)  # For items container
+        self.content_frame.grid_rowconfigure(0, weight=1)  # Ensure child widgets expand

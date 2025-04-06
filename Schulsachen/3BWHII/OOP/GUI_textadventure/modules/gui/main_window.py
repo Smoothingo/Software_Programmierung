@@ -152,7 +152,7 @@ class MainWindow(ctk.CTk):
             self.game,
             on_close_callback=self.return_to_main_view
         )
-        self.bazaar_widget.grid(row=0, column=0, columnspan=2, sticky="nsew")
+        self.bazaar_widget.grid(row=0, column=0, columnspan=2, rowspan=2, sticky="nsew")
 
     def return_to_main_view(self):
         if hasattr(self, 'bazaar_widget'):

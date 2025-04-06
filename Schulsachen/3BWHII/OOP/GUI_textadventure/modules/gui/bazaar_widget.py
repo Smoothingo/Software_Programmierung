@@ -6,48 +6,52 @@ class BazaarWidget(FullScreenWidget):
         super().__init__(master, "Bazaar", on_close_callback)
         self.game = game
         self.selected_quantity = 1
+        self.on_close_callback = on_close_callback
+
+        # Remove the header frame's close button (X)
+        for widget in self.header_frame.winfo_children():
+            if isinstance(widget, ctk.CTkButton):
+                widget.destroy()
+
         self.create_content()
         self.update_bazaar()
-        
-        # Configure grid layout
-        self.grid_rowconfigure(1, weight=1)
-        self.grid_columnconfigure(0, weight=1)
 
     def create_content(self):
-        # Configure content frame grid
-        self.content_frame.grid_rowconfigure(1, weight=1)  # For items container
-        self.content_frame.grid_columnconfigure(0, weight=1)
+        # Configure grid layout for the main widget
+        self.grid_rowconfigure(1, weight=1)  # Content area expands
+        self.grid_rowconfigure(2, weight=0)  # Exit button stays at the bottom
+        self.grid_columnconfigure(0, weight=1)
 
-        # Gold display
-        self.gold_frame = ctk.CTkFrame(self.content_frame)
-        self.gold_frame.grid(row=0, column=0, sticky="ew", pady=5)
+        # Gold display (in header frame)
         self.gold_label = ctk.CTkLabel(
-            self.gold_frame, 
+            self.header_frame, 
             text="💰 Loading gold...",
             font=("Arial", 18, "bold")
         )
         self.gold_label.pack(side="left", padx=10)
 
-        # Items container with scroll
-        self.items_container = ctk.CTkScrollableFrame(self.content_frame)
-        self.items_container.grid(row=1, column=0, sticky="nsew", pady=5)
+        # Main content area (will expand)
+        self.main_content = ctk.CTkFrame(self, fg_color="transparent")
+        self.main_content.grid(row=1, column=0, sticky="nsew", padx=20, pady=(0, 10))
+        self.main_content.grid_rowconfigure(0, weight=1)  # Items container expands
+        self.main_content.grid_columnconfigure(0, weight=1)
 
-        # Exit button at bottom
-        exit_button = ctk.CTkButton(
-            self.content_frame,
+        # Items container - scrollable and expands
+        self.items_container = ctk.CTkScrollableFrame(
+            self.main_content,
+            fg_color="transparent"
+        )
+        self.items_container.grid(row=0, column=0, sticky="nsew")
+
+        # Exit button at the very bottom (row 2)
+        self.exit_button = ctk.CTkButton(
+            self,
             text="Exit Bazaar",
-            command=self.on_close,
+            command=self.on_close_callback,
             height=40,
             font=("Arial", 14)
         )
-        exit_button.grid(row=2, column=0, sticky="ew", pady=10)
-
-        # Configure grid weights
-        self.content_frame.grid_rowconfigure(1, weight=1)  # Items container expands
-
-    def adjust_quantity(self, change):
-        self.selected_quantity = max(1, self.selected_quantity + change)
-        self.qty_display.configure(text=str(self.selected_quantity))
+        self.exit_button.grid(row=2, column=0, sticky="ew", padx=20, pady=(10, 20))
 
     def update_bazaar(self):
         self.update_gold_display()
@@ -62,6 +66,9 @@ class BazaarWidget(FullScreenWidget):
         
         items = self.game.player.inventory.item_data
         for item_id, item in items.items():
+            # Skip gold item (ID 2)
+            if int(item_id) == 2:
+                continue
             self.create_item_row(int(item_id), item)
 
     def create_item_row(self, item_id, item):
