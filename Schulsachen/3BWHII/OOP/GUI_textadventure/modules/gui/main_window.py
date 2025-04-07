@@ -1,22 +1,56 @@
 import customtkinter as ctk
 from .widgets import ScrollableFrame, ActionButton, InventoryWindow
-from .combat_window import CombatWindow
+from .combat_widget import CombatWidget
 from .bazaar_widget import BazaarWidget
 from .equipment_widget import EquipmentWidget
 
+
+import customtkinter as ctk
+
+import customtkinter as ctk
+
+import customtkinter as ctk
 
 class MainWindow(ctk.CTk):
     def __init__(self, game):
         super().__init__()
         self.game = game
         self.title("Archipelago Adventure")
-        self.geometry("1000x800")
+        self.geometry("1200x800")  # Set the initial window size
+        self.grid_rowconfigure(1, weight=1)  # Allow the main content to expand  # Set the initial window size to 1200px height
+        self.grid_columnconfigure(1, weight=1)
         
-        # Configure grid layout (3 columns)
-        self.grid_columnconfigure(0, weight=0)  # Sidebar
-        self.grid_columnconfigure(1, weight=1)   # Main content
-        self.grid_rowconfigure(1, weight=1)
+        # Start with the name input screen
+        self.show_name_input()
+
+    def show_name_input(self):
+        """Display the name input screen."""
+        self.name_input_frame = ctk.CTkFrame(self)
+        self.name_input_frame.pack(expand=True, fill="both", padx=20, pady=20)
         
+        ctk.CTkLabel(self.name_input_frame, text="Enter your name:", font=("Arial", 16)).pack(pady=10)
+        self.name_entry = ctk.CTkEntry(self.name_input_frame, width=200)
+        self.name_entry.pack(pady=10)
+        
+        ctk.CTkButton(self.name_input_frame, text="Start Adventure", command=self.submit_name).pack(pady=10)
+
+    def submit_name(self):
+        """Handle name submission and transition to the main game UI."""
+        name = self.name_entry.get().strip()
+        if name:
+            self.game.player.name = name  # Set the player's name
+            self.name_input_frame.destroy()  # Remove the name input frame
+            self.initialize_main_ui()  # Initialize the main game UI
+        else:
+            ctk.CTkLabel(self.name_input_frame, text="Name cannot be empty!", text_color="red").pack(pady=5)
+
+    def initialize_main_ui(self):
+        """Initialize the main game UI."""
+        self.grid_columnconfigure(0, weight=1)  # Sidebar
+        self.grid_columnconfigure(1, weight=30)  # Main content area
+        self.grid_rowconfigure(1, weight=1)  # Header
+
+        # Create the main UI components
         self.create_widgets()
         self.update_display()
 
@@ -39,22 +73,24 @@ class MainWindow(ctk.CTk):
         self.stats_label.pack(side="left", padx=10)
         
         # Main Content
-        self.content_container = ctk.CTkFrame(self)  # New container
+        self.content_container = ctk.CTkFrame(self)
         self.content_container.grid(row=1, column=1, padx=20, pady=10, sticky="nsew")
-        self.content_container.grid_rowconfigure(0, weight=1)
-        self.content_container.grid_columnconfigure(0, weight=1)
-    
+        self.content_container.grid_rowconfigure(0, weight=1)  # Allow content to expand vertically
+        self.content_container.grid_columnconfigure(0, weight=1)  # Allow content to expand horizontally
+
         self.content_frame = ScrollableFrame(self.content_container, height=650)
         self.content_frame.grid(row=0, column=0, sticky="nsew")
         
         # Action Buttons Frame
-        self.actions_frame = ctk.CTkFrame(self.content_frame)
-        self.actions_frame.pack(fill="x", pady=5)
+        self.actions_frame = ctk.CTkFrame(self.content_container)
+        self.actions_frame.grid(row=1, column=0, sticky="ew", padx=10, pady=5)
         
         # Log Display
-        self.log_text = ctk.CTkTextbox(self.content_frame, height=200)
-        self.log_text.pack(fill="x", pady=10)
+        self.log_text = ctk.CTkTextbox(self.content_container)
+        self.log_text.grid(row=0, column=0, sticky="nsew", padx=10, pady=10)
         self.log_text.configure(state="disabled")
+
+
 
     def update_display(self):
         # Update stats
@@ -115,20 +151,36 @@ class MainWindow(ctk.CTk):
         result = self.game.handle_action(action)
         
         if result['type'] == "combat":
-            CombatWindow(self, self.game, result['mob'])
+            self.show_combat(result['mob'])
         elif result['type'] == "bazaar":
             self.show_bazaar()
         elif result['type'] == "equipment":
-            self.show_equipment_manager()  # Show the EquipmentWidget
+            self.show_equipment_manager()
         elif result['type'] == "message":
             self.show_message(result['text'])
+            # Special case: Show "Ready to Explore" button only after talking to Jerry
+            if action.get("description") == "Talk with Jerry" and result.get("next_location"):
+                self.show_ready_to_explore_button(result["next_location"])
         elif result['type'] == "location_change":
-            self.update_display()  # Full refresh for location changes
+            self.clear_display()
+            self.update_display()
+            self.show_message(self.game.get_current_location_info()['description'])
         
         # Always update stats and inventory after any action
-        self.refresh_ui()  # Add this line
+        self.refresh_ui()
         
-        return result  # If you need to return the result
+        return result
+
+    def clear_display(self):
+        """Clear the log and action buttons."""
+        # Clear the log
+        self.log_text.configure(state="normal")
+        self.log_text.delete("1.0", "end")
+        self.log_text.configure(state="disabled")
+        
+        # Clear action buttons
+        for widget in self.actions_frame.winfo_children():
+            widget.destroy()
 
     def refresh_ui(self):
         """Update only the dynamic elements without recreating action buttons"""
@@ -161,9 +213,12 @@ class MainWindow(ctk.CTk):
             self.bazaar_widget.destroy()
         if hasattr(self, 'equipment_widget'):
             self.equipment_widget.destroy()
+        if hasattr(self, 'combat_widget'):
+            self.combat_widget.destroy()
         self.sidebar_frame.grid()
         self.header_frame.grid()
         self.content_container.grid()
+        self.refresh_ui()
 
     def show_equipment_manager(self):
         # Hide all main content
@@ -184,3 +239,43 @@ class MainWindow(ctk.CTk):
         self.log_text.insert("end", message + "\n")
         self.log_text.see("end")
         self.log_text.configure(state="disabled")
+
+    def show_combat(self, mob):
+        # Hide all main content
+        self.sidebar_frame.grid_remove()
+        self.header_frame.grid_remove()
+        self.content_container.grid_remove()
+
+        # Create fullscreen combat widget
+        self.combat_widget = CombatWidget(
+            self,
+            self.game,
+            mob,
+            on_close_callback=self.return_to_main_view  # Ensure this is passed correctly
+        )
+        self.combat_widget.grid(row=0, column=0, columnspan=2, rowspan=2, sticky="nsew")
+
+    def show_ready_to_explore_button(self, next_location):
+        # Add a message to the log
+        self.log_text.configure(state="normal")
+        self.log_text.insert("end", "\n[Click 'Ready to Explore' to continue your journey.]\n")
+        self.log_text.see("end")
+        self.log_text.configure(state="disabled")
+
+        # Create the button
+        self.ready_button = ctk.CTkButton(
+            self.content_container,
+            text="Ready to Explore",
+            command=lambda: self.travel_to_location(next_location)
+        )
+        # Use grid instead of pack
+        self.ready_button.grid(row=1, column=0, pady=10, sticky="nsew")
+
+    def travel_to_location(self, location_name):
+        # Remove the button
+        self.ready_button.destroy()
+
+        # Travel to the new location
+        self.game.travel_to(location_name)
+        self.update_display()
+        self.show_message(self.game.get_current_location_info()['description'])

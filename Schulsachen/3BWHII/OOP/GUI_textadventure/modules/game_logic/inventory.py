@@ -1,5 +1,5 @@
 import json
-
+from .constants import get_resource_path
 class Inventory:
     def __init__(self):
         self.items = []
@@ -49,7 +49,7 @@ class Inventory:
         return item['quantity'] if item else 0
         
     def load_all_items(self):
-        with open("modules/lookuptable.json", 'r') as f:
+        with open(get_resource_path("modules/lookuptable.json"), 'r') as f:
             return json.load(f)['items']
     
     def buy_item(self, item_id, quantity):
@@ -74,9 +74,9 @@ class Inventory:
     
     def get_gold(self):
         return self.get_item_quantity(2)
-    
-    def load_all_items(self):
-        with open("modules/lookuptable.json", 'r') as f:
-            return json.load(f)['items']
-    
+        
+    def get_item(self, item_id):
+        """Retrieve an item from the inventory by its ID."""
+        return next((item for item in self.items if item['id'] == item_id), None)
+        
     

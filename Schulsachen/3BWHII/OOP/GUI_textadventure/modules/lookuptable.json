@@ -40,7 +40,7 @@
     },
     "5": {
       "id": 5,
-      "name": "Potion",
+      "name": " Healing Potion",
       "description": "A healing potion.",
       "value": 20,
       "base_quantity": 1,

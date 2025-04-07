@@ -2,7 +2,7 @@ from .inventory import Inventory
 
 class Player:
     def __init__(self, name, game):
-        self.name = name
+        self.name = name or "Adventurer"
         self.game = game
         self.inventory = Inventory()
         self.level = 1
@@ -40,6 +40,12 @@ class Player:
         self.health = self.base_health
         self.attack = self.base_attack
         self.defense = self.base_defense
+
+        # Reapply equipped items' stats
+        if self.equipped_sword:
+            self.attack += self.equipped_sword['stats'].get('attack', 0)
+        if self.equipped_armor:
+            self.defense += self.equipped_armor['stats'].get('defense', 0)
 
     def use_item(self, item_id, target=None):
         item = self.inventory.get_item(item_id)

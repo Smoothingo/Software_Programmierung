@@ -175,39 +175,42 @@
           "name": "Slime",
           "description": "A small, gooey creature with a mischievous grin.",
           "stats": { "health": 25, "attack": 5, "defense": 2 },
-          "add_items": { "21": 3 }
+          "add_items": { "21": 3 },
+          "add_xp": 10
         },
         {
           "name": "Goblin",
           "description": "A small, green-skinned creature with sharp teeth and claws.",
           "stats": { "health": 50, "attack": 12, "defense": 2 },
-          "add_items": { "12": 1, "19": 1 }
+          "add_items": { "12": 1, "19": 1 },
+          "add_xp": 30
         },
         {
           "name": "Orc",
           "description": "A large, brutish humanoid with a fierce expression and powerful muscles.",
           "stats": { "health": 72, "attack": 20, "defense": 5 },
-          "add_items": { "13": 1, "20": 1 }
+          "add_items": { "13": 1, "20": 1 },
+          "add_xp": 50
         }
       ],
       "actions": [
         {
           "description": "Fight Slimes",
           "response": "// initiate combat",
-          "mob": "Slime",
-          "add_xp": 10
+          "type": "combat",
+          "mob": "Slime"
         },
         {
           "description": "Fight Goblins",
           "response": "// initiate combat",
-          "mob": "Goblin",
-          "add_xp": 30
+          "type": "combat",
+          "mob": "Goblin"
         },
         {
           "description": "Fight Orcs",
           "response": "// initiate combat",
-          "mob": "Orc",
-          "add_xp": 50
+          "type": "combat",
+          "mob": "Orc"
         },
         {
           "description": "Travel to Hub Island",

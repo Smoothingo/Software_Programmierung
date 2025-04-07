@@ -2,12 +2,12 @@ import json
 import json
 import random
 from .player import Player
-from .constants import STORY_PATH, LOOKUP_TABLE_PATH
+from .constants import get_resource_path
 
 class Game:
-    def __init__(self):
-        self.story = self.load_story(STORY_PATH)
-        self.player = Player("Adventurer", self)
+    def __init__(self, player_name="Adventurer"):
+        self.story = self.load_story(get_resource_path("modules\story_blocks.json"))
+        self.player = Player(player_name, self)
         self.current_island = self.story['islands'][0]
         self.audio_thread = None
 
@@ -30,6 +30,15 @@ class Game:
         if action.get("type") == "bazaar":
             return {"type": "bazaar", "success": True}
         
+        if action.get("type") == "combat":
+            mob_name = action.get("mob")
+            mob = self.initiate_combat(mob_name)
+
+            if mob:
+                return {"type": "combat", "mob": mob}
+            else:
+                return {"type": "message", "text": f"No mob named {mob_name} found!"}
+            
         if action.get("type") == "equipment":
             return {"type": "equipment", "success": True}
 
@@ -44,6 +53,12 @@ class Game:
         if "add_xp" in action:
             self.player.gain_xp(action["add_xp"])
         
+        # Handle actions with both a response and a next location
+        if "response" in action and "next_location" in action:
+            response = action["response"]
+            next_location = action["next_location"]
+            return {"type": "message", "text": response, "next_location": next_location}
+
         if "next_location" in action:
             self.travel_to(action["next_location"])
             return {"type": "location_change"}
@@ -59,7 +74,10 @@ class Game:
 
     def initiate_combat(self, mob_name):
         mob = next((m for m in self.current_island.get('mobs', []) if m['name'] == mob_name), None)
-        return mob
+        if mob:
+            mob['stats']['max_health'] = mob['stats']['health']  # Store max health
+            return mob
+        return None
 
     def player_death(self):
         self.player.health = 0

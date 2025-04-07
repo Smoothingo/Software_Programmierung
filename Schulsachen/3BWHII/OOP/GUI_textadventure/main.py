@@ -4,10 +4,10 @@ from modules.gui.main_window import MainWindow
 
 class App:
     def __init__(self):
-        ctk.set_appearance_mode("Dark")
-        ctk.set_default_color_theme("blue")
+        # Initialize the game with a default player name
+        self.game = Game("Adventurer")
         
-        self.game = Game()
+        # Create the main application window
         self.main_window = MainWindow(self.game)
         self.main_window.mainloop()
 

@@ -6,6 +6,7 @@ class EquipmentWidget(FullScreenWidget):
         super().__init__(master, "Equipment Manager", on_close_callback)
         self.game = game
         self.on_close_callback = on_close_callback
+        
 
         # Remove the header frame's close button (X)
         for widget in self.header_frame.winfo_children():
@@ -160,27 +161,31 @@ class EquipmentWidget(FullScreenWidget):
                 self.show_error("You can only equip one sword at a time!")
                 return
             self.game.player.equipped_sword = item
+            self.game.player.attack += item['stats'].get('attack', 0)  # Add attack stat
         elif item['type'] == 'armor':
             if self.game.player.equipped_armor:
                 self.show_error("You can only equip one armor at a time!")
                 return
             self.game.player.equipped_armor = item
+            self.game.player.defense += item['stats'].get('defense', 0)  # Add defense stat
 
         # Update stats and UI
-        self.game.player.reset_stats()
         self.update_equipment()
+        self.refresh_stats_display()
         self.clear_error()
 
     def unequip_item(self, item):
         # Unequip the item
         if item['type'] == 'weapon' and self.game.player.equipped_sword == item:
+            self.game.player.attack -= item['stats'].get('attack', 0)  # Subtract attack stat
             self.game.player.equipped_sword = None
         elif item['type'] == 'armor' and self.game.player.equipped_armor == item:
+            self.game.player.defense -= item['stats'].get('defense', 0)  # Subtract defense stat
             self.game.player.equipped_armor = None
 
         # Update stats and UI
-        self.game.player.reset_stats()
         self.update_equipment()
+        self.refresh_stats_display()
         self.clear_error()
 
     def show_error(self, message):
@@ -190,3 +195,12 @@ class EquipmentWidget(FullScreenWidget):
     def clear_error(self):
         """Clear the inline error message."""
         self.error_label.configure(text="")
+    
+    def refresh_stats_display(self):
+        # Update stats display
+        stats = self.game.player.get_stats()
+        self.stats_label.configure(
+            text=f"Level: {stats['level']} | XP: {stats['xp']}\n"
+                f"Health: {stats['health']} | Attack: {stats['attack']} | Defense: {stats['defense']}\n"
+                f"Equipped Sword: {stats['sword']} | Equipped Armor: {stats['armor']}"
+        )
