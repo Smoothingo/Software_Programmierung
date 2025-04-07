@@ -1,5 +1,9 @@
 import customtkinter as ctk
 from .fullscreen_widget import FullScreenWidget
+from modules.game_logic.constants import get_resource_path
+from PIL import Image
+from customtkinter import CTkImage
+from modules.gui.widgets import TransparentScrollableFrame
 
 class BazaarWidget(FullScreenWidget):
     def __init__(self, master, game, on_close_callback):
@@ -7,6 +11,19 @@ class BazaarWidget(FullScreenWidget):
         self.game = game
         self.selected_quantity = 1
         self.on_close_callback = on_close_callback
+
+        try:
+            image_path = get_resource_path("modules/extras/bazaar_backround.jpg")
+            bg_image = Image.open(image_path)
+            bg_image = bg_image.resize((self.winfo_screenwidth(), self.winfo_screenheight()), Image.Resampling.LANCZOS)
+            self.bg_image = CTkImage(light_image=bg_image, size=(self.winfo_screenwidth(), self.winfo_screenheight()))
+
+            # Create a label to display the background image
+            self.bg_label = ctk.CTkLabel(self, image=self.bg_image, text="")
+            self.bg_label.place(relwidth=1, relheight=1)  # Stretch to fill the entire widget
+        except FileNotFoundError:
+            print(f"Background image not found at {image_path}")
+
 
         # Remove the header frame's close button (X)
         for widget in self.header_frame.winfo_children():
@@ -37,9 +54,8 @@ class BazaarWidget(FullScreenWidget):
         self.main_content.grid_columnconfigure(0, weight=1)
 
         # Items container - scrollable and expands
-        self.items_container = ctk.CTkScrollableFrame(
-            self.main_content,
-            fg_color="transparent"
+        self.items_container = TransparentScrollableFrame(
+            self.main_content
         )
         self.items_container.grid(row=0, column=0, sticky="nsew")
 

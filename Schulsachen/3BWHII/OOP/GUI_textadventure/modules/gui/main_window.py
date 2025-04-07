@@ -1,15 +1,9 @@
 import customtkinter as ctk
-from .widgets import ScrollableFrame, ActionButton, InventoryWindow
+from .widgets import ScrollableFrame,TransparentScrollableFrame, ActionButton, InventoryWindow
 from .combat_widget import CombatWidget
 from .bazaar_widget import BazaarWidget
 from .equipment_widget import EquipmentWidget
 
-
-import customtkinter as ctk
-
-import customtkinter as ctk
-
-import customtkinter as ctk
 
 class MainWindow(ctk.CTk):
     def __init__(self, game):
@@ -78,7 +72,7 @@ class MainWindow(ctk.CTk):
         self.content_container.grid_rowconfigure(0, weight=1)  # Allow content to expand vertically
         self.content_container.grid_columnconfigure(0, weight=1)  # Allow content to expand horizontally
 
-        self.content_frame = ScrollableFrame(self.content_container, height=650)
+        self.content_frame = TransparentScrollableFrame(self.content_container, height=650)
         self.content_frame.grid(row=0, column=0, sticky="nsew")
         
         # Action Buttons Frame
@@ -86,7 +80,7 @@ class MainWindow(ctk.CTk):
         self.actions_frame.grid(row=1, column=0, sticky="ew", padx=10, pady=5)
         
         # Log Display
-        self.log_text = ctk.CTkTextbox(self.content_container)
+        self.log_text = ctk.CTkTextbox(self.content_container, fg_color="transparent")
         self.log_text.grid(row=0, column=0, sticky="nsew", padx=10, pady=10)
         self.log_text.configure(state="disabled")
 
@@ -148,28 +142,44 @@ class MainWindow(ctk.CTk):
             ).pack(side="right", padx=5)
 
     def handle_action(self, action):
+        """Handle player actions."""
         result = self.game.handle_action(action)
-        
-        if result['type'] == "combat":
-            self.show_combat(result['mob'])
-        elif result['type'] == "bazaar":
-            self.show_bazaar()
-        elif result['type'] == "equipment":
-            self.show_equipment_manager()
-        elif result['type'] == "message":
-            self.show_message(result['text'])
-            # Special case: Show "Ready to Explore" button only after talking to Jerry
-            if action.get("description") == "Talk with Jerry" and result.get("next_location"):
-                self.show_ready_to_explore_button(result["next_location"])
-        elif result['type'] == "location_change":
-            self.clear_display()
+
+
+        if action.get("description") == "Talk with Jerry":
+            # Show Jerry's introduction
+            self.show_message(action["response"])
+
+            # Add items and XP
+            if "add_items" in action:
+                for item_id, quantity in action["add_items"].items():
+                    self.game.player.inventory.add_item(int(item_id), quantity)
+            if "add_xp" in action:
+                self.game.player.gain_xp(action["add_xp"])
+
+            # Clear action buttons
+            self.clear_widgets()
+
+            # Show the "Explore" button
+            self.show_explore_button(action.get("next_location"))
+            return  # Stop further processing to avoid traveling immediately
+
+        if result["type"] == "location_change":
+            # Update the UI for the new location
             self.update_display()
-            self.show_message(self.game.get_current_location_info()['description'])
-        
-        # Always update stats and inventory after any action
-        self.refresh_ui()
-        
-        return result
+            self.show_message(result["text"])  # Display the new location's description
+
+        elif result["type"] == "message":
+            self.show_message(result["text"])
+
+        elif result["type"] == "combat":
+            self.show_combat(result["mob"])
+
+        elif result["type"] == "bazaar":
+            self.show_bazaar()
+
+        elif result["type"] == "equipment":
+            self.show_equipment_manager()  # Open the equipment manager
 
     def clear_display(self):
         """Clear the log and action buttons."""
@@ -177,6 +187,12 @@ class MainWindow(ctk.CTk):
         self.log_text.configure(state="normal")
         self.log_text.delete("1.0", "end")
         self.log_text.configure(state="disabled")
+        
+        # Clear action buttons
+        for widget in self.actions_frame.winfo_children():
+            widget.destroy()
+
+    def clear_widgets(self):
         
         # Clear action buttons
         for widget in self.actions_frame.winfo_children():
@@ -221,6 +237,7 @@ class MainWindow(ctk.CTk):
         self.refresh_ui()
 
     def show_equipment_manager(self):
+        """Open the equipment manager."""
         # Hide all main content
         self.sidebar_frame.grid_remove()
         self.header_frame.grid_remove()
@@ -255,10 +272,12 @@ class MainWindow(ctk.CTk):
         )
         self.combat_widget.grid(row=0, column=0, columnspan=2, rowspan=2, sticky="nsew")
 
-    def show_ready_to_explore_button(self, next_location):
+   
+    def show_explore_button(self, next_location):
+        """Show the 'Ready to Explore' button."""
         # Add a message to the log
         self.log_text.configure(state="normal")
-        self.log_text.insert("end", "\n[Click 'Ready to Explore' to continue your journey.]\n")
+        self.log_text.insert("end", "\n\n[Click 'Ready to Explore' to continue your journey.]\n")
         self.log_text.see("end")
         self.log_text.configure(state="disabled")
 

@@ -49,7 +49,7 @@ class Inventory:
         return item['quantity'] if item else 0
         
     def load_all_items(self):
-        with open(get_resource_path("modules/lookuptable.json"), 'r') as f:
+        with open(get_resource_path(r"modules/lookuptable.json"), 'r') as f:
             return json.load(f)['items']
     
     def buy_item(self, item_id, quantity):

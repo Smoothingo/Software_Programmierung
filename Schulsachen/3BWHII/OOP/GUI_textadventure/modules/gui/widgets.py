@@ -5,7 +5,12 @@ class ScrollableFrame(ctk.CTkScrollableFrame):
         super().__init__(master, **kwargs)
         self.grid_columnconfigure(0, weight=1)
         self.grid_rowconfigure(0, weight=1)
-        self._parent_frame.configure(height=600)  # Force minimum height
+        self._parent_frame.configure(height=600,)  # Force minimum height
+
+class TransparentScrollableFrame(ctk.CTkScrollableFrame):
+    def __init__(self, master, **kwargs):
+        super().__init__(master, **kwargs)
+        self.configure(fg_color="transparent")  # Make the frame transparent
         
 class ActionButton(ctk.CTkButton):
     def __init__(self, master, text, command):
