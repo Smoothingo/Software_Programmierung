@@ -2,7 +2,7 @@ import customtkinter as ctk
 from .widgets import ScrollableFrame, ActionButton, InventoryWindow
 from .combat_window import CombatWindow
 from .bazaar_widget import BazaarWidget
-from .equipment_window import EquipmentWindow
+from .equipment_widget import EquipmentWidget
 
 
 class MainWindow(ctk.CTk):
@@ -118,6 +118,8 @@ class MainWindow(ctk.CTk):
             CombatWindow(self, self.game, result['mob'])
         elif result['type'] == "bazaar":
             self.show_bazaar()
+        elif result['type'] == "equipment":
+            self.show_equipment_manager()  # Show the EquipmentWidget
         elif result['type'] == "message":
             self.show_message(result['text'])
         elif result['type'] == "location_change":
@@ -157,10 +159,25 @@ class MainWindow(ctk.CTk):
     def return_to_main_view(self):
         if hasattr(self, 'bazaar_widget'):
             self.bazaar_widget.destroy()
+        if hasattr(self, 'equipment_widget'):
+            self.equipment_widget.destroy()
         self.sidebar_frame.grid()
         self.header_frame.grid()
         self.content_container.grid()
 
+    def show_equipment_manager(self):
+        # Hide all main content
+        self.sidebar_frame.grid_remove()
+        self.header_frame.grid_remove()
+        self.content_container.grid_remove()
+
+        # Create fullscreen equipment manager
+        self.equipment_widget = EquipmentWidget(
+            self,
+            self.game,
+            on_close_callback=self.return_to_main_view
+        )
+        self.equipment_widget.grid(row=0, column=0, columnspan=2, rowspan=2, sticky="nsew")
 
     def show_message(self, message):
         self.log_text.configure(state="normal")

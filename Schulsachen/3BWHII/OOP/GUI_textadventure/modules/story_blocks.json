@@ -17,7 +17,8 @@
         },
         {
           "description": "Change Equipment",
-          "response": "// change equipment"
+          "response": "// change equipment",
+          "type": "equipment"
         }
       ]
     },
@@ -45,7 +46,8 @@
       
         {
           "description": "Change Equipment",
-          "response": "// change equipment"
+          "response": "// change equipment",
+          "type": "equipment"
         }
       ]
     },
@@ -89,7 +91,8 @@
         },
         {
           "description": "Change Equipment",
-          "response": "// change equipment"
+          "response": "// change equipment",
+          "type": "equipment"
         }
       ]
     },
@@ -117,7 +120,8 @@
         },
         {
           "description": "Change Equipment",
-          "response": "// change equipment"
+          "response": "// change equipment",
+          "type": "equipment"
         }
       ]
     },
@@ -151,7 +155,8 @@
         },
         {
           "description": "Change Equipment",
-          "response": "// change equipment"
+          "response": "// change equipment",
+          "type": "equipment"
         }
       ]
     },
@@ -211,7 +216,8 @@
         },
         {
           "description": "Change Equipment",
-          "response": "// change equipment"
+          "response": "// change equipment",
+          "type": "equipment"
         }
       ]
     },
@@ -246,7 +252,8 @@
         },
         {
           "description": "Change Equipment",
-          "response": "// change equipment"
+          "response": "// change equipment",
+          "type": "equipment"
         }
       ]
     }

@@ -29,6 +29,9 @@ class Game:
         
         if action.get("type") == "bazaar":
             return {"type": "bazaar", "success": True}
+        
+        if action.get("type") == "equipment":
+            return {"type": "equipment", "success": True}
 
         if "add_items" in action:
             for item_id, quantity in action["add_items"].items():
