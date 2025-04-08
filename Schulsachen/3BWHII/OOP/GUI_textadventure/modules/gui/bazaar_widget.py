@@ -147,18 +147,18 @@ class BazaarWidget(FullScreenWidget):
 
     def execute_trade(self, item_id, action, qty_label):
         if action == "buy":
-            success = self.game.player.inventory.buy_item(item_id, self.selected_quantity)
+            success, is_equipped = self.game.player.inventory.buy_item(item_id, self.selected_quantity), False
         elif action == "sell":
-            success = self.game.player.inventory.sell_item(item_id, self.selected_quantity)
+            success, is_equipped = self.game.player.inventory.sell_item(item_id, self.selected_quantity), False
         elif action == "sell_all":
-            success = self.game.player.inventory.sell_all_items(item_id)
+            success, _, _, is_equipped = self.game.player.inventory.sell_all_items(item_id)
             
 
         if success:
             self.update_gold_display()
             current_qty = self.game.player.inventory.get_item_quantity(item_id)
             qty_label.configure(text=f"Owned: {current_qty}")
-            
+        elif is_equipped:       
             # Update parent inventory display
             parent = self.master
             while not hasattr(parent, 'update_inventory_display') and hasattr(parent, 'master'):

@@ -2,7 +2,8 @@ import json
 from .constants import get_resource_path
 
 class Inventory:
-    def __init__(self):
+    def __init__(self, game):
+        self.game = game
         self.items = []
         self.item_data = self.load_all_items()
         
@@ -70,24 +71,47 @@ class Inventory:
 
     def sell_item(self, item_id, quantity):
         """Game logic for selling an item"""
+
+        if self.is_item_unsellable(item_id):
+            return False, True
+        
         item = self.item_data[str(item_id)]
         total_value = item['value'] * quantity
         if self.get_item_quantity(item_id) >= quantity:
             self.remove_item(item_id, quantity)
             self.add_item(2, total_value)  # 2 = Gold ID
-            return True
-        return False
+            return True, False
+        return False, False
     
     def sell_all_items(self, item_id):
         """Sell all quantities of the specified item."""
+        
+
+        if self.is_item_unsellable(item_id):
+            return False, 0, 0, True
+        
         item = next((i for i in self.items if i['id'] == item_id), None)
         if item:
             quantity = item['quantity']
             total_value = item['value'] * quantity
             self.add_item(2, total_value)  # Add gold to the player's inventory (2 = Gold ID)
             self.items.remove(item)  # Remove the item from the inventory
-            return True, quantity, total_value
-        return False, 0, 0
+            return True, quantity, total_value, False
+        return False, 0, 0, False
+    
+    def is_item_unsellable(self, item_id):
+        """Check if the item is equipped and cannot be sold."""
+        equipped_items = [
+            self.game.player.equipped_sword,
+            self.game.player.equipped_armor
+        ]
+        # Check if the item is equipped and selling it would leave none
+        for equipped_item in equipped_items:
+            if equipped_item and equipped_item['id'] == item_id:
+                current_quantity = self.get_item_quantity(item_id)
+                if current_quantity <= 1:
+                    return True  # Item is unsellable
+        return False  # Item can be sold
     
     def get_gold(self):
         return self.get_item_quantity(2)

@@ -4,7 +4,7 @@ class Player:
     def __init__(self, name, game):
         self.name = name or "Adventurer"
         self.game = game
-        self.inventory = Inventory()
+        self.inventory = Inventory(game)
         self.level = 1
         self.xp = 0
         self.base_health = 100
