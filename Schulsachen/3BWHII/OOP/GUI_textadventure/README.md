@@ -1,4 +1,5 @@
-### Well. DANKE FÜR DIE KRÜCKE Deepseek (besser als chatty, wobei copilot in vscode auch goated ist). Auch großen dank an spotify und tiktok brainrot. 
+### Well. DANKE FÜR DIE KRÜCKE Deepseek (besser als chatty, wobei copilot in vscode auch goated ist). 
+Auch großen dank an spotify und tiktok brainrot. 
 Ohne euch wär das ehrlich nicht möglich gewesen. (solo leveling mad overrated.
 Frieren war peak. From Bureaucrat to Villainess: Dad's Been Reincarnated!  auch lustig.)
 
