@@ -155,7 +155,7 @@ class CombatWidget(FullScreenWidget):
 
         # Add rewards to the player's inventory
         for item_id, quantity in rewards.items():
-            print(f"Adding item to inventory: ID={item_id}, Quantity={quantity}")  # Debug statement
+            print(f"Adding item to inventory: ID={item_id}, Quantity={quantity}")  #debug mebug copilot nix gute., macht alles immer schlimmer komplizierter etc
             self.game.player.inventory.add_item(int(item_id), quantity)  # Ensure item_id is an integer
 
         # Add XP to the player
