@@ -3,6 +3,7 @@ from .widgets import ScrollableFrame,TransparentScrollableFrame, ActionButton, I
 from .combat_widget import CombatWidget
 from .bazaar_widget import BazaarWidget
 from .equipment_widget import EquipmentWidget
+from .death_widget import DeathWidget
 
 
 class MainWindow(ctk.CTk):
@@ -150,13 +151,6 @@ class MainWindow(ctk.CTk):
             # Show Jerry's introduction
             self.show_message(action["response"])
 
-            # Add items and XP
-            if "add_items" in action:
-                for item_id, quantity in action["add_items"].items():
-                    self.game.player.inventory.add_item(int(item_id), quantity)
-            if "add_xp" in action:
-                self.game.player.gain_xp(action["add_xp"])
-
             # Clear action buttons
             self.clear_widgets()
 
@@ -298,3 +292,21 @@ class MainWindow(ctk.CTk):
         self.game.travel_to(location_name)
         self.update_display()
         self.show_message(self.game.get_current_location_info()['description'])
+    
+    def show_death_screen(self):
+        """Show the death screen when the player dies."""
+        # Hide all main content
+        self.sidebar_frame.grid_remove()
+        self.header_frame.grid_remove()
+        self.content_container.grid_remove()
+
+        # Create the DeathWidget
+        self.death_widget = DeathWidget(
+            self,
+            on_exit_callback=self.exit_game
+        )
+        self.death_widget.grid(row=0, column=0, columnspan=2, rowspan=2, sticky="nsew")
+
+    def exit_game(self):
+        """Exit the game."""
+        self.destroy()

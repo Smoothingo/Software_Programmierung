@@ -1,21 +1,23 @@
 import json
 from .constants import get_resource_path
+
 class Inventory:
     def __init__(self):
         self.items = []
         self.item_data = self.load_all_items()
         
     def add_item(self, item_id, quantity=1):
+        item_id = int(item_id)  # Ensure item_id is always an integer
         item_data = self.item_data[str(item_id)]  # Access loaded item data
         existing = next((i for i in self.items if i['id'] == item_id), None)
         
         if existing:
-            existing['quantity'] += item_data['base_quantity'] * quantity
+            existing['quantity'] += quantity  # Add directly to the existing quantity
         else:
             new_item = {
                 'id': item_data['id'],
                 'name': item_data['name'],
-                'quantity': item_data['base_quantity'] * quantity,
+                'quantity': quantity,  # Use the provided quantity
                 'description': item_data['description'],
                 'value': item_data['value'],
                 'type': item_data['type']
@@ -23,6 +25,10 @@ class Inventory:
             if 'stats' in item_data:
                 new_item['stats'] = item_data['stats']
             self.items.append(new_item)
+        
+        # Notify the GUI to update the UI
+        if hasattr(self, 'on_inventory_update'):
+            self.on_inventory_update()
 
     def get_formatted_inventory(self):
         return [{
@@ -71,6 +77,17 @@ class Inventory:
             self.add_item(2, total_value)  # 2 = Gold ID
             return True
         return False
+    
+    def sell_all_items(self, item_id):
+        """Sell all quantities of the specified item."""
+        item = next((i for i in self.items if i['id'] == item_id), None)
+        if item:
+            quantity = item['quantity']
+            total_value = item['value'] * quantity
+            self.add_item(2, total_value)  # Add gold to the player's inventory (2 = Gold ID)
+            self.items.remove(item)  # Remove the item from the inventory
+            return True, quantity, total_value
+        return False, 0, 0
     
     def get_gold(self):
         return self.get_item_quantity(2)

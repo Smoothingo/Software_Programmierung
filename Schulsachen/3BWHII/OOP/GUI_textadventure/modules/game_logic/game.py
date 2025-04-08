@@ -4,6 +4,7 @@ import random
 from .player import Player
 from .constants import get_resource_path
 
+
 class Game:
     def __init__(self, player_name="Adventurer"):
         self.story = self.load_story(get_resource_path(r"modules\story_blocks.json"))
@@ -42,6 +43,33 @@ class Game:
         if action.get("type") == "equipment":
             return {"type": "equipment", "success": True}
         
+
+        # Handle adding items
+        if "add_items" in action:
+            for item_id, quantity in action["add_items"].items():
+                self.player.inventory.add_item(int(item_id), quantity)
+            if hasattr(self.player.game, "main_window"):
+                self.player.game.main_window.update_display()
+            
+
+        
+
+        if "remove_items" in action:
+            for item_id, quantity in action["remove_items"].items():
+                self.player.inventory.remove_item(int(item_id), quantity)
+            if hasattr(self.player.game, "main_window"):
+                self.player.game.main_window.update_display()
+            
+
+        # Handle adding XP
+        if "add_xp" in action:
+            self.player.gain_xp(action["add_xp"])
+            if hasattr(self.player.game, "main_window"):
+                self.player.game.main_window.update_display()
+
+            return {"type": "message", "text": action.get('response', 'Action completed')}
+    
+
         if "next_location" in action:
             next_location = action["next_location"]
             if self.travel_to(next_location):  # Update the player's location first
@@ -53,20 +81,6 @@ class Game:
         # Handle actions with a response
         if "response" in action:
             return {"type": "message", "text": action["response"]}
-
-        # Handle adding items
-        if "add_items" in action:
-            for item_id, quantity in action["add_items"].items():
-                self.player.inventory.add_item(int(item_id), quantity)
-
-        # Handle removing items
-        if "remove_items" in action:
-            for item_id, quantity in action["remove_items"].items():
-                self.player.inventory.remove_item(int(item_id), quantity)
-
-        # Handle adding XP
-        if "add_xp" in action:
-            self.player.gain_xp(action["add_xp"])
 
         return {"type": "message", "text": action.get('response', 'Action completed')}
 

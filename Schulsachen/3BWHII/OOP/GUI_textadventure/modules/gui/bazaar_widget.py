@@ -39,13 +39,17 @@ class BazaarWidget(FullScreenWidget):
         self.grid_rowconfigure(2, weight=0)  # Exit button stays at the bottom
         self.grid_columnconfigure(0, weight=1)
 
-        # Gold display (in header frame)
+        self.header_frame = ctk.CTkFrame(self, fg_color="transparent")
+        self.header_frame.grid(row=0, column=0, sticky="ew", padx=20, pady=(10, 0))
+
         self.gold_label = ctk.CTkLabel(
-            self.header_frame, 
-            text="💰 Loading gold...",
-            font=("Arial", 18, "bold")
+            self.header_frame,
+            text=f"💰 {self.game.player.inventory.get_gold()} Gold",
+            font=("Arial", 16, "bold"),
+            anchor="w"
         )
         self.gold_label.pack(side="left", padx=10)
+
 
         # Main content area (will expand)
         self.main_content = ctk.CTkFrame(self, fg_color="transparent")
@@ -134,12 +138,22 @@ class BazaarWidget(FullScreenWidget):
             command=lambda iid=item_id: self.execute_trade(iid, "sell", qty_label)
         ).pack(side="left", padx=5)
 
+        ctk.CTkButton(
+            item_frame,
+            text="Sell All",
+            command=lambda iid=item_id: self.execute_trade(iid, "sell_all", qty_label),
+            width=80
+        ).pack(side="right", padx=5)
+
     def execute_trade(self, item_id, action, qty_label):
         if action == "buy":
             success = self.game.player.inventory.buy_item(item_id, self.selected_quantity)
-        else:
+        elif action == "sell":
             success = self.game.player.inventory.sell_item(item_id, self.selected_quantity)
-        
+        elif action == "sell_all":
+            success = self.game.player.inventory.sell_all_items(item_id)
+            
+
         if success:
             self.update_gold_display()
             current_qty = self.game.player.inventory.get_item_quantity(item_id)

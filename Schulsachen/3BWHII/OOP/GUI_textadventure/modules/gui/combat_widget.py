@@ -155,7 +155,8 @@ class CombatWidget(FullScreenWidget):
 
         # Add rewards to the player's inventory
         for item_id, quantity in rewards.items():
-            self.game.player.inventory.add_item(item_id, quantity)
+            print(f"Adding item to inventory: ID={item_id}, Quantity={quantity}")  # Debug statement
+            self.game.player.inventory.add_item(int(item_id), quantity)  # Ensure item_id is an integer
 
         # Add XP to the player
         self.game.player.gain_xp(xp)
@@ -174,7 +175,8 @@ class CombatWidget(FullScreenWidget):
     def player_defeated(self):
         # Handle player defeat
         self.update_display("You have been defeated! Game Over.")
-        self.on_close_callback()
+        self.master.show_death_screen()
+        
 
     def use_potion(self):
         # Check if the player has potions
