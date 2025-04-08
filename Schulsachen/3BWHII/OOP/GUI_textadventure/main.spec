@@ -5,7 +5,7 @@ a = Analysis(
     ['main.py'],
     pathex=[],
     binaries=[],
-    datas=[('c:\\Users\\smooth\\Documents\\Github\\Software_Programmierung\\Schulsachen\\3BWHII\\OOP\\GUI_textadventure\\modules', 'modules')],
+    datas=[('modules', 'modules')],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},
