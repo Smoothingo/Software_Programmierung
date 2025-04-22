@@ -64,12 +64,13 @@ class EquipmentWidget(FullScreenWidget):
         self.exit_button.grid(row=2, column=0, sticky="ew", padx=20, pady=(10, 20))
 
     def update_equipment(self):
+        """Update the equipment display, including equipped items."""
         # Update stats display
         stats = self.game.player.get_stats()
         self.stats_label.configure(
             text=f"Level: {stats['level']} | XP: {stats['xp']}\n"
-                 f"Health: {stats['health']} | Attack: {stats['attack']} | Defense: {stats['defense']}\n"
-                 f"Equipped Sword: {stats['sword']} | Equipped Armor: {stats['armor']}"
+                f"Health: {stats['health']} | Attack: {stats['attack']} | Defense: {stats['defense']}\n"
+                f"Equipped Sword: {stats['sword']} | Equipped Armor: {stats['armor']}"
         )
 
         # Clear existing items in the container
@@ -81,6 +82,12 @@ class EquipmentWidget(FullScreenWidget):
             item for item in self.game.player.inventory.items
             if item['type'] in ['weapon', 'armor']
         ]
+
+        # Add equipped items to the list if they are not already in the inventory
+        if self.game.player.equipped_sword and self.game.player.equipped_sword not in owned_items:
+            owned_items.append(self.game.player.equipped_sword)
+        if self.game.player.equipped_armor and self.game.player.equipped_armor not in owned_items:
+            owned_items.append(self.game.player.equipped_armor)
 
         # Group items by type
         grouped_items = {"weapon": [], "armor": []}
@@ -155,19 +162,22 @@ class EquipmentWidget(FullScreenWidget):
         return False
 
     def equip_item(self, item):
-        # Check if the item is a weapon or armor
+        """Equip the selected item."""
         if item['type'] == 'weapon':
             if self.game.player.equipped_sword:
                 self.show_error("You can only equip one sword at a time!")
                 return
             self.game.player.equipped_sword = item
             self.game.player.attack += item['stats'].get('attack', 0)  # Add attack stat
+            self.game.player.inventory.remove_item(item['id'], 1)  # Remove one from inventory
+
         elif item['type'] == 'armor':
             if self.game.player.equipped_armor:
                 self.show_error("You can only equip one armor at a time!")
                 return
             self.game.player.equipped_armor = item
             self.game.player.defense += item['stats'].get('defense', 0)  # Add defense stat
+            self.game.player.inventory.remove_item(item['id'], 1)  # Remove one from inventory
 
         # Update stats and UI
         self.update_equipment()
@@ -175,13 +185,16 @@ class EquipmentWidget(FullScreenWidget):
         self.clear_error()
 
     def unequip_item(self, item):
-        # Unequip the item
+        """Unequip the selected item."""
         if item['type'] == 'weapon' and self.game.player.equipped_sword == item:
             self.game.player.attack -= item['stats'].get('attack', 0)  # Subtract attack stat
             self.game.player.equipped_sword = None
+            self.game.player.inventory.add_item(item['id'], 1)  # Add back to inventory
+
         elif item['type'] == 'armor' and self.game.player.equipped_armor == item:
             self.game.player.defense -= item['stats'].get('defense', 0)  # Subtract defense stat
             self.game.player.equipped_armor = None
+            self.game.player.inventory.add_item(item['id'], 1)  # Add back to inventory
 
         # Update stats and UI
         self.update_equipment()

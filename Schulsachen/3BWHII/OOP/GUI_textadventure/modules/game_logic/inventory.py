@@ -84,21 +84,22 @@ class Inventory:
         return False, False
     
     def sell_all_items(self, item_id):
-        """Sell all quantities of the specified item."""
-        
-
-        if self.is_item_unsellable(item_id):
-            return False, 0, 0, True
-        
+        """Sell all quantities of the specified item, keeping one if it's equipped."""
         item = next((i for i in self.items if i['id'] == item_id), None)
-        if item:
-            quantity = item['quantity']
-            total_value = item['value'] * quantity
-            self.add_item(2, total_value)  # Add gold to the player's inventory (2 = Gold ID)
-            self.items.remove(item)  # Remove the item from the inventory
-            return True, quantity, total_value, False
-        return False, 0, 0, False
-    
+        if not item:
+            return False, 0, 0, False  # Item not found
+
+        # Check if the item is equipped
+        if self.is_item_unsellable(item_id):
+            return False, 0, 0, True  # Cannot sell if only one equipped item remains
+
+        # If the item is not equipped, sell all quantities
+        quantity = item['quantity']
+        total_value = item['value'] * quantity
+        self.add_item(2, total_value)  # Add gold to the player's inventory (2 = Gold ID)
+        self.items.remove(item)  # Remove the item from the inventory
+        return True, quantity, total_value, False
+        
     def is_item_unsellable(self, item_id):
         """Check if the item is equipped and cannot be sold."""
         equipped_items = [
