@@ -3,7 +3,7 @@
 cls
 echo.
 echo 1. Process GCAG data
-echo 2. Process GISTEMP data
+echo 2. Process NASA-GISTEMP data
 echo 3. Plot from existing JSON file
 echo 4. Exit
 echo.
@@ -39,16 +39,28 @@ echo.
 set /p action=Choose action (1-4): 
 
 if "%action%"=="1" (
-    type monthly.csv | python mapper.py --source %source% | sort | python reducer.py
+    if "%source%"=="gcag" (
+        type monthly.csv | python mapper.py --source %source% | sort | python reducer.py
+    ) else (
+        type NASA-GISTEMP_temperature-data.csv | python mapper.py --source %source% | sort | python reducer.py
+    )
     pause
     goto :eof
 ) else if "%action%"=="2" (
-    type monthly.csv | python mapper.py --source %source% | sort | python reducer.py | python saver.py > output.json
+    if "%source%"=="gcag" (
+        type monthly.csv | python mapper.py --source %source% | sort | python reducer.py | python saver.py > output.json
+    ) else (
+        type NASA-GISTEMP_temperature-data.csv | python mapper.py --source %source% | sort | python reducer.py | python saver.py > output.json
+    )
     echo Data saved to output.json
     pause
     goto :eof
 ) else if "%action%"=="3" (
-    type monthly.csv | python mapper.py --source %source% | sort | python reducer.py | python saver.py > output.json
+    if "%source%"=="gcag" (
+        type monthly.csv | python mapper.py --source %source% | sort | python reducer.py | python saver.py > output.json
+    ) else (
+        type NASA-GISTEMP_temperature-data.csv | python mapper.py --source %source% | sort | python reducer.py | python saver.py > output.json
+    )
     python plotter.py output.json
     pause
     goto :eof

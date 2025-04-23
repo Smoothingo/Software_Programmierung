@@ -1,4 +1,4 @@
-import customtkinter as ctk
+
 from modules.game_logic.game import Game
 from modules.gui.main_window import MainWindow
 

@@ -2,11 +2,11 @@
 
 
 a = Analysis(
-    ['main.py'],
+    ['C:\\Users\\Markus\\Documents\\GITHUB\\Software_Programmierung\\Schulsachen\\3BWHII\\OOP\\GUI_textadventure\\main.py'],
     pathex=[],
     binaries=[],
-    datas=[('modules', 'modules')],
-    hiddenimports=[],
+    datas=[('C:\\Users\\Markus\\Documents\\GITHUB\\Software_Programmierung\\Schulsachen\\3BWHII\\OOP\\GUI_textadventure\\modules', 'modules')],
+    hiddenimports=['customtkinter'],
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],
