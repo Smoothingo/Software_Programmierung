@@ -16,7 +16,8 @@ from matplotlib.animation import FuncAnimation
 from typing import Callable, List, Tuple, Dict
 
 # ================= KONFIGURATION =================
-HAUPTFORMEL = "x**2 - n"        # Zu lösende Gleichung (Aufgabe 5)
+  # FORMEL FÜR IRGEND EINE AUFGABE SETZEN
+HAUPTFORMEL = "a * math.cosh(50 / a) - (a + 10)" 
 DEFAULT_EPS = 1e-8              # Standard-Genauigkeit
 MAX_ITER = 100                  # Maximale Iterationen
 PLOT_XLABEL = "x"               # X-Achsenbeschriftung
@@ -40,9 +41,9 @@ class EquationSolver:
 
     def _build_function(self) -> Callable[[float], float]:
         """Erstellt die Lösungsfunktion sicher"""
-        context = {'math': math, 'np': np, '__builtins__': None, **self.parameters}
+        context = {'math': math, 'np': np, '__builtins__': None, **self.parameters, 'w': 100, 'h': 10}
         try:
-            return lambda x: eval(self.equation, {'__builtins__': {}}, {**context, 'x': x})
+            return lambda a: eval(self.equation, {'__builtins__': {}}, {**context, 'a': a})
         except Exception as e:
             raise ValueError(f"Ungültige Gleichung: {str(e)}") from e
 
@@ -88,8 +89,10 @@ class EquationSolver:
         return c
 
     def _validate_interval(self, f: Callable, a: float, b: float):
-        """Prüft Vorzeichenwechsel"""
-        if f(a)*f(b) >= 0:
+        """Prüft Vorzeichenwechsel und gibt Debug-Informationen aus"""
+        fa, fb = f(a), f(b)
+        print(f"Debug: f({a}) = {fa}, f({b}) = {fb}")  # Debug-Ausgabe
+        if fa * fb >= 0:
             raise ValueError("Kein Vorzeichenwechsel im Intervall [a, b]")
 
     def _update_history(self, a: float, b: float, c: float, fc: float):
@@ -188,19 +191,10 @@ class SolutionVisualizer:
 def main():
     print("=== Numerischer Gleichungslöser ===")
     print(f"Aktive Formel: {HAUPTFORMEL}\n")
-    
+
     # Solver initialisieren
     solver = EquationSolver(HAUPTFORMEL)
-    
-    # Parameter einlesen
-    for var in solver.variables:
-        while True:
-            try:
-                solver.parameters[var] = float(input(f"Wert für {var}: "))
-                break
-            except ValueError:
-                print("Ungültige Eingabe!")
-    
+
     # Intervall einlesen
     while True:
         try:
@@ -209,53 +203,39 @@ def main():
             break
         except ValueError:
             print("Ungültige Eingabe!")
-    
+
     # Verfahrenswahl
     method = input("Verfahren [Bisektion/Regula]: ").lower()
-    
+
     try:
         # Berechnung durchführen
         if method.startswith('b'):
             root = solver.bisection(a, b)
         else:
             root = solver.regula_falsi(a, b)
-            
+
         # Ergebnisse ausgeben
         print(f"\nErgebnis: {root:.10f}")
         print(f"Iterationen: {len(solver.history)}")
         print(f"Letzter Fehler: {solver.errors[-1]:.2e}")
-        
+
         # Visualisierung
         if len(solver.history) > 0:
             vis = SolutionVisualizer(solver)
             vis.animate()
-            
+
+        # Aufgabe 9: Berechnung der Seillänge
+        if HAUPTFORMEL == "a * math.cosh(50 / a) - (a + 10)":
+            import math
+            w = 100  # Abstand zwischen den Befestigungspunkten
+            l = 2 * root * math.sinh(w / (2 * root))
+            print(f"\nBerechneter Krümmungsradius a: {root:.10f}")
+            print(f"Länge der Leitung l: {l:.10f} m")
+        else:
+            print("\nDie Seillänge wurde nicht berechnet, da die Formel nicht der Standardformel entspricht.")
+
     except ValueError as e:
         print(f"\nFehler: {str(e)}")
 
-# ================= AUFGABENLÖSUNGEN ================
-"""
-Aufgabe 5-9 Lösungshinweise:
-
-Aufgabe 5: Test mit Wurzelgleichung
-- Formel: x**2 - n
-- Aufruf: n=25,81,144 im Intervall [0, 2n]
-
-Aufgabe 6: Regula Falsi Test
-- Gleiche Parameter wie Aufgabe 5, Verfahren 'Regula' wählen
-
-Aufgabe 7: Visualisierung
-- Automatische Animation nach Berechnung
-
-Aufgabe 8: Polynomtest
-- Formel ändern zu: '2*x + x**2 + 3*x**3 - x**4'
-- Intervall [3,4] verwenden
-- DEFAULT_EPS auf 1e-2 bzw. 1e-8 setzen
-
-Aufgabe 9: Kettenlinie
-- Formel definieren für: a*math.cosh(50/a) - (a + 10)
-- Intervall z.B. [40,60] verwenden
-- Lösung für a finden, dann Länge berechnen mit 2a*math.sinh(50/a)
-"""
 if __name__ == "__main__":
     main()
