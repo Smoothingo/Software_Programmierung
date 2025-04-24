@@ -19,7 +19,7 @@ from typing import Callable, List, Tuple, Dict
   # FORMEL FÜR IRGEND EINE AUFGABE SETZEN
 # HAUPTFORMEL = "a * math.cosh(50 / a) - (a + 10)"  # Formel zur Berechnung des Krümmungsradius a
 # HAUPTFORMEL = "x**3 - 6*x**2 + 11*x - 6"  # Beispiel für eine Polynomgleichung zur Testung der Genauigkeit
-HAUPTFORMEL = "a * math.cosh(50 / a) - (a + 10)" # Sicherstellen, dass die aktive Formel unten gesetzt ist
+HAUPTFORMEL = "x**2-n" # Sicherstellen, dass die aktive Formel unten gesetzt ist
 
 DEFAULT_EPS = 1e-8              # Standard-Genauigkeit
 MAX_ITER = 100                  # Maximale Iterationen
