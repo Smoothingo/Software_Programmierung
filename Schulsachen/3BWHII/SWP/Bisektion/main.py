@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 from typing import Callable, Tuple, List, Optional, Dict
+import json  # Add import for JSON handling
 
 class EquationSolver:
     """Numerischer Solver für Nullstellenprobleme mit Bisektion und Newton-Raphson."""
@@ -72,10 +73,17 @@ class EquationSolver:
 class SolutionVisualizer:
     """Interaktive Visualisierung des Lösungsprozesses."""
     
-    def __init__(self, solver: EquationSolver):
+    def __init__(self, solver: EquationSolver, output_file: str = "animation_data.json"):
         self.solver = solver
         self.fig, self.axes = plt.subplots(3, 1, figsize=(10, 12))
+        self.output_file = output_file  # File to save iteration data
+        self._clear_output_file()  # Clear the file at the start
         self._setup_plots()
+    
+    def _clear_output_file(self):
+        """Löscht den Inhalt der JSON-Datei zu Beginn."""
+        with open(self.output_file, "w") as f:
+            f.write("")  # Clear the file by writing an empty string
     
     def _setup_plots(self):
         """Initialisiert die drei Subplots."""
@@ -91,6 +99,21 @@ class SolutionVisualizer:
         self.axes[1].set_yscale('log')
         self.axes[2].set_xlabel('Iteration')
         plt.tight_layout()
+    
+    def _save_iteration_data(self, frame: int):
+        """Speichert die Iterationsdaten in eine JSON-Datei."""
+        a, b, c = self.solver.history[frame]
+        error = self.solver.errors[frame]
+        data = {
+            "iteration": frame + 1,
+            "a": a,
+            "b": b,
+            "c": c,
+            "error": error
+        }
+        with open(self.output_file, "a") as f:
+            json.dump(data, f)
+            f.write("\n")  # Add a newline for readability
     
     def animate(self):
         """Erzeugt die Animationssequenz."""
@@ -120,6 +143,9 @@ class SolutionVisualizer:
             
             solutions = [h[2] for h in self.solver.history[:frame+1]]
             self.axes[2].plot(solutions, 'go-', markersize=4)
+            
+            # Save iteration data to JSON
+            self._save_iteration_data(frame)
             
             return self.axes
         
@@ -207,6 +233,7 @@ def run_bisection():
     visualizer = SolutionVisualizer(solver)
     anim = visualizer.animate()
     plt.show()  # Animation anzeigen
+    print(f"Animation-Daten gespeichert in animation_data.json")
 
 def run_newton():
     """Interaktive Newton-Raphson Berechnung."""
@@ -221,6 +248,7 @@ def run_newton():
     visualizer = SolutionVisualizer(solver)
     anim = visualizer.animate()
     plt.show()
+    print(f"Animation-Daten gespeichert in animation_data.json")
 
 def run_polynomial_test():
     """Genauigkeitstests für das Polynom aus Aufgabe 8."""
