@@ -17,9 +17,8 @@ from typing import Callable, List, Tuple, Dict
 
 # ================= KONFIGURATION =================
   # FORMEL FÜR IRGEND EINE AUFGABE SETZEN
-# HAUPTFORMEL = "a * math.cosh(50 / a) - (a + 10)"  # Formel zur Berechnung des Krümmungsradius a
-# HAUPTFORMEL = "x**3 - 6*x**2 + 11*x - 6"  # Beispiel für eine Polynomgleichung zur Testung der Genauigkeit
-HAUPTFORMEL = "x**2-n" # Sicherstellen, dass die aktive Formel unten gesetzt ist
+HAUPTFORMEL = "a * math.cosh(50 / a) - (a + 10)"  # Formel zur Berechnung des Krümmungsradius a
+#HAUPTFORMEL = "2*x + x**2 + 3*x**3 - x**4"  # Polynomial P4(x)
 
 DEFAULT_EPS = 1e-8              # Standard-Genauigkeit
 MAX_ITER = 100                  # Maximale Iterationen
@@ -43,10 +42,13 @@ class EquationSolver:
         return sorted(set(re.findall(r'\b([a-zA-Z])\b(?![\w.])', equation_clean)) - {'x'})
 
     def _build_function(self) -> Callable[[float], float]:
-        """Erstellt die Lösungsfunktion sicher"""
-        context = {'math': math, 'np': np, '__builtins__': None, **self.parameters, 'w': 100, 'h': 10}
+        """Erstellt die Lösungsfunktion sicher mit Fehlerbehandlung"""
+        context = {'math': math, 'np': np, '__builtins__': None, **self.parameters}
         try:
-            return lambda a: eval(self.equation, {'__builtins__': {}}, {**context, 'a': a})
+            # Map both 'x' and 'a' to the input variable for evaluation
+            return lambda var: eval(self.equation, {'__builtins__': {}}, {**context, 'x': var, 'a': var})
+        except ZeroDivisionError:
+            raise ValueError("Division durch Null in der Formel. Bitte überprüfen Sie die Eingabe.")
         except Exception as e:
             raise ValueError(f"Ungültige Gleichung: {str(e)}") from e
 
@@ -93,10 +95,15 @@ class EquationSolver:
 
     def _validate_interval(self, f: Callable, a: float, b: float):
         """Prüft Vorzeichenwechsel und gibt Debug-Informationen aus"""
-        fa, fb = f(a), f(b)
-        print(f"Debug: f({a}) = {fa}, f({b}) = {fb}")  # Debug-Ausgabe
-        if fa * fb >= 0:
-            raise ValueError("Kein Vorzeichenwechsel im Intervall [a, b]")
+        try:
+            fa, fb = f(a), f(b)
+            print(f"Debug: f({a}) = {fa}, f({b}) = {fb}")  # Debug-Ausgabe
+            if fa * fb >= 0:
+                raise ValueError("Kein Vorzeichenwechsel im Intervall [a, b]")
+        except ZeroDivisionError:
+            raise ValueError("Division durch Null bei der Intervallprüfung. Bitte überprüfen Sie die Grenzen.")
+        except Exception as e:
+            raise ValueError(f"Fehler bei der Intervallprüfung: {str(e)}")
 
     def _update_history(self, a: float, b: float, c: float, fc: float):
         """Speichert Iterationsdaten"""
@@ -192,11 +199,22 @@ class SolutionVisualizer:
         plt.show()
 # ================= HAUPTPROGRAMM ================
 def main():
+    """Hauptprogramm mit Fehlerbehandlung für verschiedene Formeln"""
     print("=== Numerischer Gleichungslöser ===")
     print(f"Aktive Formel: {HAUPTFORMEL}\n")
 
     # Solver initialisieren
     solver = EquationSolver(HAUPTFORMEL)
+
+    # Parameter für die Formel einlesen (falls erforderlich)
+    for var in solver.variables:
+        if var not in ['x', 'a']:  # Skip 'x' and 'a' as they are dynamically handled
+            while True:
+                try:
+                    solver.parameters[var] = float(input(f"Geben Sie den Wert für {var} ein: "))
+                    break
+                except ValueError:
+                    print(f"Ungültige Eingabe für {var}. Bitte geben Sie eine Zahl ein.")
 
     # Intervall einlesen
     while True:
@@ -205,7 +223,7 @@ def main():
             b = float(input("Rechte Grenze b: "))
             break
         except ValueError:
-            print("Ungültige Eingabe!")
+            print("Ungültige Eingabe! Bitte geben Sie Zahlen ein.")
 
     # Verfahrenswahl
     method = input("Verfahren [Bisektion/Regula]: ").lower()
@@ -229,14 +247,18 @@ def main():
             print(f"Länge der Leitung l: {l:.10f} m")
         else:
             print("\nDie Seillänge wurde nicht berechnet, da die Formel nicht der Standardformel entspricht.")
-        # Visualisierung
 
+        # Visualisierung
         if len(solver.history) > 0:
             vis = SolutionVisualizer(solver)
             vis.animate()
-            
+
     except ValueError as e:
         print(f"\nFehler: {str(e)}")
+    except ZeroDivisionError:
+        print("\nFehler: Division durch Null in der Berechnung. Bitte überprüfen Sie die Eingaben.")
+    except Exception as e:
+        print(f"\nUnbekannter Fehler: {str(e)}")
 
 if __name__ == "__main__":
     main()
