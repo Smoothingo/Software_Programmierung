@@ -17,7 +17,10 @@ from typing import Callable, List, Tuple, Dict
 
 # ================= KONFIGURATION =================
   # FORMEL FÜR IRGEND EINE AUFGABE SETZEN
-HAUPTFORMEL = "a * math.cosh(50 / a) - (a + 10)" 
+# HAUPTFORMEL = "a * math.cosh(50 / a) - (a + 10)"  # Formel zur Berechnung des Krümmungsradius a
+# HAUPTFORMEL = "x**3 - 6*x**2 + 11*x - 6"  # Beispiel für eine Polynomgleichung zur Testung der Genauigkeit
+HAUPTFORMEL = "a * math.cosh(50 / a) - (a + 10)" # Sicherstellen, dass die aktive Formel unten gesetzt ist
+
 DEFAULT_EPS = 1e-8              # Standard-Genauigkeit
 MAX_ITER = 100                  # Maximale Iterationen
 PLOT_XLABEL = "x"               # X-Achsenbeschriftung
@@ -219,21 +222,19 @@ def main():
         print(f"Iterationen: {len(solver.history)}")
         print(f"Letzter Fehler: {solver.errors[-1]:.2e}")
 
-        # Visualisierung
-        if len(solver.history) > 0:
-            vis = SolutionVisualizer(solver)
-            vis.animate()
-
-        # Aufgabe 9: Berechnung der Seillänge
         if HAUPTFORMEL == "a * math.cosh(50 / a) - (a + 10)":
-            import math
             w = 100  # Abstand zwischen den Befestigungspunkten
             l = 2 * root * math.sinh(w / (2 * root))
             print(f"\nBerechneter Krümmungsradius a: {root:.10f}")
             print(f"Länge der Leitung l: {l:.10f} m")
         else:
             print("\nDie Seillänge wurde nicht berechnet, da die Formel nicht der Standardformel entspricht.")
+        # Visualisierung
 
+        if len(solver.history) > 0:
+            vis = SolutionVisualizer(solver)
+            vis.animate()
+            
     except ValueError as e:
         print(f"\nFehler: {str(e)}")
 
