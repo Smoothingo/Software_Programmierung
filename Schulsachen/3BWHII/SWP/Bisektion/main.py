@@ -4,6 +4,10 @@ from matplotlib.animation import FuncAnimation
 from typing import Callable, Tuple, List, Optional, Dict
 import json  # Add import for JSON handling
 
+# Set a non-interactive backend for matplotlib to avoid Qt issues
+import matplotlib
+matplotlib.use('TkAgg')
+
 class EquationSolver:
     """Numerischer Solver für Nullstellenprobleme mit Bisektion und Newton-Raphson."""
     
