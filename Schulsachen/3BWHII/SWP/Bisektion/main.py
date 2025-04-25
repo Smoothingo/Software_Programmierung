@@ -177,7 +177,7 @@ class CatenarySolver:
         # Exakte Lösung für Krümmungsradius a
         solver = EquationSolver(f"x*cosh({self.width}/(2*x)) - x - {self.sag}")
         a_guess = self.width**2 / (8 * self.sag)  # Physikalisch sinnvolle Startschätzung
-        self.a = solver.bisection(a_guess/10, a_guess*10)
+        self.a = solver.bisection(a_guess/10, a_guess*10) #für schnellere lösung mit numerischen SOLVER
         
         # Exakte Seillänge berechnen
         self.length = 2 * self.a * np.sinh(self.width/(2*self.a))
