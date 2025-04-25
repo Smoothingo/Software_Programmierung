@@ -17,7 +17,16 @@ Bei Polynom ist die Formel von der Angabe schon drinnen. Um auf 3,4567... zu kom
 In dem Fall bsp: Intervall = (3,4)
 
 Bei Kettenlinie einfach die länge des ganzen und die differenz y eingeben. also wie weit das seil nach unten hängt. 
-und natürlich auch wieder linke und Rechte Grenze um denn Krümmungsradius zu bestimmen. Beispiel werte Intervall = (40,200)
+
+# 🔧 Features
+
+### Automatische Intervall-Schätzung bei Kettenlinie
+
+### Dynamische Funktionseingabe via eval() (z.B. x**2 - 25)
+
+### Visualisierung der Iterationsschritte
 
 ## Liebe Grüẞe Kattner
 ## Viel Spaẞ
+
+### Erreichbar unter mkattner@student.tgm.ac.at oder smoothingo@proton.me für jegliche Art von Fragen :) 
