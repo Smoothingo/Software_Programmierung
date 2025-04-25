@@ -243,6 +243,15 @@ def run_newton():
     """Interaktive Newton-Raphson Berechnung."""
     print("\n=== Newton-Raphson Verfahren ===")
     func = input("Funktion (z.B. 'x**2 - 25'): ") or "x**2 - 25"
+    
+    # Validate the formula
+    try:
+        test_x = 1.0  # Test with a sample value
+        eval(func, {'x': test_x, 'np': np, 'sinh': np.sinh, 'cosh': np.cosh})
+    except Exception as e:
+        print(f"Ungültige Funktion: {e}")
+        return
+    
     x0 = float(input("Startwert: ") or 2)
     
     solver = EquationSolver(func)
