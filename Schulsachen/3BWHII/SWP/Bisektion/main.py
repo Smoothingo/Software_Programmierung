@@ -1,10 +1,10 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
-from typing import Callable, Tuple, List, Optional, Dict
-import json  # Add import for JSON handling
+from typing import Callable, Tuple, List, Dict
+import json  # Import für JSON-Verarbeitung
 
-# Set a non-interactive backend for matplotlib to avoid Qt issues
+# Setzt ein nicht-interaktives Backend für matplotlib, um Qt-Probleme zu vermeiden
 import matplotlib
 matplotlib.use('TkAgg')
 
@@ -19,17 +19,17 @@ class EquationSolver:
         self.errors: List[float] = []
         
     def _build_function(self) -> Callable[[float], float]:
-        """Erstellt berechnete Funktion mit numpy Support."""
+        """Erstellt die Funktion mit numpy-Unterstützung."""
         return lambda x: eval(self.function_str, {'x': x, 'np': np, 'sinh': np.sinh, 'cosh': np.cosh})
     
     def bisection(self, a: float, b: float) -> float:
-        """Bisektionsverfahren mit vollständiger History-Aufzeichnung."""
+        """Bisektionsverfahren mit vollständiger Aufzeichnung der Schritte."""
         f = self._build_function()
         self.history = []
         self.errors = []
         
         if f(a) * f(b) >= 0:
-            raise ValueError("Funktion muss an den Intervallgrenzen unterschiedliche Vorzeichen haben.")
+            raise ValueError("Die Funktion muss an den Intervallgrenzen unterschiedliche Vorzeichen haben.")
         
         for i in range(self.max_iter):
             c = (a + b) / 2
@@ -48,7 +48,7 @@ class EquationSolver:
         return (a + b) / 2
     
     def newton_raphson(self, initial_guess: float) -> float:
-        """Newton-Raphson Verfahren mit adaptiver Schrittweite."""
+        """Newton-Raphson-Verfahren mit adaptiver Schrittweite."""
         f = self._build_function()
         self.history = []
         self.errors = []
@@ -80,14 +80,14 @@ class SolutionVisualizer:
     def __init__(self, solver: EquationSolver, output_file: str = "animation_data.json"):
         self.solver = solver
         self.fig, self.axes = plt.subplots(3, 1, figsize=(10, 12))
-        self.output_file = output_file  # File to save iteration data
-        self._clear_output_file()  # Clear the file at the start
+        self.output_file = output_file  # Datei zum Speichern der Iterationsdaten
+        self._clear_output_file()  # Datei zu Beginn leeren
         self._setup_plots()
     
     def _clear_output_file(self):
         """Löscht den Inhalt der JSON-Datei zu Beginn."""
         with open(self.output_file, "w") as f:
-            f.write("")  # Clear the file by writing an empty string
+            f.write("")  # Datei leeren, indem ein leerer String geschrieben wird
     
     def _setup_plots(self):
         """Initialisiert die drei Subplots."""
@@ -117,7 +117,7 @@ class SolutionVisualizer:
         }
         with open(self.output_file, "a") as f:
             json.dump(data, f)
-            f.write("\n")  # Add a newline for readability
+            f.write("\n")  # Neue Zeile für bessere Lesbarkeit
     
     def animate(self):
         """Erzeugt die Animationssequenz."""
@@ -148,14 +148,14 @@ class SolutionVisualizer:
             solutions = [h[2] for h in self.solver.history[:frame+1]]
             self.axes[2].plot(solutions, 'go-', markersize=4)
             
-            # Save iteration data to JSON
+            # Iterationsdaten in JSON speichern
             self._save_iteration_data(frame)
             
             return self.axes
         
         anim = FuncAnimation(self.fig, update, frames=len(self.solver.history), interval=800, blit=False)
-        self.animation = anim  # Assign to an instance variable to prevent garbage collection
-        plt.show()  # Ensure the animation is displayed
+        self.animation = anim  # Zuweisung zu einer Instanzvariable, um Garbage Collection zu verhindern
+        plt.show()  # Animation anzeigen
 
 class CatenarySolver:
     """Physikalisch exakte Lösung des Kettenlinienproblems."""
@@ -177,7 +177,7 @@ class CatenarySolver:
         # Exakte Lösung für Krümmungsradius a
         solver = EquationSolver(f"x*cosh({self.width}/(2*x)) - x - {self.sag}")
         a_guess = self.width**2 / (8 * self.sag)  # Physikalisch sinnvolle Startschätzung
-        self.a = solver.bisection(a_guess/10, a_guess*10) #für schnellere lösung mit numerischen SOLVER
+        self.a = solver.bisection(a_guess/10, a_guess*10)  # Schnellere Lösung mit numerischem Solver
         
         # Exakte Seillänge berechnen
         self.length = 2 * self.a * np.sinh(self.width/(2*self.a))
@@ -207,7 +207,7 @@ class CatenarySolver:
         ax.plot([0, 0], [0, y[0]], 'k-', lw=3)
         ax.plot([self.width, self.width], [0, y[-1]], 'k-', lw=3)
         
-        # Durchhang5
+        # Durchhang
         ax.plot([params['x0'], params['x0']], 
                 [params['y0'] - params['a'], params['y0'] - params['a'] + self.sag], 
                 'r--', label=f'Durchhang = {self.sag}m')
@@ -244,9 +244,9 @@ def run_newton():
     print("\n=== Newton-Raphson Verfahren ===")
     func = input("Funktion (z.B. 'x**2 - 25'): ") or "x**2 - 25"
     
-    # Validate the formula
+    # Validierung der Formel
     try:
-        test_x = 1.0  # Test with a sample value
+        test_x = 1.0  # Test mit einem Beispielwert
         eval(func, {'x': test_x, 'np': np, 'sinh': np.sinh, 'cosh': np.cosh})
     except Exception as e:
         print(f"Ungültige Funktion: {e}")
